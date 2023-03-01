@@ -26,6 +26,7 @@ if __name__ == "__main__":
 
 
     doc = SegmentedTextSM(text, doc_name="test", lexicon=sm.LEXICON, model=sm.MODEL)
+    #doc = sm.segment_text(text, "test")
 
     sys.stdout = output
     f.close()

@@ -40,6 +40,7 @@ catGet = re.compile(r"""
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 LEXICON_PATH = os.path.join(DIR_PATH, "data/lexicon/lexicon")
 MODEL_PATH = os.path.join(DIR_PATH, "data/tagsStats/ngrams")
+CACHE_PATH = os.path.join(DIR_PATH, "data/cache/cache")
 
 
 class SegMeant:
@@ -55,7 +56,7 @@ class SegMeant:
 
         self.LEXICON = LexiconSM(LEXICON_PATH)
         
-        #self.CACHE = CacheSM()
+        #self.CACHE = CacheSM(CACHE_PATH)
 
         shelf = shelve.open(MODEL_PATH, writeback=False)
 
@@ -74,7 +75,7 @@ class SegMeant:
             self.MODEL = NGramsSM(dic=shelf, n={2, 3, 4}, sep='+', txt=ph)
     pass
 
-    def segment_text_from_file(self, path: str) -> SegmentedTextSM:
+    def segment_text(self, path: str, doc_name: str = "") -> SegmentedTextSM:
         """
         Factory method permettant la création d'un texte tokenisé à partir d'un nom de fichier, en prenant en charge l'ajout au cache du module pour faciliter la réutilisation des données.
         
@@ -84,16 +85,26 @@ class SegMeant:
         :rtype: une référence sur un objet :class:`SegmentedTextSM`
         """
 
-        with open(path, mode="r", encoding="utf-8") as f:
+        if os.path.isfile(path):
 
-            txt = f.read()
+            with open(path, mode="r", encoding="utf-8") as f:
 
-            if self.CACHE.isin(txt):
-                print(f"File \"{os.path.basename(path)}\" already in cache. Loading...")
-                return self.CACHE.cache[txt]
+                txt = f.read()
 
-            doc = SegmentedTextSM(txt, doc_name=os.path.basename(path), lexicon=self.LEXICON, model=self.MODEL)
-            self.CACHE.add(doc, txt)
+                if self.CACHE.isin(txt):
+                    print(f"File \"{os.path.basename(path)}\" already in cache. Loading...")
+                    return self.CACHE.cache[txt]
+
+                doc = SegmentedTextSM(txt, doc_name=doc_name if doc_name != "" else os.path.basename(path), lexicon=self.LEXICON, model=self.MODEL)
+                self.CACHE.add(doc, txt)
+                return doc
+        else:
+            if self.CACHE.isin(path):
+                    print(f"Text already in cache. Loading...")
+                    return self.CACHE.cache[path]
+
+            doc = SegmentedTextSM(path, doc_name=doc_name, lexicon=self.LEXICON, model=self.MODEL)
+            self.CACHE.add(doc, path)
             return doc
 
     pass
@@ -119,7 +130,7 @@ class SegMeant:
             return self.CACHE.cache[id]
 
         for file in paths:
-            docs.append(self.segment_text_from_file(file))
+            docs.append(self.segment_text(file))
 
         corpus = CorpusSM(docs)
         self.CACHE.add(corpus, id)

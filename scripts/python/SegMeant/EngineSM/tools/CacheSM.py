@@ -11,8 +11,8 @@ sys.setrecursionlimit(4000)
 class CacheSM:
 
     @timeit
-    def __init__(self):
-        self.cache = shelve.open("SegMeant/data/cache/cache", writeback=True)
+    def __init__(self, location):
+        self.cache = shelve.open(location, writeback=True)
         self.writeback = True
     pass
 
