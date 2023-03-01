@@ -34,6 +34,7 @@ import xml.etree.ElementTree as ET
 from zipfile import ZipFile, is_zipfile
 import numpy as np
 import copy
+from copy import deepcopy
 
 
 
@@ -644,10 +645,33 @@ class SegmentedTextSM:
             return out
         pass
 
-        #s = json.dumps(parseChildren(self.masterNode), ensure_ascii=False)
-
         return parseChildren(self.masterNode)
+    pass
 
+    def to_json(self) -> dict:
+        
+        doc = deepcopy(self)
+
+        for lvl in doc.levels:
+            for node in doc.levels[lvl]:
+                delete(node.parent)
+
+
+        del doc.levels
+
+        for tok in doc.listObjs:
+            tok.parent = None
+            delete(tok.children)
+
+        def propagate(node):
+            del node.parent
+            for child in node.children:
+                propagate(child)
+
+        propagate(doc.masterNode)
+
+        return jsonize(doc)
+    pass
 
     @classmethod
     def from_xml(cls, filename):
@@ -924,3 +948,33 @@ class SegmentedTextSM:
 
 ###################################################################################################################################################
 
+def jsonize(obj: object):
+
+    if obj is None:
+        return None
+
+    if type(obj) in (int, str, bool, float):
+        return obj
+
+    elif type(obj) in (list, tuple, set):
+        out = []
+        for el in obj:
+            out.append(jsonize(el))
+            
+    elif type(obj) is dict:
+        out = {}
+        for el in obj:
+            out[el] = jsonize(obj[el])
+
+    else:
+        out = {}
+        for el in obj.__dict__:
+            try: 
+                getattr(obj.__class__, el)
+                continue
+            except AttributeError:
+                out[el] = jsonize(obj.__dict__[el])
+
+    return out
+
+def delete(x): del(x)

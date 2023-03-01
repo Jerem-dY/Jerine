@@ -134,25 +134,31 @@
                     putenv("LC_ALL=en_US.UTF-8");
                     $cmd = "python3 scripts/python/test.py "."\"".$_POST["text"]."\"";
 
+					if(isset($return)){
+						unset($return);
+					}
+					
                     exec($cmd, $return);
 
                     $xml_string = end($return);
 
-                    print json_encode($xml_string);
+					$out = str_replace("nan", "null", $xml_string);
+
+                    print $out;
                 ?>;
 
-            var doc = JSON5.parse(result);
+            //var doc = JSON5.parse(result);
 
-            $(".tree").html("");
-            
-            var tree = create_chart(doc.tree, "#tree-simple");
-            $('#tree-simple').css("overflow", "visible");
-
-            let table = tableFromJson(doc.linear);
+            let table = tableFromJson(result.listObjs);
 
             table.classList.add('scrollable');
 
             document.querySelector("div#tabletab").appendChild(table)
+
+			$(".tree").html("");
+            
+            var tree = create_chart(structureJson(result.masterNode), "#tree-simple");
+            $('#tree-simple').css("overflow", "visible");
 
 			
 		</script>

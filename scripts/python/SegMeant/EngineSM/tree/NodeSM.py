@@ -215,6 +215,14 @@ class NodeSM:
     pass
 
 
+    def propagate(self, func) -> None:
+        
+        func(self)
+
+        for child in self.children:
+            child.propagate(func)
+
+
     def decapsulate(self) -> list:
         """
         Récupère la liste des feuilles (noeuds terminaux) accessibles depuis ce noeud.

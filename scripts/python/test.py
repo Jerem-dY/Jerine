@@ -18,9 +18,9 @@ if __name__ == "__main__":
 
     text: str = args.input[0]
 
-    output = sys.stdout
+    """output = sys.stdout
     f = open(os.devnull, 'w')
-    sys.stdout = f
+    sys.stdout = f"""
 
     sm = SegMeant()
 
@@ -28,13 +28,13 @@ if __name__ == "__main__":
     doc = SegmentedTextSM(text, doc_name="test", lexicon=sm.LEXICON, model=sm.MODEL)
     #doc = sm.segment_text(text, "test")
 
-    sys.stdout = output
-    f.close()
+    """sys.stdout = output
+    f.close()"""
     
     """for i, token in enumerate(doc.listObjs):
         print(f"{i}: {token.txt}\t{token.tags}<br>")"""
     
-    print(doc.serialize())
+    print(doc.to_json())
 
     
     
