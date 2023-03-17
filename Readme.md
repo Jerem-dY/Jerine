@@ -6,10 +6,10 @@ Plateforme web d'échange, tri et export de fichiers **CoNLL-U, TXT et XML**.
 ## Dépendances :
 
 ### javascript
-jquery *>= 3.6.1*
-jquery-ui
-jqPlot
-DataTables
+jquery *>= 3.6.1*  
+jquery-ui  
+jqPlot  
+DataTables  
 
 ### Python
 
@@ -23,4 +23,4 @@ pylint *>= 2.16.1*
 
 
 ### Rust
-cpython *>= 0.7.1*
+cpython *>= 0.7.1*  
