@@ -1,0 +1,23 @@
+.overlay_form{
+    display: flex;
+}
+
+.overlay_section{
+    padding: 2%;
+    margin: 0.5%;
+    background-color: rgba(137, 43, 226, 0.188);
+}
+
+.overlay_left{
+    width:50%;
+}
+
+label{
+    margin-left: 10%;
+    font-style: italic;
+    font-size:16px;
+}
+
+td{
+    cursor:cell;
+}
