@@ -1,7 +1,9 @@
 # Bourdillat-Adjoudj
 
 Plateforme web d'échange, tri et export de fichiers **CoNLL-U, TXT et XML**.  
-*Le cahier des charges et autres ressources se trouvent dans [docs/readable](/docs/readable)*
+*Le cahier des charges et autres ressources se trouvent dans [docs/readable](/docs/readable)*  
+
+Le site est accessible ici : [***Adjoudj-Bourdillat***](http://i3l.univ-grenoble-alpes.fr/~bourdillat/Bourdillat-Adjoudj/main.html)  
 
 ## Dépendances :
 
