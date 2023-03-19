@@ -43,7 +43,7 @@ else{
  * Etape 2 : on crée le dossier qui va accueillir les fichiers à traiter, s'il n'existe pas déjà.
  *  
  * */
-$uploads_path = getcwd().DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR;
+$uploads_path = getcwd().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR;
 
 if(is_dir($uploads_path)){
 
@@ -54,7 +54,7 @@ if(is_dir($uploads_path)){
     }
 }else{
     if(!mkdir($uploads_path, 0777)){
-        print "<br/>Couldn't make the directory #".$id." for upload. Aborting.<br/>";
+        print "<br/>Couldn't make the directory #".$id." for upload : '".$uploads_path."'. Aborting.<br/>";
         http_response_code(500);
     exit;
     }

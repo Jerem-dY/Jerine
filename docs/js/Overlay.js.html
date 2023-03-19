@@ -1,4 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Overlay.js</title>
 
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Overlay.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 /**
  * Classe décrivant la fenêtre d'upload de documents.
  */
@@ -15,23 +43,23 @@ class Overlay{
      */
     constructor(id, parent){
 
-        this.div = $("<div id=\"" + id + "\" title=\"Ajouter des documents\">").appendTo(parent);
-        var overlay_form = $("<form class=\"overlay_form\"></form>").appendTo(this.div);
-        overlay_form.append("<input type=\"submit\" tabindex=\"-1\" style=\"position:absolute; top:-1000px\">");
+        this.div = $("&lt;div id=\"" + id + "\" title=\"Ajouter des documents\">").appendTo(parent);
+        var overlay_form = $("&lt;form class=\"overlay_form\">&lt;/form>").appendTo(this.div);
+        overlay_form.append("&lt;input type=\"submit\" tabindex=\"-1\" style=\"position:absolute; top:-1000px\">");
 
-        var left_section = $("<section class=\"overlay_section overlay_left\"></section>").appendTo(overlay_form);
-        var right_section = $("<section class=\"overlay_section\"></section>").appendTo(overlay_form);
+        var left_section = $("&lt;section class=\"overlay_section overlay_left\">&lt;/section>").appendTo(overlay_form);
+        var right_section = $("&lt;section class=\"overlay_section\">&lt;/section>").appendTo(overlay_form);
 
-        var table = $("<table id=\"import_files_table\" class=\"display\"><thead><tr><th>Fichier</th><th>Taille (ko)</th><th>Type</th></tr></thead><tbody></tbody></table>").appendTo(left_section);
-        this.filePicker = $("<input type=\"file\" name=\"filePicker\" multiple></input>").appendTo(left_section).button();
+        var table = $("&lt;table id=\"import_files_table\" class=\"display\">&lt;thead>&lt;tr>&lt;th>Fichier&lt;/th>&lt;th>Taille (ko)&lt;/th>&lt;th>Type&lt;/th>&lt;/tr>&lt;/thead>&lt;tbody>&lt;/tbody>&lt;/table>").appendTo(left_section);
+        this.filePicker = $("&lt;input type=\"file\" name=\"filePicker\" multiple>&lt;/input>").appendTo(left_section).button();
 
 
-        var type_changer = $("<div id=\"type_changer\"></div>").appendTo(right_section);
-        $("<legend><h2>Format de fichier</h2></legend>").appendTo(type_changer);
+        var type_changer = $("&lt;div id=\"type_changer\">&lt;/div>").appendTo(right_section);
+        $("&lt;legend>&lt;h2>Format de fichier&lt;/h2>&lt;/legend>").appendTo(type_changer);
 
-        this.selectType = $("<select name=\"selectType\" id=\"selectType\"></select>").appendTo(type_changer);
+        this.selectType = $("&lt;select name=\"selectType\" id=\"selectType\">&lt;/select>").appendTo(type_changer);
 
-        this.changeTypeBtn = $("<button id=\"changeTypeBtn\" type=\"button\">Changer</button>").appendTo(type_changer).button();
+        this.changeTypeBtn = $("&lt;button id=\"changeTypeBtn\" type=\"button\">Changer&lt;/button>").appendTo(type_changer).button();
         this.changeTypeBtn.on({"click": (function(){
             var dataind = this.table.rows({selected: true}).indexes();
             var type = this.selectType.val();
@@ -47,36 +75,36 @@ class Overlay{
             
         }).bind(this)});
 
-        this.processors = $("<div id=\"processors\"></div>").appendTo(right_section);
-        $("<legend><h2>Processeurs</h2></legend>").appendTo(this.processors);
+        this.processors = $("&lt;div id=\"processors\">&lt;/div>").appendTo(right_section);
+        $("&lt;legend>&lt;h2>Processeurs&lt;/h2>&lt;/legend>").appendTo(this.processors);
 
-        $("<label for=\"tokenizer\">Tokeniseur</select>").appendTo(this.processors);
-        this.tokenizer = $("<select id=\"tokenizer\"></select>").appendTo(this.processors);
+        $("&lt;label for=\"tokenizer\">Tokeniseur&lt;/select>").appendTo(this.processors);
+        this.tokenizer = $("&lt;select id=\"tokenizer\">&lt;/select>").appendTo(this.processors);
 
-        $("<label for=\"tagger\">Etiqueteur</select>").appendTo(this.processors);
-        this.tagger = $("<select id=\"tagger\"></select>").appendTo(this.processors);
+        $("&lt;label for=\"tagger\">Etiqueteur&lt;/select>").appendTo(this.processors);
+        this.tagger = $("&lt;select id=\"tagger\">&lt;/select>").appendTo(this.processors);
 
-        $("<label for=\"lemmatizer\">Lemmatiseur</select>").appendTo(this.processors);
-        this.lemmatizer = $("<select id=\"lemmatizer\"></select>").appendTo(this.processors);
+        $("&lt;label for=\"lemmatizer\">Lemmatiseur&lt;/select>").appendTo(this.processors);
+        this.lemmatizer = $("&lt;select id=\"lemmatizer\">&lt;/select>").appendTo(this.processors);
 
-        $("<label for=\"dependency_analyzer\">Analyseur syn.</select>").appendTo(this.processors);
-        this.dependency_analyzer = $("<select id=\"dependency_analyzer\"></select>").appendTo(this.processors);
+        $("&lt;label for=\"dependency_analyzer\">Analyseur syn.&lt;/select>").appendTo(this.processors);
+        this.dependency_analyzer = $("&lt;select id=\"dependency_analyzer\">&lt;/select>").appendTo(this.processors);
 
 
-        Overlay.accepted_types.forEach(function(el){$("#selectType").append("<option value=\"" + el + "\">" + el + "</option>");});
+        Overlay.accepted_types.forEach(function(el){$("#selectType").append("&lt;option value=\"" + el + "\">" + el + "&lt;/option>");});
         Overlay.available_processors.forEach(function(el){
-            $("#tokenizer").append("<option value=\"" + el + "\">" + el + "</option>");
-            $("#tagger").append("<option value=\"" + el + "\">" + el + "</option>");
-            $("#lemmatizer").append("<option value=\"" + el + "\">" + el + "</option>");
-            $("#dependency_analyzer").append("<option value=\"" + el + "\">" + el + "</option>");
+            $("#tokenizer").append("&lt;option value=\"" + el + "\">" + el + "&lt;/option>");
+            $("#tagger").append("&lt;option value=\"" + el + "\">" + el + "&lt;/option>");
+            $("#lemmatizer").append("&lt;option value=\"" + el + "\">" + el + "&lt;/option>");
+            $("#dependency_analyzer").append("&lt;option value=\"" + el + "\">" + el + "&lt;/option>");
         });
 
         //$("#selectType").selectmenu( "refresh" );
 
-        this.alertFormat = $("<p class=\"ui-state-error\"><span class=\"ui-icon ui-icon-alert\"></span> Un ou plusieurs fichiers ne sont pas dans un format valide !</p>").appendTo(right_section);
+        this.alertFormat = $("&lt;p class=\"ui-state-error\">&lt;span class=\"ui-icon ui-icon-alert\">&lt;/span> Un ou plusieurs fichiers ne sont pas dans un format valide !&lt;/p>").appendTo(right_section);
         this.alertFormat.hide();
 
-        this.alertSize = $("<p class=\"ui-state-error\"><span class=\"ui-icon ui-icon-alert\"></span> La taille totale des fichiers dépasse 1 Mo !</p>").appendTo(right_section);
+        this.alertSize = $("&lt;p class=\"ui-state-error\">&lt;span class=\"ui-icon ui-icon-alert\">&lt;/span> La taille totale des fichiers dépasse 1 Mo !&lt;/p>").appendTo(right_section);
         this.alertSize.hide();
         
         this.table = table.DataTable({
@@ -129,13 +157,13 @@ class Overlay{
             "direction": "horizontal"
         });
 
-        this.progressDialog = $("<div id=\"progressDialog\" title=\"Traitement\"></div>").dialog({
+        this.progressDialog = $("&lt;div id=\"progressDialog\" title=\"Traitement\">&lt;/div>").dialog({
             autoOpen: false,
             resizable: false,
             draggable: false
         });
 
-        var pBar = $("<div id=\"pBarUpload\"></div>").appendTo(this.progressDialog);
+        var pBar = $("&lt;div id=\"pBarUpload\">&lt;/div>").appendTo(this.progressDialog);
 
         pBar.progressbar({
             value: false
@@ -158,7 +186,7 @@ class Overlay{
 
             event.data.overlay.table.clear();
 
-            for(let i=0; i < this.fileList.length; i++){
+            for(let i=0; i &lt; this.fileList.length; i++){
 
                 
                 //if(!names.includes(fileList.item(i).name)){
@@ -238,7 +266,7 @@ class Overlay{
         data.append("username", "bourdije");
         data.append("password", "password");
         
-        for(let i=0; i < this.fileList.length; i++){
+        for(let i=0; i &lt; this.fileList.length; i++){
             data.append("file_" + i, this.fileList.item(i));
         }
 
@@ -259,7 +287,7 @@ class Overlay{
             }).bind(this),
             error : (function(response, status, errorType){
                 this.loading(false);
-                $("<div>" + errorType + " : <p>" + response.responseText + "</p></div>").dialog();
+                $("&lt;div>" + errorType + " : &lt;p>" + response.responseText + "&lt;/p>&lt;/div>").dialog();
             }).bind(this)
         });
 
@@ -278,7 +306,7 @@ class Overlay{
         let hasTxt = false;
         let error = false;
 
-        for(let i=0; i < this.table.rows()[0].length; i++){
+        for(let i=0; i &lt; this.table.rows()[0].length; i++){
 
             size += this.table.cell(i, 1).data();
 
@@ -335,4 +363,26 @@ class Overlay{
         }
         
     }
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Overlay.html">Overlay</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Sun Mar 19 2023 23:48:34 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
