@@ -10,13 +10,13 @@ include("connexion.php");
 if(isset($_POST) && isset($_POST['username']) && isset($_POST['password'])){
     print_r($_POST);
 
-    $query = "SELECT id FROM `user` WHERE password='".$_POST['password']."' AND login='".$_POST['username']."'" ;
+    $query = "SELECT user_id FROM `user` WHERE password='".$_POST['password']."' AND login='".$_POST['username']."'" ;
     
     /* On exécute la requête : */
     if($response = $pdo->query($query)){
 
         if($record = $response->fetch()){
-            $id = $record["id"];
+            $id = $record["user_id"];
         }
         else{
             print "<br/>Authentification failed: wrong username or password. Aborting.<br/>";
@@ -109,7 +109,35 @@ echo "<br/>Files tranferred.<br/>";
  *  
  * */
 
-// .......................
+
+//putenv("LC_ALL=en_US.UTF-8");
+
+//echo exec("/home/IdL/2022/bourdillat/miniconda3/bin/conda init 2>&1", $return);
+//echo exec("/home/IdL/2022/bourdillat/miniconda3/bin/conda activate website 2>&1", $return);
+
+//print_r($return);
+
+$cmd = "/home/IdL/2022/bourdillat/miniconda3/envs/website/bin/python3.9 ../python/inputdata.py";
+
+foreach($to_delete as $f){
+    $cmd = $cmd." '".$f."'";
+}
+
+$cmd = $cmd." "."-A ".$_POST['username']." ".$_POST['password']." 2>&1";
+
+$process_out = exec($cmd, $return);
+print_r($return);
+
+
+if($process_out != 0){
+    http_response_code(500);
+    echo("<br/>Something went wrong while processing the files!<br/>");
+}
+else{
+    http_response_code(200);
+    echo("Fichiers traités.");
+}
+
 
 
 /**
@@ -128,6 +156,5 @@ echo "<br/>Files tranferred.<br/>";
     }
  }
 
-http_response_code(200);
 exit;
 ?>

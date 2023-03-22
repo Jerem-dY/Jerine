@@ -233,6 +233,7 @@ class Overlay{
      */
     addDocs(){
 
+        this.loading(true);
         var data = new FormData();
 
         data.append("username", "bourdije");
@@ -242,7 +243,6 @@ class Overlay{
             data.append("file_" + i, this.fileList.item(i));
         }
 
-        this.loading(true);
 
         $.ajax({
             url : "./php/upload.php",
