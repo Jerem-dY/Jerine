@@ -5,6 +5,9 @@ Plateforme web d'échange, tri et export de fichiers **CoNLL-U, TXT et XML**.
 
 Le site est accessible ici : [***Adjoudj-Bourdillat***](http://i3l.univ-grenoble-alpes.fr/~bourdillat/Bourdillat-Adjoudj/main.html)  
 
+## Wiki :
+- [Sécurité](https://gricad-gitlab.univ-grenoble-alpes.fr/idl2022-2023/bourdillat-adjoudj/-/wikis/S%C3%A9curit%C3%A9)
+
 ## Dépendances :
 
 ### javascript
