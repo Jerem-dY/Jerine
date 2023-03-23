@@ -1,38 +1,14 @@
 <?php 
 
 include("connexion.php");
-
+session_start();
 
 /**
  * Etape 1 : on vérifie que l'on a bien toutes les infos nécesaires, puis on récupère l'id de l'utilisateur.
  *  
  * */
-if(isset($_POST) && isset($_POST['username']) && isset($_POST['password'])){
-    print_r($_POST);
+if(!(isset($_SESSION) && isset($_SESSION["id"]))){
 
-    $query = "SELECT user_id FROM `user` WHERE password='".$_POST['password']."' AND login='".$_POST['username']."'" ;
-    
-    /* On exécute la requête : */
-    if($response = $pdo->query($query)){
-
-        if($record = $response->fetch()){
-            $id = $record["user_id"];
-        }
-        else{
-            print "<br/>Authentification failed: wrong username or password. Aborting.<br/>";
-            http_response_code(401);
-            exit;
-        }
-    
-    }
-    else{
-        print "<br/>Couldn't get a response back from the database. Aborting.<br/>";
-        http_response_code(500);
-        exit;
-    }
-    
-}
-else{
     print "<br/>Required tokens were not provided. Aborting.<br/>";
     http_response_code(400);
     exit;
@@ -43,18 +19,18 @@ else{
  * Etape 2 : on crée le dossier qui va accueillir les fichiers à traiter, s'il n'existe pas déjà.
  *  
  * */
-$uploads_path = getcwd().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$id.DIRECTORY_SEPARATOR;
+$uploads_path = getcwd().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$_SESSION["id"].DIRECTORY_SEPARATOR;
 
 if(is_dir($uploads_path)){
 
     if(!is_writable($uploads_path)){
-        print "<br/>Upload dir #".$id." is not writeable. Aborting.<br/>";
+        print "<br/>Upload dir #".$_SESSION["id"]." is not writeable. Aborting.<br/>";
         http_response_code(500);
         exit;
     }
 }else{
     if(!mkdir($uploads_path, 0777)){
-        print "<br/>Couldn't make the directory #".$id." for upload : '".$uploads_path."'. Aborting.<br/>";
+        print "<br/>Couldn't make the directory #".$_SESSION["id"]." for upload : '".$uploads_path."'. Aborting.<br/>";
         http_response_code(500);
     exit;
     }
@@ -123,7 +99,7 @@ foreach($to_delete as $f){
     $cmd = $cmd." '".$f."'";
 }
 
-$cmd = $cmd." "."-A ".$_POST['username']." ".$_POST['password']." 2>&1";
+$cmd = $cmd." "."-u ".$_SESSION["id"]." 2>&1";
 
 $process_out = exec($cmd, $return);
 print_r($return);

@@ -235,9 +235,6 @@ class Overlay{
 
         this.loading(true);
         var data = new FormData();
-
-        data.append("username", "bourdije");
-        data.append("password", "password");
         
         for(let i=0; i < this.fileList.length; i++){
             data.append("file_" + i, this.fileList.item(i));
@@ -255,6 +252,7 @@ class Overlay{
             success : (function(result, status){
                 this.loading(false);
                 alert("Fichiers envoyés !");
+                $(".refresh").trigger("refresh_tables");
                 
             }).bind(this),
             error : (function(response, status, errorType){

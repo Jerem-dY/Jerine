@@ -1,9 +1,10 @@
 <?php
 
+putenv("LC_ALL=en_US.UTF-8");
 
 try{
     $pdo = new PDO('mysql:host=localhost;dbname=bourdillat', 'bourdillat', 'Uibbnqkbavs09//');
-    print "La base est ouverte !<br/>\n";
+    //print "La base est ouverte !<br/>\n";
 }
 catch(Exception $e){
     die('Erreur : '.$e->getMessage());
