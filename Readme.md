@@ -9,7 +9,7 @@ Le site est accessible ici : [***Adjoudj-Bourdillat***](http://i3l.univ-grenoble
 - [Sécurité](https://gricad-gitlab.univ-grenoble-alpes.fr/idl2022-2023/bourdillat-adjoudj/-/wikis/S%C3%A9curit%C3%A9)
 
 ## Base de données :
-[diagramme de la base de données](/docs/readable/db.png "base de données de l'application"){: .shadow}
+![diagramme de la base de données](/docs/readable/db.png "base de données de l'application"){: .shadow}
 
 ## Dépendances :
 
