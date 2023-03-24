@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Jeu 23 Mars 2023 à 20:42
+-- Généré le :  Ven 24 Mars 2023 à 21:27
 -- Version du serveur :  10.1.48-MariaDB-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.24-0ubuntu0.18.04.17
 
@@ -27,9 +27,9 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `collection` (
-  `collection_id` int(11) NOT NULL,
+  `collection_id` int(11) UNSIGNED NOT NULL,
   `collection_name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `is_main` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'booléen indiquant s''il s''agit de la collection principale d''un utilisateur'
+  `is_main` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT 'booléen indiquant s''il s''agit de la collection principale d''un utilisateur'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -46,8 +46,8 @@ INSERT INTO `collection` (`collection_id`, `collection_name`, `is_main`) VALUES
 --
 
 CREATE TABLE `collection_has_document` (
-  `collection_id` int(11) NOT NULL,
-  `document_id` int(11) NOT NULL
+  `collection_id` int(11) UNSIGNED NOT NULL,
+  `document_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -57,8 +57,8 @@ CREATE TABLE `collection_has_document` (
 --
 
 CREATE TABLE `document` (
-  `document_id` int(11) NOT NULL,
-  `document_name` varchar(80) COLLATE utf8_unicode_ci NOT NULL
+  `document_id` int(11) UNSIGNED NOT NULL,
+  `document_name` varchar(80) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -68,9 +68,9 @@ CREATE TABLE `document` (
 --
 
 CREATE TABLE `form` (
-  `form_id` int(11) NOT NULL,
+  `form_id` mediumint(11) UNSIGNED NOT NULL,
   `form_chars` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
-  `form_len` smallint(6) AS (CHAR_LENGTH(form_chars)) VIRTUAL
+  `form_len` smallint(6) UNSIGNED AS (CHAR_LENGTH(form_chars)) VIRTUAL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -78,7 +78,7 @@ CREATE TABLE `form` (
 --
 
 INSERT INTO `form` (`form_id`, `form_chars`, `form_len`) VALUES
-(-1, NULL, NULL);
+(0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,8 +87,8 @@ INSERT INTO `form` (`form_id`, `form_chars`, `form_len`) VALUES
 --
 
 CREATE TABLE `lemma` (
-  `lemma_id` int(11) NOT NULL,
-  `lemma_form` int(11) NOT NULL,
+  `lemma_id` mediumint(11) UNSIGNED NOT NULL,
+  `lemma_form` mediumint(11) UNSIGNED NOT NULL,
   `pos` enum('ADJ','ADP','ADV','AUX','CCONJ','DET','INTJ','NOUN','NUM','PART','PRON','PROPN','PUNCT','SCONJ','SYM','VERB','X') COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -97,7 +97,7 @@ CREATE TABLE `lemma` (
 --
 
 INSERT INTO `lemma` (`lemma_id`, `lemma_form`, `pos`) VALUES
-(-1, -1, 'X');
+(0, 0, 'X');
 
 -- --------------------------------------------------------
 
@@ -106,10 +106,10 @@ INSERT INTO `lemma` (`lemma_id`, `lemma_form`, `pos`) VALUES
 --
 
 CREATE TABLE `sentence` (
-  `sentence_id` int(11) NOT NULL,
+  `sentence_id` int(11) UNSIGNED NOT NULL,
   `type` enum('DEC','INT','EXC') COLLATE utf8_unicode_ci NOT NULL,
-  `text_id` int(11) NOT NULL,
-  `sentence_doc_ind` int(11) NOT NULL
+  `text_id` int(11) UNSIGNED NOT NULL,
+  `sentence_doc_ind` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -119,16 +119,16 @@ CREATE TABLE `sentence` (
 --
 
 CREATE TABLE `token` (
-  `token_id` int(11) NOT NULL,
-  `token_sent_ind` int(11) DEFAULT NULL,
-  `token_doc_ind` int(11) NOT NULL,
-  `token_form` int(11) NOT NULL,
-  `lemma` int(11) DEFAULT NULL,
-  `sentence` int(11) NOT NULL,
+  `token_id` int(11) UNSIGNED NOT NULL,
+  `token_sent_ind` int(11) UNSIGNED NOT NULL,
+  `token_doc_ind` int(11) UNSIGNED NOT NULL,
+  `token_form` mediumint(11) UNSIGNED NOT NULL,
+  `lemma` mediumint(11) UNSIGNED NOT NULL,
+  `sentence` int(11) UNSIGNED NOT NULL,
   `deprel` enum('acl','acl:relcl','advcl','advmod','advmod:emph','advmod:lmod','amod','appos','aux','aux:pass','case','cc','cc:preconj','ccomp','clf','compound','compound:lvc','compound:prt','compound:redup','compound:svc','conj','cop','csubj','csubj:outer','csubj:pass','dep','det','det:numgov','det:nummod','det:poss','discourse','dislocated','expl','expl:impers','expl:pass','expl:pv','fixed','flat','flat:foreign','flat:name','goeswith','iobj','list','mark','nmod','nmod:poss','nmod:tmod','nsubj','nsubj:outer','nsubj:pass','nummod','nummod:gov','obj','obl','obl:agent','obl:arg','obl:lmod','obl:tmod','orphan','parataxis','punct','reparandum','root','vocative','xcomp') COLLATE utf8_unicode_ci DEFAULT NULL,
-  `head` int(11) DEFAULT NULL,
-  `offset` int(11) NOT NULL,
-  `spaceafter` tinyint(4) NOT NULL
+  `head` int(11) UNSIGNED DEFAULT NULL,
+  `offset` int(11) UNSIGNED NOT NULL,
+  `spaceafter` tinyint(4) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -138,12 +138,12 @@ CREATE TABLE `token` (
 --
 
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+  `user_id` int(11) UNSIGNED NOT NULL,
   `login` varchar(8) COLLATE utf8_unicode_ci NOT NULL,
   `password` char(60) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
   `fname` varchar(12) COLLATE utf8_unicode_ci NOT NULL,
   `surname` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `documents` int(11) NOT NULL
+  `documents` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -160,8 +160,8 @@ INSERT INTO `user` (`user_id`, `login`, `password`, `fname`, `surname`, `documen
 --
 
 CREATE TABLE `user_has_collection` (
-  `user_id` int(11) NOT NULL,
-  `collection_id` int(11) NOT NULL
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `collection_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -244,32 +244,32 @@ ALTER TABLE `user_has_collection`
 -- AUTO_INCREMENT pour la table `collection`
 --
 ALTER TABLE `collection`
-  MODIFY `collection_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `collection_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT pour la table `form`
 --
 ALTER TABLE `form`
-  MODIFY `form_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `form_id` mediumint(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `lemma`
 --
 ALTER TABLE `lemma`
-  MODIFY `lemma_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `lemma_id` mediumint(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `sentence`
 --
 ALTER TABLE `sentence`
-  MODIFY `sentence_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sentence_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `token`
 --
 ALTER TABLE `token`
-  MODIFY `token_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `token_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Contraintes pour les tables exportées
 --

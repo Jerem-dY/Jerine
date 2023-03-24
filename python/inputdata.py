@@ -49,7 +49,7 @@ def insert_lemmas(cursor, lemma_form_ids, lemma_pos):
         if result != []:
             ids.append(result[0][0])
         else:
-            ids.append(-1)
+            ids.append(0)
 
     return ids
 
@@ -79,7 +79,7 @@ def insert_sentences(cursor, type, text_id, sentence_doc_ind):
         if result != []:
             ids.append(result[0][0])
         else:
-            ids.append("NULL")
+            ids.append(0)
 
     #cursor.execute("SET FOREIGN_KEY_CHECKS=1;")
 
@@ -194,7 +194,7 @@ def process_file(file):
                     for i in range(len(sentence_ids)):
                         sentence_ids_stretched += list(itertools.repeat(sentence_ids[i], sentences[i]+1))
 
-                    print(lemma_ids)
+                    #print(lemma_ids)
                     transaction(insert_tokens, db)(c, token_sent_inds, token_doc_ind, token_form_ids, lemma_ids, sentence_ids_stretched, deprels, heads, offset, spaceafter)
 
             except Exception as e:

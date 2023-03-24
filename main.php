@@ -75,6 +75,9 @@ if(!(isset($_SESSION) && isset(_SESSION["id"]))){
                     <th>Phrases</th>
                     <th>Tokens</th>
                     <th>Lemmes</th>
+                    <th>Formes</th>
+                    <th>Rapport types/tokens</th>
+                    <th>Caractères</th>
                 </tr>
             </thead>
         </table>
@@ -109,10 +112,13 @@ if(!(isset($_SESSION) && isset(_SESSION["id"]))){
                 'url':'php/getCollectionContent.php'
             },
             'columns': [	
-                { data: 'document_name' },
-                { data: 'sents' },
+                { data: 'document' },
+                { data: 'sentences' },
                 { data: 'tokens' },
-                { data: 'lemmas' }
+                { data: 'lemmas' },
+                { data: 'forms' },
+                { data: 'typetokenr' },
+                { data: 'chars' }
             ]
         });
 
