@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Client :  localhost:3306
--- Généré le :  Ven 24 Mars 2023 à 21:27
+-- Généré le :  Lun 27 Mars 2023 à 22:50
 -- Version du serveur :  10.1.48-MariaDB-0ubuntu0.18.04.1
 -- Version de PHP :  7.2.24-0ubuntu0.18.04.17
 
@@ -37,7 +37,11 @@ CREATE TABLE `collection` (
 --
 
 INSERT INTO `collection` (`collection_id`, `collection_name`, `is_main`) VALUES
-(1, 'documents', 1);
+(1, 'documents', 1),
+(5, 'documents', 1),
+(18, 'littérature', 0),
+(19, 'test', 0),
+(23, 'cuisine', 0);
 
 -- --------------------------------------------------------
 
@@ -49,6 +53,25 @@ CREATE TABLE `collection_has_document` (
   `collection_id` int(11) UNSIGNED NOT NULL,
   `document_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Déclencheurs `collection_has_document`
+--
+DELIMITER $$
+CREATE TRIGGER `document_garbage_collector` AFTER DELETE ON `collection_has_document` FOR EACH ROW BEGIN
+
+DECLARE refs integer;
+
+SET @refs := (SELECT COUNT(document_id) FROM collection_has_document WHERE document_id = OLD.document_id);
+
+IF(@refs <= 0)
+THEN
+	DELETE FROM document WHERE document_id = OLD.document_id;
+END IF;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -151,7 +174,26 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `login`, `password`, `fname`, `surname`, `documents`) VALUES
-(1, 'bourdije', '$2y$10$Oi9CULEflMTw4HbX1/yY6umwdQMKWn6ZzMETNrsZKqdAYJCU5Wpi6', 'Jérémy', 'Bourdillat', 1);
+(1, 'bourdije', '$2y$10$Oi9CULEflMTw4HbX1/yY6umwdQMKWn6ZzMETNrsZKqdAYJCU5Wpi6', 'Jérémy', 'Bourdillat', 1),
+(3, 'test', '$2y$10$jp10eWiy6lvpA4a3wxclROkaCgMa9F66AzBOS.1LG7Z1MVR3lnTue', 'Test', 'Test', 5);
+
+--
+-- Déclencheurs `user`
+--
+DELIMITER $$
+CREATE TRIGGER `user_prepare_private_coll` BEFORE INSERT ON `user` FOR EACH ROW BEGIN
+
+DECLARE coll_id integer;
+
+INSERT INTO collection (collection_id, collection_name, is_main) VALUES (NULL, "documents", 1);
+
+SET @coll_id := (SELECT LAST_INSERT_ID());
+
+SET NEW.documents = @coll_id;
+
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -163,6 +205,34 @@ CREATE TABLE `user_has_collection` (
   `user_id` int(11) UNSIGNED NOT NULL,
   `collection_id` int(11) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Contenu de la table `user_has_collection`
+--
+
+INSERT INTO `user_has_collection` (`user_id`, `collection_id`) VALUES
+(1, 23),
+(3, 18),
+(3, 19);
+
+--
+-- Déclencheurs `user_has_collection`
+--
+DELIMITER $$
+CREATE TRIGGER `collection_garbage_collector` AFTER DELETE ON `user_has_collection` FOR EACH ROW BEGIN
+
+DECLARE refs integer;
+
+SET @refs := (SELECT COUNT(collection_id) FROM user_has_collection WHERE collection_id = OLD.collection_id);
+
+IF(@refs <= 0)
+THEN
+	DELETE FROM collection WHERE collection_id = OLD.collection_id;
+END IF;
+
+END
+$$
+DELIMITER ;
 
 --
 -- Index pour les tables exportées
@@ -244,7 +314,7 @@ ALTER TABLE `user_has_collection`
 -- AUTO_INCREMENT pour la table `collection`
 --
 ALTER TABLE `collection`
-  MODIFY `collection_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `collection_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT pour la table `form`
 --
@@ -269,7 +339,7 @@ ALTER TABLE `token`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- Contraintes pour les tables exportées
 --

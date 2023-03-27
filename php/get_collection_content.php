@@ -3,6 +3,8 @@
 // Fortement inspiré de : https://codeanddeploy.com/blog/php/jquery-datatables-ajax-php-and-mysql-using-pdo-example
 
 include ('connexion.php');
+include("start_session.php");
+
 
 $searchQuery = " ";
 
@@ -18,26 +20,17 @@ $searchValue = $_POST['search']['value']; // Search value
 $searchArray = array();
 
 if($searchValue != ''){
-    $searchQuery = " AND (document_name LIKE :document_name OR 
-        count(distinct(sentence)) LIKE :sentences OR
-        count(distinct(token_id)) LIKE :tokens OR 
-        count(distinct(lemma_id)) LIKE :lemmas OR
-        count(distinct(token.token_form)) LIKE :forms OR
-        count(distinct(token.token_form))/count(distinct(token_id)) LIKE :typtokenr OR
-        sum(form.form_len) LIKE :chars ) ";
+    $searchQuery = " AND (document_name LIKE :document_name ) ";
     $searchArray = array( 
-        'document_name'=>"%$searchValue%",
-        'sents'=>"%$searchValue%",
-        'tokens'=>"%$searchValue%",
-        'lemmas'=>"%$searchValue%",
-        'forms'=>"%$searchValue%",
-        'typetokenr'=>"%$searchValue%",
-        'chars'=>"%$searchValue%"
+        'document_name'=>"%$searchValue%"
     );
 }
-
+ 
 // Total number of records with filtering
-$stmt = $pdo->prepare("SELECT COUNT(*) AS allcount FROM document WHERE 1 ".$searchQuery);
+$stmt = $pdo->prepare("SELECT COUNT(*) AS allcount 
+FROM document 
+JOIN collection_has_document ON collection_has_document.document_id = document.document_id 
+WHERE collection_has_document.collection_id=".$_GET["collection_id"]." ".$searchQuery);
 $stmt->execute($searchArray);
 $records = $stmt->fetch();
 $totalRecordwithFilter = $records['allcount'];
@@ -45,7 +38,10 @@ $totalRecordwithFilter = $records['allcount'];
 
 
 // Total number of records without filtering
-$stmt = $pdo->prepare("SELECT COUNT(*) AS allcount FROM document ");
+$stmt = $pdo->prepare("SELECT COUNT(*) AS allcount 
+FROM document 
+JOIN collection_has_document ON collection_has_document.document_id = document.document_id 
+WHERE collection_has_document.collection_id=".$_GET["collection_id"]." ");
 $stmt->execute();
 $records = $stmt->fetch();
 $totalRecords = $records['allcount'];
@@ -56,22 +52,22 @@ $totalRecords = $records['allcount'];
 
 
 $stmt = $pdo->prepare("select document_name as document, count(distinct(sentence)) as sentences, count(distinct(token_id)) as tokens, count(distinct(lemma_id)) as lemmas, count(distinct(token.token_form)) as forms, sum(form.form_len) as chars, count(distinct(token.token_form))/count(distinct(token_id)) as typetokenr from collection
-join collection_has_document on collection_has_document.collection_id = collection.collection_id
-join document on document.document_id = collection_has_document.document_id
+join collection_has_document on collection_has_document.collection_id=collection.collection_id
+join document on collection_has_document.document_id = document.document_id
 join sentence on sentence.text_id = document.document_id
 join token on token.sentence = sentence.sentence_id
-join lemma on lemma.lemma_id = token.lemma
+join lemma on token.lemma = lemma.lemma_id
 join form on form.form_id = token.token_form
-where 1 ".$searchQuery." group by document.document_id order by document_name");
+where collection.collection_id=".$_GET["collection_id"]." ".$searchQuery." group by document.document_id order by document_name");
 
 $stmt = $pdo->prepare("select document_name as document, count(distinct(sentence)) as sentences, count(distinct(token_id)) as tokens, count(distinct(lemma_id)) as lemmas, count(distinct(token.token_form)) as forms, sum(form.form_len) as chars, count(distinct(token.token_form))/count(distinct(token_id)) as typetokenr from collection
-join collection_has_document on collection_has_document.collection_id = collection.collection_id
-join document on document.document_id = collection_has_document.document_id
+join collection_has_document on collection_has_document.collection_id=collection.collection_id
+join document on collection_has_document.document_id = document.document_id
 join sentence on sentence.text_id = document.document_id
 join token on token.sentence = sentence.sentence_id
-join lemma on lemma.lemma_id = token.lemma
+join lemma on token.lemma = lemma.lemma_id
 join form on form.form_id = token.token_form
-where 1 ".$searchQuery." group by document.document_id order by ".$columnName." ".$columnSortOrder." limit :limit,:offset");
+where collection.collection_id=".$_GET["collection_id"]." ".$searchQuery." group by document.document_id order by ".$columnName." ".$columnSortOrder." limit :limit,:offset");
 
 foreach ($searchArray as $key=>$search) {
     $stmt->bindValue(':'.$key, $search,PDO::PARAM_STR);

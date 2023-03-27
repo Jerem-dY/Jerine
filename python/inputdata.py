@@ -1,4 +1,5 @@
 import mysql.connector
+from mysql.connector import errors
 import argparse
 import os
 import spacy
@@ -15,9 +16,19 @@ def hash_doc(doc: str):
 def transaction(func, db):
 
     def wrapper(*args, **kargs):
-        db.start_transaction()
-        res = func(*args, **kargs)
-        db.commit()
+
+        t = 3
+
+        while t>0:
+            try:
+                
+                db.start_transaction(isolation_level="READ COMMITTED")
+                res = func(*args, **kargs)
+                db.commit()
+                t = 0
+            except errors.Error as e:
+                print(e, ": trying again.")
+                t -=1
 
         return res
 
@@ -31,7 +42,13 @@ def insert_forms(cursor, forms):
 
     for i in forms:
         cursor.execute("SELECT form_id FROM form WHERE form_chars = %s;", i)
-        ids.append(cursor.fetchall()[0][0])
+        result = cursor.fetchall()
+        
+        if result != []:
+            ids.append(result[0][0])
+        else:
+            ids.append(0)
+
 
     return ids
 
@@ -55,19 +72,24 @@ def insert_lemmas(cursor, lemma_form_ids, lemma_pos):
 
 def insert_document(cursor, document_name, content):
     hash = hash_doc(content)
+
     cursor.execute("select document_id from document where document_id = %s", (hash,))
 
     if cursor.fetchall() != []:
-        return None
+
+        '''cursor.execute("""select document.document_id from document 
+            join collection_has_document on collection_has_document.document_id = document.document_id
+            join user on user.documents = collection_has_document.collection_id
+            where document.document_id = %s and user.user_id = %s""", (hash, ID))'''
+
+        return (hash, True)
     else:
         cursor.execute("insert into document (document_id, document_name) values (%s, %s)", (hash, document_name))
-        return hash
+        return (hash, False)
 
 def insert_sentences(cursor, type, text_id, sentence_doc_ind):
 
-    #cursor.execute("SET FOREIGN_KEY_CHECKS=0;")
-
-    data = [i for i in zip(type, tuple([text_id for i in range(len(type))]), sentence_doc_ind)]
+    data = [i for i in zip(type, tuple([text_id for j in range(len(type))]), sentence_doc_ind)]
     cursor.executemany("INSERT INTO sentence (type, text_id, sentence_doc_ind) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE sentence_id=sentence_id;", data)
     
     ids = []
@@ -81,8 +103,6 @@ def insert_sentences(cursor, type, text_id, sentence_doc_ind):
         else:
             ids.append(0)
 
-    #cursor.execute("SET FOREIGN_KEY_CHECKS=1;")
-
     return ids
 
 def insert_tokens(cursor, token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter):
@@ -90,28 +110,13 @@ def insert_tokens(cursor, token_sent_ind, token_doc_ind, token_form, lemma, sent
     
     data = [i for i in zip(token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter)]
 
-    #print("len de sentence :", len(sentence))
-    #print("len de token_form :", len(token_form))
-
-    #cursor.execute("SET FOREIGN_KEY_CHECKS=0;")
-
     cursor.executemany("INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE token_id=token_id;", data)
-    
-    #cursor.execute("SET FOREIGN_KEY_CHECKS=1;")
-
-    """ids = []
-
-    for i in data:
-        cursor.execute("SELECT token_id FROM token WHERE lemma_form = %s AND pos = %s;", i)
-        ids.append(c.fetchall()[0][0])
-
-    return ids"""
 
 def insert_in_collection(cursor, user_id, document_id):
     cursor.execute("select documents from user where user_id = %s", (user_id,))
 
-    collection_id = cursor.fetchone()[0]
-    cursor.execute("insert into collection_has_document (collection_id, document_id) values (%s, %s)", (collection_id, document_id))
+    collection_id = cursor.fetchall()[0][0]
+    cursor.execute("insert into collection_has_document (collection_id, document_id) values (%s, %s) ON DUPLICATE KEY UPDATE collection_id=collection_id", (collection_id, document_id))
 
 
 def process_file(file):
@@ -120,96 +125,95 @@ def process_file(file):
 
     with open(file, mode="r", encoding="utf-8") as f:
 
-        with mysql.connector.connect(**PARAMS) as db :
+        db = CONNECTION
 
-            #db.autocommit = True
-
-            try:
-                with db.cursor() as c:
+        try:
+            with db.cursor(prepared=False) as c:
 
 
-                    txt = f.read()
+                txt = f.read()
 
-                    document_id = transaction(insert_document, db)(c, os.path.basename(file), txt)
-                    print("Doc id : ", document_id)
-                    if (document_id) == None:
-                        print("Skipped redundant document")
-                        # Rajouter l'ajout du texte à la collection de l'utilisateur (si pas déjà)
-                        return
+                document_id, is_in_db = transaction(insert_document, db)(c, os.path.basename(file), txt)
+                transaction(insert_in_collection, db)(c, ID, document_id)
+
+                print("Doc id : ", document_id)
+                if is_in_db:
+                    print("Skipped redundant document")
+                    return
+
+                token_forms = []
+                lemma_forms = []
+                lemma_pos = []
+                sentence_types = []
+                token_sent_inds = []
+                sentence_doc_inds = []
+                deprels = []
+                heads = []
+                sentences = []
+                offset = []
+                spaceafter = []
+
+                cmptr_tokens = 0
+                token_doc_ind = []
+                sentence_ids_stretched = []
+
+                doc = nlp(txt)
+                for i, sent in enumerate(doc.sents):
+
+                    sentence_types.append("DEC")
+                    sentence_doc_inds.append(i+1)
+
+                    for j, token in enumerate(sent):
+
+                        cmptr_tokens += 1
+                        token_doc_ind.append(cmptr_tokens)
                     
-                    transaction(insert_in_collection, db)(c, ID, document_id)
-
-                    token_forms = []
-                    lemma_forms = []
-                    lemma_pos = []
-                    sentence_types = []
-                    token_sent_inds = []
-                    sentence_doc_inds = []
-                    deprels = []
-                    heads = []
-                    sentences = []
-                    offset = []
-                    spaceafter = []
-
-                    cmptr_tokens = 0
-                    token_doc_ind = []
-
-                    doc = nlp(txt)
-
-                    for i, sent in enumerate(doc.sents):
-
-                        sentence_types.append("DEC")
-                        sentence_doc_inds.append(i+1)
-
-                        for j, token in enumerate(sent):
-
-                            cmptr_tokens += 1
-                            token_doc_ind.append(cmptr_tokens)
+                        token_forms.append((token.text.translate(ESCAPE),))
+                        lemma_forms.append((token.lemma_.translate(ESCAPE),))
+                        offset.append(token.idx)
+                        spaceafter.append(int(1 if token.whitespace_ != "" else 0))
+                        lemma_pos.append(token.pos_)
+                        token_sent_inds.append(j+1)
+                        deprels.append(token.dep_)
                         
-                            token_forms.append((token.text.translate(ESCAPE),))
-                            lemma_forms.append((token.lemma_.translate(ESCAPE),))
-                            offset.append(token.idx)
-                            spaceafter.append(int(1 if token.whitespace_ != "" else 0))
-                            lemma_pos.append(token.pos_)
-                            token_sent_inds.append(j+1)
-                            deprels.append(token.dep_)
-                            
-                            if token.i > token.head.i:
-                                heads.append(cmptr_tokens - abs(token.i - token.head.i))
-                            else:
-                                heads.append(cmptr_tokens + abs(token.i - token.head.i))
+                        if token.i > token.head.i:
+                            heads.append(cmptr_tokens - abs(token.i - token.head.i))
+                        else:
+                            heads.append(cmptr_tokens + abs(token.i - token.head.i))
 
-                        sentences.append(j)
+                    sentences.append(j)
 
-                    token_form_ids = transaction(insert_forms, db)(c, token_forms)
-                    lemma_form_ids = transaction(insert_forms, db)(c, lemma_forms)
+                token_form_ids = transaction(insert_forms, db)(c, token_forms)
+                lemma_form_ids = transaction(insert_forms, db)(c, lemma_forms)
 
-                    lemma_ids = transaction(insert_lemmas, db)(c, lemma_form_ids, lemma_pos)
-                    sentence_ids = transaction(insert_sentences, db)(c, sentence_types, document_id, sentence_doc_inds)
+                lemma_ids = transaction(insert_lemmas, db)(c, lemma_form_ids, lemma_pos)
+                sentence_ids = transaction(insert_sentences, db)(c, sentence_types, document_id, sentence_doc_inds)
 
-                    #print("sentences :", sentences)
-                    #print("sentence_ids :", sentence_ids)
+                #print("sentences :", sentences)
+                #print("sentence_ids :", sentence_ids)
 
-                    sentence_ids_stretched = []
-                    for i in range(len(sentence_ids)):
-                        sentence_ids_stretched += list(itertools.repeat(sentence_ids[i], sentences[i]+1))
+                
+                for i in range(len(sentence_ids)):
+                    sentence_ids_stretched += list(itertools.repeat(sentence_ids[i], sentences[i]+1))
 
-                    #print(lemma_ids)
-                    transaction(insert_tokens, db)(c, token_sent_inds, token_doc_ind, token_form_ids, lemma_ids, sentence_ids_stretched, deprels, heads, offset, spaceafter)
+                #print(lemma_ids)
+                transaction(insert_tokens, db)(c, token_sent_inds, token_doc_ind, token_form_ids, lemma_ids, sentence_ids_stretched, deprels, heads, offset, spaceafter)
 
-            except Exception as e:
-                print("Can't connect to DB.")
-                if db == None:
-                    print("Couldn't create db object.")
-                if c == None:
-                    print("Couldn't create cursor object.")
-
-                print(e)
+        except errors.Error as e:
+            print("Can't connect to DB.")
+            if db == None:
+                print("Couldn't create db object.")
+            if c == None:
+                print("Couldn't create cursor object.")
+             
+            print(e)
+            print("Rolling back...")
+            db.rollback() 
 
 
-def init_worker(connection_params, escape_table, user_id):
-    global PARAMS
-    PARAMS = connection_params
+def init_worker(connection, escape_table, user_id):
+    global CONNECTION
+    CONNECTION = connection
 
     global ESCAPE 
     ESCAPE = escape_table
@@ -222,6 +226,8 @@ if __name__ == "__main__":
 
     argparser = argparse.ArgumentParser(description="Extrait les informations du texte et l'upload sur la base de données.")
     argparser.add_argument('input', help="Les textes à traiter.", type=str, default=[""], nargs='+')
+    argparser.add_argument('-p',"--processors" , help="Les processeurs pour compléter les données. [tokenizer, tagger, lemmatizer, dependency analyzer]", type=str, default=[""], nargs=4)
+    argparser.add_argument('-t',"--types" , help="Le type de chaque document.", type=str, default=[""], nargs='+')
     argparser.add_argument('-u', "--user", help="ID de l'utilisateur.", type=int, default=None, nargs=1)
     args = argparser.parse_args()
     
@@ -243,7 +249,39 @@ if __name__ == "__main__":
         '\f' : r'\f'
     })
 
-    p = Pool(2, initializer=init_worker, initargs=(connection_params, escape_table, args.user))
-    p.map(process_file, args.input)
-    p.close()
+    processors = {
+        "tokenizer": args.processors[0],
+        "tagger": args.processors[1],
+        "lemmatizer": args.processors[2],
+        "dependency_analyzer": args.processors[3]
+    }
+
+    types = args.types
+
+    if len(types) != len(args.input):
+        print("Mismatch between number of types and documents. Aborting.")
+        exit()
+
+    print(processors)
+    print(types)
+
+    connection = mysql.connector.connect(**connection_params)
+    connection.autocommit = True
+
+    global CONNECTION
+    CONNECTION = connection
+
+    global ESCAPE 
+    ESCAPE = escape_table
+
+    global ID
+    ID = args.user[0]
+
+    for file in args.input:
+        process_file(file)
+
+
+    """p = Pool(2, initializer=init_worker, initargs=(connection, escape_table, args.user))
+    p.map_async(process_file, args.input)
+    p.close()"""
         

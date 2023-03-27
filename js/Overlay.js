@@ -22,7 +22,7 @@ class Overlay{
         var left_section = $("<section class=\"overlay_section overlay_left\"></section>").appendTo(overlay_form);
         var right_section = $("<section class=\"overlay_section\"></section>").appendTo(overlay_form);
 
-        var table = $("<table id=\"import_files_table\" class=\"display\"><thead><tr><th>Fichier</th><th>Taille (ko)</th><th>Type</th></tr></thead><tbody></tbody></table>").appendTo(left_section);
+        var table = $("<table id=\"import_files_table\" class=\"cell-border hover stripe display\"><thead><tr><th>Fichier</th><th>Taille (ko)</th><th>Type</th></tr></thead><tbody></tbody></table>").appendTo(left_section);
         this.filePicker = $("<input type=\"file\" name=\"filePicker\" multiple></input>").appendTo(left_section).button();
 
 
@@ -92,6 +92,8 @@ class Overlay{
 
         this.dialog = this.div.dialog({
             autoOpen: false,
+			hide: 'fold',
+			show: 'blind',
             height: 760,
             width: 1000,
             modal: true,
@@ -132,7 +134,10 @@ class Overlay{
         this.progressDialog = $("<div id=\"progressDialog\" title=\"Traitement\"></div>").dialog({
             autoOpen: false,
             resizable: false,
-            draggable: false
+            draggable: false,
+            modal: true,
+			show: "clip",
+			hide: "slide"
         });
 
         var pBar = $("<div id=\"pBarUpload\"></div>").appendTo(this.progressDialog);
@@ -213,6 +218,7 @@ class Overlay{
      */
     show(){
         this.dialog.dialog( "open" );
+        this.check();
     }
 
     /**
@@ -235,6 +241,16 @@ class Overlay{
 
         this.loading(true);
         var data = new FormData();
+
+        var processors = {
+            tokenizer: this.tokenizer.val(),
+            tagger: this.tagger.val(),
+            lemmatizer: this.lemmatizer.val(),
+            dependency_analyzer: this.dependency_analyzer.val()
+        };
+
+        data.append("types", JSON.stringify(this.table.column( 2, {order:'current'} ).data().toArray()));
+        data.append("processors", JSON.stringify(processors));
         
         for(let i=0; i < this.fileList.length; i++){
             data.append("file_" + i, this.fileList.item(i));
@@ -247,6 +263,7 @@ class Overlay{
             dataType : "html",
             data : data,
             cache: false,
+            timeout: 0,
             contentType: false,
             processData: false,
             success : (function(result, status){
@@ -283,7 +300,7 @@ class Overlay{
             if(!(Overlay.accepted_types.includes(this.table.cell(i, 2).data()))){
                 //$(event.target).addClass( "ui-state-error" );
                 $(this.table.row(i).node()).addClass("ui-state-error");
-                this.alertFormat.show();
+                this.alertFormat.show("shake");
                 error = true;
             }
             else{
@@ -296,14 +313,14 @@ class Overlay{
         }
 
         if(size > Overlay.max_size){
-            this.alertSize.show();
+            this.alertSize.show("shake");
             error = true;
         }
         else{
             this.alertSize.hide();
         }
 
-        if(error){
+        if(error || !this.table.rows().count()){
             $(".ui-dialog-buttonpane button:contains('Ajouter')").button('disable');
         }
         else{

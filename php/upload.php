@@ -1,36 +1,54 @@
 <?php 
 
 include("connexion.php");
-session_start();
+include("start_session.php");
+
+
+
+$normalizeChars = array(
+    'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
+    'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
+    'Ï'=>'I', 'Ñ'=>'N', 'Ń'=>'N', 'Ò'=>'O', 'Ó'=>'O', 'Ô'=>'O', 'Õ'=>'O', 'Ö'=>'O', 'Ø'=>'O', 'Ù'=>'U', 'Ú'=>'U',
+    'Û'=>'U', 'Ü'=>'U', 'Ý'=>'Y', 'Þ'=>'B', 'ß'=>'Ss','à'=>'a', 'á'=>'a', 'â'=>'a', 'ã'=>'a', 'ä'=>'a',
+    'å'=>'a', 'æ'=>'a', 'ç'=>'c', 'è'=>'e', 'é'=>'e', 'ê'=>'e', 'ë'=>'e', 'ì'=>'i', 'í'=>'i', 'î'=>'i',
+    'ï'=>'i', 'ð'=>'o', 'ñ'=>'n', 'ń'=>'n', 'ò'=>'o', 'ó'=>'o', 'ô'=>'o', 'õ'=>'o', 'ö'=>'o', 'ø'=>'o', 'ù'=>'u',
+    'ú'=>'u', 'û'=>'u', 'ü'=>'u', 'ý'=>'y', 'ý'=>'y', 'þ'=>'b', 'ÿ'=>'y', 'ƒ'=>'f',
+    'ă'=>'a', 'î'=>'i', 'â'=>'a', 'ș'=>'s', 'ț'=>'t', 'Ă'=>'A', 'Î'=>'I', 'Â'=>'A', 'Ș'=>'S', 'Ț'=>'T', 
+    ' '=>'_', '\t'=>'__',
+);
+
+
 
 /**
- * Etape 1 : on vérifie que l'on a bien toutes les infos nécesaires, puis on récupère l'id de l'utilisateur.
+ * Etape 1 : on vérifie que l'on a bien toutes les infos nécesaires.
  *  
  * */
-if(!(isset($_SESSION) && isset($_SESSION["id"]))){
+if(!(isset($_SESSION) && isset($_SESSION["user_id"]) && isset($_POST["processors"]) && isset($_POST["types"]))){
 
     print "<br/>Required tokens were not provided. Aborting.<br/>";
     http_response_code(400);
     exit;
 }
 
+$processors = json_decode($_POST["processors"], true);
+$types = json_decode($_POST["types"], true);
 
 /**
  * Etape 2 : on crée le dossier qui va accueillir les fichiers à traiter, s'il n'existe pas déjà.
  *  
  * */
-$uploads_path = getcwd().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$_SESSION["id"].DIRECTORY_SEPARATOR;
+$uploads_path = getcwd().DIRECTORY_SEPARATOR."..".DIRECTORY_SEPARATOR."uploads".DIRECTORY_SEPARATOR.$_SESSION["user_id"].DIRECTORY_SEPARATOR;
 
 if(is_dir($uploads_path)){
 
     if(!is_writable($uploads_path)){
-        print "<br/>Upload dir #".$_SESSION["id"]." is not writeable. Aborting.<br/>";
+        print "<br/>Upload dir #".$_SESSION["user_id"]." is not writeable. Aborting.<br/>";
         http_response_code(500);
         exit;
     }
 }else{
     if(!mkdir($uploads_path, 0777)){
-        print "<br/>Couldn't make the directory #".$_SESSION["id"]." for upload : '".$uploads_path."'. Aborting.<br/>";
+        print "<br/>Couldn't make the directory #".$_SESSION["user_id"]." for upload : '".$uploads_path."'. Aborting.<br/>";
         http_response_code(500);
     exit;
     }
@@ -67,7 +85,7 @@ $to_delete = array();
 
 foreach ($_FILES as $file) {
 
-    $target_path = $uploads_path.basename($file['name']);
+    $target_path = $uploads_path.basename(strtr($file['name'], $normalizeChars));
 
     if (move_uploaded_file($file['tmp_name'], $target_path)) {
         array_push($to_delete, $target_path);
@@ -99,7 +117,14 @@ foreach($to_delete as $f){
     $cmd = $cmd." '".$f."'";
 }
 
-$cmd = $cmd." "."-u ".$_SESSION["id"]." 2>&1";
+$cmd = $cmd." "."-u ".$_SESSION["user_id"]." -p ".$processors["tokenizer"]." ".$processors["tagger"]." ".$processors["lemmatizer"]." ".$processors["dependency_analyzer"]." -t ";
+
+foreach($types as $t){
+    $cmd = $cmd.$t." ";
+}
+
+
+$cmd = $cmd."2>&1";
 
 $process_out = exec($cmd, $return);
 print_r($return);

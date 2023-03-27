@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: TabManager.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,46 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: TabManager.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 
 
-    <h3> </h3>
+/**
+ * Classe représentant le gestionnaire d'onglets de l'interface graphique.
+ */
+class TabManager{
 
+    /**
+     * Constructeur de la classe.
+     * @param {String} id l'identifiant à donner au widget
+     * @param {jQuery} parent le parent du widget
+     */
+    constructor(id, parent){
 
+        this.div = $("&lt;div id=\"" + id + "\">").appendTo(parent);
+        this.headers = $("&lt;ul id=\"tab_headers\">&lt;li>&lt;a href=\"#datatab\">Documents&lt;/a>&lt;/li>").appendTo(this.div);
+        
+        this.datatab = new DataTab("datatab", this.div);
 
+        this.div.tabs();
 
-
-
-
-
-
+    }
 
     
 
 
 
-
-
+}</code></pre>
+        </article>
+    </section>
 
 
 

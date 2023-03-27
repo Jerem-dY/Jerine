@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Home</title>
+    <title>JSDoc: Source: RightPannel.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,32 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Home</h1>
+    <h1 class="page-title">Source: RightPannel.js</h1>
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
 
+/**
+ * CLasse représentant le pannel droit de l'interface graphique (à définir).
+ */
+class RightPannel{
 
-    <h3> </h3>
+    /**
+     * Constructeur de la classe.
+     * @param {String} id l'identifiant à donner au widget
+     * @param {jQuery} parent le parent du widget
+     */
+    constructor(id, parent){
 
+        this.div = $("&lt;div id=\"" + id + "\" class=\"rightpannel ui-corner-all ui-widget ui-widget-content\">").appendTo(parent);
 
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
+    }
+}</code></pre>
+        </article>
+    </section>
 
 
 

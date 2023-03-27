@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: LeftPannel.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: LeftPannel.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+
+/**
+ * Classe représentant le pannel gauche de l'interface graphique, soit la partie "navigation".
+ */
+class LeftPannel{
+
+    /**
+     * Constructeur de la classe.
+     * @param {String} id l'identifiant à donner au widget
+     * @param {jQuery} parent le parent du widget
+     */
+    constructor(id, parent){
+
+        this.div = $("&lt;div id=\"" + id + "\" class=\"leftpannel ui-corner-all ui-widget ui-widget-content\">").appendTo(parent).resizable({
+            containment: "#"+parent[0].id,
+            handles: 'e',
+            minWidth: 300
+        });
+
+        this.tree = $("&lt;div id=\"collectiontree\" class=\"refresh refreshtree\">").appendTo(this.div);
+
+        this.addColBtn = $("&lt;button id=\"addColBtn\">+ collection&lt;/button>").appendTo(this.div).button().on("click", (function(){this.addColDialog.dialog( "open" );}).bind(this));
+        this.deleteColBtn = $("&lt;button id=\"deleteColBtn\">- collection&lt;/button>").appendTo(this.div).button().on("click", (function(){
+            
+            var data = new FormData();
+
+            data.append("collection_id", this.tree.jstree("get_selected", true)[0].original.collection_id);
+
+            $.ajax({
+                url : "./php/remove_collection.php",
+                method : "POST",
+                dataType : "html",
+                data : data,
+                cache: false,
+                timeout: 0,
+                contentType: false,
+                processData: false,
+                success : (function(result, status){
+                    window.location.href = window.location.href;
+                    
+                }).bind(this),
+                error : (function(response, status, errorType){
+                    $("&lt;div>" + errorType + " : &lt;p>" + response.responseText + "&lt;/p>&lt;/div>").dialog();
+                }).bind(this)
+            });
+        }).bind(this));
+
+        this.addColDialog = $("&lt;div id=\"addColDialog\">&lt;/div>").appendTo(this.div);
+
+        this.tree.jstree({
+            'core': {
+                "themes" : { "stripes" : true },
+                'data': {
+                    'url': function(node) {
+                        return 'php/get_collections.php';
+                    },
+                    'data': function(node) {
+                        return {
+                            'parent': node.id
+                        };
+                    }
+                },
+                "multiple": false
+            }
+        });
+
+        this.addColDialog.dialog({
+            autoOpen: false,
+			hide: 'fold',
+			show: 'blind',
+            height: 200,
+            width: 300,
+            modal: true,
+            resizable: false,
+            draggable: true,
+            buttons: {
+                Ajouter: (function(){
+
+                    var data = new FormData();
+
+                    data.append("collection_name", this.newColName.val());
+
+                    $.ajax({
+                        url : "./php/add_collection.php",
+                        method : "POST",
+                        dataType : "html",
+                        data : data,
+                        cache: false,
+                        timeout: 0,
+                        contentType: false,
+                        processData: false,
+                        success : (function(result, status){
+                            window.location.href = window.location.href;
+                            
+                        }).bind(this),
+                        error : (function(response, status, errorType){
+                            $("&lt;div>" + errorType + " : &lt;p>" + response.responseText + "&lt;/p>&lt;/div>").dialog();
+                        }).bind(this)
+                    });
+
+                    this.addColDialog.dialog( "close" );
+
+                }).bind(this),
+                Annuler: (function() {
+                    this.addColDialog.dialog( "close" );
+                }).bind(this)
+            },
+            close: (function() {
+                this.newColName.val("");
+            }).bind(this)
+        });
+
+        /*var form = $("&lt;form>").appendTo(this.addColDialog);
+        form.append("&lt;input type=\"submit\" tabindex=\"-1\" style=\"position:absolute; top:-1000px\">");*/
+
+        this.newColName = $("&lt;input type=\"text\" name=\"newColName\">").appendTo(this.addColDialog);
+
+        this.tree.on("changed.jstree", (function(){
+
+            if(this.tree.jstree("get_selected", true)[0].id == "mes_documents"){
+                this.deleteColBtn.button('disable');
+            }
+            else{
+                this.deleteColBtn.button('enable');
+            }
+
+            $(".refresh").trigger("refresh_tables");
+        }).bind(this));
+
+    }
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DataTab.html">DataTab</a></li><li><a href="LeftPannel.html">LeftPannel</a></li><li><a href="Overlay.html">Overlay</a></li><li><a href="RightPannel.html">RightPannel</a></li><li><a href="TabManager.html">TabManager</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Mon Mar 27 2023 22:51:44 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
