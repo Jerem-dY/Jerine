@@ -7,6 +7,8 @@ Le site est accessible ici : [***Adjoudj-Bourdillat***](http://i3l.univ-grenoble
 
 ## Description 
 Ce site est une application web (s'éxecutant dans un navigateur) mettant à disposition de l'utilisateur un espace de travail et un stockage pour déposer des documents tokenisés, segmentés en phrases et analysés syntaxiquement. L'application permet l'import de fichiers de type *texte brut*, *XML* ou *CoNLL-U*. Il est possible de compléter les informations manquantes à l'aide des processeurs disponibles (spaCy, stanza, nltk, etc.). L'export des documents dans les mêmes formats que ceux cités précédemment est possible. L'utilisateur a aussi accès à diverses visualisations de ses données, elles aussi exportables.  
+et ça sera tout.
+
 
 ## Wiki :
 - [Sécurité](https://gricad-gitlab.univ-grenoble-alpes.fr/idl2022-2023/bourdillat-adjoudj/-/wikis/S%C3%A9curit%C3%A9)  
