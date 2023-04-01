@@ -1,2 +1,6 @@
 uploads/
 .vscode/
+*.rst
+*.bak
+*.pyc
+__pycache__

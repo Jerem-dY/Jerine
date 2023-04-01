@@ -1,0 +1,37 @@
+InputProcessing.Processors package
+==================================
+
+Submodules
+----------
+
+InputProcessing.Processors.Hops module
+--------------------------------------
+
+.. inheritance-diagram:: InputProcessing.Processors.Hops
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.Processors.Hops
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+InputProcessing.Processors.Spacy module
+---------------------------------------
+
+.. inheritance-diagram:: InputProcessing.Processors.Spacy
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.Processors.Spacy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: InputProcessing.Processors
+   :members:
+   :undoc-members:
+   :show-inheritance:

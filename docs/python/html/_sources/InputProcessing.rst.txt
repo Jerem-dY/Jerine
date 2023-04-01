@@ -1,0 +1,45 @@
+InputProcessing package
+=======================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   InputProcessing.Processors
+
+Submodules
+----------
+
+InputProcessing.Document module
+-------------------------------
+
+.. inheritance-diagram:: InputProcessing.Document
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.Document
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+InputProcessing.ProcessorTemplate module
+----------------------------------------
+
+.. inheritance-diagram:: InputProcessing.ProcessorTemplate
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.ProcessorTemplate
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: InputProcessing
+   :members:
+   :undoc-members:
+   :show-inheritance:

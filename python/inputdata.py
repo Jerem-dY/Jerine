@@ -6,8 +6,10 @@ import spacy
 import hashlib
 import itertools
 from multiprocessing import Pool
+import asyncio
+from benchmark import timeit, time
 
-
+@timeit
 def hash_doc(doc: str):
 
     return int(hashlib.blake2b(doc.encode(), digest_size=3, inner_size=3).hexdigest(), 16)
@@ -15,7 +17,7 @@ def hash_doc(doc: str):
 
 def transaction(func, db):
 
-    def wrapper(*args, **kargs):
+    async def wrapper(*args, **kargs):
 
         t = 3
 
@@ -23,20 +25,22 @@ def transaction(func, db):
             try:
                 
                 db.start_transaction(isolation_level="READ COMMITTED")
-                res = func(*args, **kargs)
+                res = await func(*args, **kargs)
                 db.commit()
                 t = 0
             except errors.Error as e:
                 print(e, ": trying again.")
+                db.rollback()
                 t -=1
 
         return res
 
     return wrapper
 
-def insert_forms(cursor, forms):
+@timeit
+async def insert_forms(cursor, forms):
 
-    cursor.executemany("INSERT INTO form (form_chars) VALUES (%s) ON DUPLICATE KEY UPDATE form_id=form_id;", forms)
+    cursor.executemany("INSERT INTO form (form_chars) VALUES (%s) ON DUPLICATE KEY UPDATE form_id=LAST_INSERT_ID(form_id);", forms)
     
     ids = []
 
@@ -48,14 +52,17 @@ def insert_forms(cursor, forms):
             ids.append(result[0][0])
         else:
             ids.append(0)
+    
+    #ids = list(range(cursor.lastrowid-len(forms), cursor.lastrowid+1))
 
 
     return ids
 
-def insert_lemmas(cursor, lemma_form_ids, lemma_pos):
+@timeit
+async def insert_lemmas(cursor, lemma_form_ids, lemma_pos):
 
     data = [i for i in zip(lemma_form_ids, lemma_pos)]
-    cursor.executemany("INSERT INTO lemma (lemma_form, pos) VALUES (%s, %s) ON DUPLICATE KEY UPDATE lemma_id=lemma_id;", data)
+    cursor.executemany("INSERT INTO lemma (lemma_form, pos) VALUES (%s, %s) ON DUPLICATE KEY UPDATE lemma_id=LAST_INSERT_ID(lemma_id);", data)
     
     ids = []
 
@@ -67,10 +74,13 @@ def insert_lemmas(cursor, lemma_form_ids, lemma_pos):
             ids.append(result[0][0])
         else:
             ids.append(0)
+    
+    #ids = list(range(cursor.lastrowid-len(lemma_pos), cursor.lastrowid+1))
 
     return ids
 
-def insert_document(cursor, document_name, content):
+@timeit
+async def insert_document(cursor, document_name, content):
     hash = hash_doc(content)
 
     cursor.execute("select document_id from document where document_id = %s", (hash,))
@@ -87,39 +97,43 @@ def insert_document(cursor, document_name, content):
         cursor.execute("insert into document (document_id, document_name) values (%s, %s)", (hash, document_name))
         return (hash, False)
 
-def insert_sentences(cursor, type, text_id, sentence_doc_ind):
+@timeit
+async def insert_sentences(cursor, type, text_id, sentence_doc_ind):
 
     data = [i for i in zip(type, tuple([text_id for j in range(len(type))]), sentence_doc_ind)]
-    cursor.executemany("INSERT INTO sentence (type, text_id, sentence_doc_ind) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE sentence_id=sentence_id;", data)
+    cursor.executemany("INSERT INTO sentence (type, text_id, sentence_doc_ind) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE sentence_id=LAST_INSERT_ID(sentence_id);", data)
     
     ids = []
 
-    for i in data:
+    """for i in data:
         cursor.execute("SELECT sentence_id FROM sentence WHERE text_id = %s AND sentence_doc_ind = %s;", (text_id, i[2]))
         result = cursor.fetchall()
 
         if result != []:
             ids.append(result[0][0])
         else:
-            ids.append(0)
+            ids.append(0)"""
+    ids = list(range(cursor.lastrowid, cursor.lastrowid+len(sentence_doc_ind)))
 
     return ids
 
-def insert_tokens(cursor, token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter):
+@timeit
+async def insert_tokens(cursor, token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter):
 
     
     data = [i for i in zip(token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter)]
 
-    cursor.executemany("INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE token_id=token_id;", data)
+    cursor.executemany("INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE token_id=LAST_INSERT_ID(token_id);", data)
 
-def insert_in_collection(cursor, user_id, document_id):
+@timeit
+async def insert_in_collection(cursor, user_id, document_id):
     cursor.execute("select documents from user where user_id = %s", (user_id,))
 
     collection_id = cursor.fetchall()[0][0]
     cursor.execute("insert into collection_has_document (collection_id, document_id) values (%s, %s) ON DUPLICATE KEY UPDATE collection_id=collection_id", (collection_id, document_id))
 
-
-def process_file(file):
+@timeit
+async def process_file(file):
 
     
 
@@ -133,8 +147,8 @@ def process_file(file):
 
                 txt = f.read()
 
-                document_id, is_in_db = transaction(insert_document, db)(c, os.path.basename(file), txt)
-                transaction(insert_in_collection, db)(c, ID, document_id)
+                document_id, is_in_db = await transaction(insert_document, db)(c, os.path.basename(file), txt)
+                await transaction(insert_in_collection, db)(c, ID, document_id)
 
                 print("Doc id : ", document_id)
                 if is_in_db:
@@ -157,7 +171,12 @@ def process_file(file):
                 token_doc_ind = []
                 sentence_ids_stretched = []
 
+                t1 = time.time()
                 doc = nlp(txt)
+                t2 = time.time()
+
+                print(f'Function "nlp" took {t2-t1:.4f} seconds')
+
                 for i, sent in enumerate(doc.sents):
 
                     sentence_types.append("DEC")
@@ -183,11 +202,13 @@ def process_file(file):
 
                     sentences.append(j)
 
-                token_form_ids = transaction(insert_forms, db)(c, token_forms)
-                lemma_form_ids = transaction(insert_forms, db)(c, lemma_forms)
+                token_form_ids = await transaction(insert_forms, db)(c, token_forms)
+                lemma_form_ids = await transaction(insert_forms, db)(c, lemma_forms)
 
-                lemma_ids = transaction(insert_lemmas, db)(c, lemma_form_ids, lemma_pos)
-                sentence_ids = transaction(insert_sentences, db)(c, sentence_types, document_id, sentence_doc_inds)
+                lemma_ids = await transaction(insert_lemmas, db)(c, lemma_form_ids, lemma_pos)
+                sentence_ids = await transaction(insert_sentences, db)(c, sentence_types, document_id, sentence_doc_inds)
+
+                db.commit()
 
                 #print("sentences :", sentences)
                 #print("sentence_ids :", sentence_ids)
@@ -197,7 +218,7 @@ def process_file(file):
                     sentence_ids_stretched += list(itertools.repeat(sentence_ids[i], sentences[i]+1))
 
                 #print(lemma_ids)
-                transaction(insert_tokens, db)(c, token_sent_inds, token_doc_ind, token_form_ids, lemma_ids, sentence_ids_stretched, deprels, heads, offset, spaceafter)
+                await transaction(insert_tokens, db)(c, token_sent_inds, token_doc_ind, token_form_ids, lemma_ids, sentence_ids_stretched, deprels, heads, offset, spaceafter)
 
         except errors.Error as e:
             print("Can't connect to DB.")
@@ -278,7 +299,7 @@ if __name__ == "__main__":
     ID = args.user[0]
 
     for file in args.input:
-        process_file(file)
+        asyncio.run(process_file(file))
 
 
     """p = Pool(2, initializer=init_worker, initargs=(connection, escape_table, args.user))

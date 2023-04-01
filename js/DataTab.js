@@ -12,9 +12,9 @@ class DataTab{
      * @param {String} id l'identifiant à donner au widget
      * @param {jQuery} parent le parent du widget
      */
-    constructor(id, parent){
+    constructor(id, manager){
 
-        this.div = $("<div id=\"" + id + "\" title=\"Ajouter des documents\" class=\"central_area\">").appendTo(parent);
+        this.div = $("<div id=\"" + id + "\" title=\"Ajouter des documents\" class=\"central_area\">").appendTo(manager.div);
         this.div.controlgroup();
         this.documentsTable = $("<table id=\"collection_content_table\" class=\"refresh refreshtable cell-border hover stripe display\">\
         <thead>\
@@ -59,9 +59,22 @@ class DataTab{
             { data: 'lemmas' },
             { data: 'forms' },
             { data: 'typetokenr' },
-            { data: 'chars' }
+            { data: 'chars' },
+            { data: 'id',
+              visible: false}
         ]
     });
+
+    $('#collection_content_table > tbody').on( 'dblclick', 'tr',function () { 
+        var data = $("#collection_content_table").DataTable().row(this).data();
+
+        let name = data["document"].replace(".", "_")
+
+        if($("#"+name).length == 0){
+            manager.addTab(name, data["id"]);
+        }
+
+    }); 
 
 
     }

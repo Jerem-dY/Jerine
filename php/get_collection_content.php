@@ -51,7 +51,7 @@ $totalRecords = $records['allcount'];
 // Fetch records
 
 
-$stmt = $pdo->prepare("select document_name as document, count(distinct(sentence)) as sentences, count(distinct(token_id)) as tokens, count(distinct(lemma_id)) as lemmas, count(distinct(token.token_form)) as forms, sum(form.form_len) as chars, count(distinct(token.token_form))/count(distinct(token_id)) as typetokenr from collection
+$stmt = $pdo->prepare("select document.document_id as did, document_name as document, count(distinct(sentence)) as sentences, count(distinct(token_id)) as tokens, count(distinct(lemma_id)) as lemmas, count(distinct(token.token_form)) as forms, sum(form.form_len) as chars, count(distinct(token.token_form))/count(distinct(token_id)) as typetokenr from collection
 join collection_has_document on collection_has_document.collection_id=collection.collection_id
 join document on collection_has_document.document_id = document.document_id
 join sentence on sentence.text_id = document.document_id
@@ -60,7 +60,7 @@ join lemma on token.lemma = lemma.lemma_id
 join form on form.form_id = token.token_form
 where collection.collection_id=".$_GET["collection_id"]." ".$searchQuery." group by document.document_id order by document_name");
 
-$stmt = $pdo->prepare("select document_name as document, count(distinct(sentence)) as sentences, count(distinct(token_id)) as tokens, count(distinct(lemma_id)) as lemmas, count(distinct(token.token_form)) as forms, sum(form.form_len) as chars, count(distinct(token.token_form))/count(distinct(token_id)) as typetokenr from collection
+$stmt = $pdo->prepare("select document.document_id as did, document_name as document, count(distinct(sentence)) as sentences, count(distinct(token_id)) as tokens, count(distinct(lemma_id)) as lemmas, count(distinct(token.token_form)) as forms, sum(form.form_len) as chars, count(distinct(token.token_form))/count(distinct(token_id)) as typetokenr from collection
 join collection_has_document on collection_has_document.collection_id=collection.collection_id
 join document on collection_has_document.document_id = document.document_id
 join sentence on sentence.text_id = document.document_id
@@ -92,7 +92,8 @@ foreach ($docRecords as $row) {
         "lemmas"=>$row['lemmas'],
         "forms"=>$row['forms'],
         "typetokenr"=>$row['typetokenr'],
-        "chars"=>$row['chars']
+        "chars"=>$row['chars'],
+        "id"=>$row['did'],
     );
 }
 

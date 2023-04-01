@@ -1,0 +1,7 @@
+inputdata module
+================
+
+.. automodule:: inputdata
+   :members:
+   :undoc-members:
+   :show-inheritance:
