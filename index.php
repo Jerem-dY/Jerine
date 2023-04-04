@@ -30,7 +30,7 @@ if(isset($_SESSION) && isset($_SESSION["user_id"])){
 
     <img src="images/JérIne.png"? width="60%">
 
-    <form action="page_de_connexion.html" method="post">
+    <form action="main.php" method="post">
 
       <label for="login">Login :</label>
       <input type="login" id="login" name="login" required>
