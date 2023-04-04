@@ -32,11 +32,11 @@ if(isset($_SESSION) && isset($_SESSION["user_id"])){
 
     <form action="page_de_connexion.html" method="post">
 
-      <label for="email">Adresse e-mail :</label>
-      <input type="email" id="email" name="email" required>
+      <label for="login">Login :</label>
+      <input type="login" id="login" name="login" required>
 
       <label for="password">Mot de passe :</label>
-      <input type="password" id="password" name="password" required>
+      <input type="password" id="password" name="pwd" required>
 
       <button type="submit">Se connecter</button>
       
