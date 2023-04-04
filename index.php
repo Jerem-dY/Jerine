@@ -28,7 +28,7 @@ if(isset($_SESSION) && isset($_SESSION["user_id"])){
     }
     ?>
 
-    <img src="C:\Users\djaam\Downloads\JérIne.png"? width="60%">
+    <img src="images/JérIne.png"? width="60%">
 
     <form action="page_de_connexion.html" method="post">
 
