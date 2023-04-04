@@ -48,6 +48,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">python</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="benchmark.html">benchmark module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline.html">pipeline module</a></li>
@@ -87,6 +88,12 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Parsers.html">InputProcessing.Parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html#inputprocessing-parsers-txt-module">InputProcessing.Parsers.TXT module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html#module-InputProcessing.Parsers">Module contents</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html">InputProcessing.Processors package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-hops-module">InputProcessing.Processors.Hops module</a></li>
@@ -102,6 +109,7 @@
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#informations-sur-le-module">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.Document"><code class="docutils literal notranslate"><span class="pre">Document</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.LemmatizedDocument"><code class="docutils literal notranslate"><span class="pre">LemmatizedDocument</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.RawDocument"><code class="docutils literal notranslate"><span class="pre">RawDocument</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument"><code class="docutils literal notranslate"><span class="pre">TaggedDocument</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument"><code class="docutils literal notranslate"><span class="pre">TokenizedDocument</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument._check_arguments"><code class="docutils literal notranslate"><span class="pre">TokenizedDocument._check_arguments()</span></code></a></li>
@@ -109,34 +117,44 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-processortemplate-module">InputProcessing.ProcessorTemplate module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id1">INFORMATIONS GENERALES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id2">INFORMATIONS SUR LE MODULE</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface._abc_impl</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface.deprel"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface.deprel()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ParserInterface.ParserInterface"><code class="docutils literal notranslate"><span class="pre">ParserInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ParserInterface.ParserInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">ParserInterface._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ParserInterface.ParserInterface.parse"><code class="docutils literal notranslate"><span class="pre">ParserInterface.parse()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.LemmatizerInterface"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.LemmatizerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface._abc_impl</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.LemmatizerInterface.lemmatize"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface.lemmatize()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.PosTaggerInterface"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.PosTaggerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface._abc_impl</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.PosTaggerInterface.tag"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface.tag()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id3">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id4">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface.deprel"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface.deprel()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.TokenizerInterface"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.TokenizerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface._abc_impl</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.TokenizerInterface.tokenize"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface.tokenize()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface.lemmatize"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface.lemmatize()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface.tag"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface.tag()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface.tokenize"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface.tokenize()</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id3">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id4">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id5">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id6">INFORMATIONS SUR LE MODULE</a></li>
 </ul>
 </li>
 </ul>
@@ -145,6 +163,7 @@
 <li class="toctree-l2"><a class="reference internal" href="benchmark.html#benchmark.timeit"><code class="docutils literal notranslate"><span class="pre">timeit()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="inputdata.html">inputdata module</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>

@@ -21,7 +21,7 @@
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
     <link rel="next" title="benchmark module" href="benchmark.html" />
-    <link rel="prev" title="InputProcessing package" href="InputProcessing.html" /> 
+    <link rel="prev" title="InputProcessing.Parsers package" href="InputProcessing.Parsers.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,16 +48,19 @@
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">python</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a><ul class="current">
 <li class="toctree-l3 current"><a class="reference internal" href="InputProcessing.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html">InputProcessing.Parsers package</a></li>
 <li class="toctree-l4 current"><a class="current reference internal" href="#">InputProcessing.Processors package</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-document-module">InputProcessing.Document module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-processortemplate-module">InputProcessing.ProcessorTemplate module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="benchmark.html">benchmark module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="pipeline.html">pipeline module</a></li>
@@ -66,6 +69,7 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="InputProcessing.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Parsers.html">InputProcessing.Parsers package</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">InputProcessing.Processors package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inputprocessing-processors-hops-module">InputProcessing.Processors.Hops module</a></li>
@@ -77,7 +81,8 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-document-module">InputProcessing.Document module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-processortemplate-module">InputProcessing.ProcessorTemplate module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a></li>
 </ul>
 </li>
@@ -116,14 +121,14 @@
 </section>
 <section id="inputprocessing-processors-hops-module">
 <h2>InputProcessing.Processors.Hops module<a class="headerlink" href="#inputprocessing-processors-hops-module" title="Lien permanent vers cette rubrique"></a></h2>
-<div class="graphviz"><img src="_images/inheritance-55d8f49293d9de80d8f51ea7ec315c01636eba6c.png" alt="Inheritance diagram of InputProcessing.Processors.Hops" usemap="#inheritance705e9e70f2" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-d0de913fdd574c22e686724aeea09b145d638de0.png" alt="Inheritance diagram of InputProcessing.Processors.Hops" usemap="#inheritance705e9e70f2" class="inheritance graphviz" /></div>
 <map id="inheritance705e9e70f2" name="inheritance705e9e70f2">
-<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
 <area shape="rect" id="node2" href="#InputProcessing.Processors.Hops.Hops" target="_top" title="Hops" alt="" coords="57,79,129,104"/>
 </map><span class="target" id="module-InputProcessing.Processors.Hops"></span><dl class="py class">
 <dt class="sig sig-object py" id="InputProcessing.Processors.Hops.Hops">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.Processors.Hops.</span></span><span class="sig-name descname"><span class="pre">Hops</span></span><a class="reference internal" href="_modules/InputProcessing/Processors/Hops.html#Hops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.Hops.Hops" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Bases : <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface" title="InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
+<dd><p>Bases : <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" title="InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="InputProcessing.Processors.Hops.Hops._abc_impl">
 <span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#InputProcessing.Processors.Hops.Hops._abc_impl" title="Lien permanent vers cette définition"></a></dt>
@@ -154,17 +159,17 @@
 </section>
 <section id="inputprocessing-processors-spacy-module">
 <h2>InputProcessing.Processors.Spacy module<a class="headerlink" href="#inputprocessing-processors-spacy-module" title="Lien permanent vers cette rubrique"></a></h2>
-<div class="graphviz"><img src="_images/inheritance-1007421e4da98f54c69bc745c553973ec3a620c2.png" alt="Inheritance diagram of InputProcessing.Processors.Spacy" usemap="#inheritance43fadf5cf7" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-0cd081dfbf59ba15bc895a2fd7dc83238174918c.png" alt="Inheritance diagram of InputProcessing.Processors.Spacy" usemap="#inheritance43fadf5cf7" class="inheritance graphviz" /></div>
 <map id="inheritance43fadf5cf7" name="inheritance43fadf5cf7">
-<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
 <area shape="rect" id="node4" href="#InputProcessing.Processors.Spacy.Spacy" target="_top" title="Spacy" alt="" coords="333,79,405,104"/>
-<area shape="rect" id="node2" href="InputProcessing.html#InputProcessing.ProcessorTemplate.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="205,5,359,31"/>
-<area shape="rect" id="node3" href="InputProcessing.html#InputProcessing.ProcessorTemplate.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="384,5,529,31"/>
-<area shape="rect" id="node5" href="InputProcessing.html#InputProcessing.ProcessorTemplate.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="554,5,693,31"/>
+<area shape="rect" id="node2" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="205,5,359,31"/>
+<area shape="rect" id="node3" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="384,5,529,31"/>
+<area shape="rect" id="node5" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="554,5,693,31"/>
 </map><span class="target" id="module-InputProcessing.Processors.Spacy"></span><dl class="py class">
 <dt class="sig sig-object py" id="InputProcessing.Processors.Spacy.Spacy">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.Processors.Spacy.</span></span><span class="sig-name descname"><span class="pre">Spacy</span></span><a class="reference internal" href="_modules/InputProcessing/Processors/Spacy.html#Spacy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.Spacy.Spacy" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Bases : <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.TokenizerInterface" title="InputProcessing.ProcessorTemplate.TokenizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.PosTaggerInterface" title="InputProcessing.ProcessorTemplate.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.LemmatizerInterface" title="InputProcessing.ProcessorTemplate.LemmatizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface" title="InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
+<dd><p>Bases : <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface" title="InputProcessing.ProcessorInterfaces.TokenizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface" title="InputProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface" title="InputProcessing.ProcessorInterfaces.LemmatizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" title="InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="InputProcessing.Processors.Spacy.Spacy._abc_impl">
 <span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#InputProcessing.Processors.Spacy.Spacy._abc_impl" title="Lien permanent vers cette définition"></a></dt>
@@ -232,7 +237,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.Processors.Spacy.Spacy.tokenize">
-<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/Spacy.html#Spacy.tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.Spacy.Spacy.tokenize" title="Lien permanent vers cette définition"></a></dt>
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.RawDocument" title="InputProcessing.Document.RawDocument"><span class="pre">RawDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/Spacy.html#Spacy.tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.Spacy.Spacy.tokenize" title="Lien permanent vers cette définition"></a></dt>
 <dd><p>Méthode permettant la tokenisation d’un texte brut (y compris la segmentation en phrase)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -283,7 +288,7 @@ Projet de fin de semestre</p>
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
-        <a href="InputProcessing.html" class="btn btn-neutral float-left" title="InputProcessing package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="InputProcessing.Parsers.html" class="btn btn-neutral float-left" title="InputProcessing.Parsers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
         <a href="benchmark.html" class="btn btn-neutral float-right" title="benchmark module" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

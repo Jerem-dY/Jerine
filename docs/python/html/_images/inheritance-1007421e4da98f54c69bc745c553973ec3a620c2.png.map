@@ -1,7 +1,0 @@
-<map id="inheritance43fadf5cf7" name="inheritance43fadf5cf7">
-<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorTemplate.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
-<area shape="rect" id="node4" href="#InputProcessing.Processors.Spacy.Spacy" target="_top" title="Spacy" alt="" coords="333,79,405,104"/>
-<area shape="rect" id="node2" href="InputProcessing.html#InputProcessing.ProcessorTemplate.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="205,5,359,31"/>
-<area shape="rect" id="node3" href="InputProcessing.html#InputProcessing.ProcessorTemplate.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="384,5,529,31"/>
-<area shape="rect" id="node5" href="InputProcessing.html#InputProcessing.ProcessorTemplate.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="554,5,693,31"/>
-</map>

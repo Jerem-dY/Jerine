@@ -1,6 +1,0 @@
-<map id="inheritance57c7db48fb" name="inheritance57c7db48fb">
-<area shape="rect" id="node1" href="#InputProcessing.Document.Document" target="_top" title="Classe représentant un document tokenisé, étiqueté, lemmatisé et analysé syntaxiquement par des processeurs." alt="" coords="45,225,135,251"/>
-<area shape="rect" id="node2" href="#InputProcessing.Document.LemmatizedDocument" target="_top" title="Classe représentant un document tokenisé, étiqueté et lemmatisé par des processeurs." alt="" coords="5,152,175,177"/>
-<area shape="rect" id="node3" href="#InputProcessing.Document.TaggedDocument" target="_top" title="Classe représentant un document tokenisé et étiqueté par des processeurs." alt="" coords="22,79,158,104"/>
-<area shape="rect" id="node4" href="#InputProcessing.Document.TokenizedDocument" target="_top" title="Classe représentant un document tokenisé par un processeur. " alt="" coords="13,5,167,31"/>
-</map>

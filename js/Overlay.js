@@ -5,7 +5,7 @@
 class Overlay{
 
     static accepted_types = ["CoNLL-U", "XML", "TXT"]
-    static available_processors = ["stanza", "spacy"]
+    static available_processors = ["not_working", "not_working"]
     static max_size = 1000.0;
 
     /**
@@ -63,12 +63,51 @@ class Overlay{
         this.dependency_analyzer = $("<select id=\"dependency_analyzer\"></select>").appendTo(this.processors);
 
 
-        Overlay.accepted_types.forEach(function(el){$("#selectType").append("<option value=\"" + el + "\">" + el + "</option>");});
-        Overlay.available_processors.forEach(function(el){
-            $("#tokenizer").append("<option value=\"" + el + "\">" + el + "</option>");
-            $("#tagger").append("<option value=\"" + el + "\">" + el + "</option>");
-            $("#lemmatizer").append("<option value=\"" + el + "\">" + el + "</option>");
-            $("#dependency_analyzer").append("<option value=\"" + el + "\">" + el + "</option>");
+        /* On récupère les parsers disponibles et on les ajoute : */
+
+        $.ajax({
+            url : "./php/get_parsers.php",
+            method : "GET",
+            dataType : "json",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success : function(result, status){
+                result.forEach(el => $("#selectType").append("<option value=\"" + el + "\">" + el + "</option>").selectmenu('refresh'));
+            },
+            error : function(response, status, errorType){
+                Overlay.accepted_types.forEach(function(el){$("#selectType").append("<option value=\"" + el + "\">" + el + "</option>");});
+            }
+        });
+
+
+        /* On récupère les proceseurs disponibles et on les ajoute : */
+
+        $.ajax({
+            url : "./php/get_processors.php",
+            method : "GET",
+            dataType : "json",
+            cache: false,
+            contentType: false,
+            processData: false,
+            success : function(result, status){
+
+                result.tokenizer.forEach(el => $("#tokenizer").append("<option value=\"" + el + "\">" + el + "</option>").selectmenu('refresh'));
+                result.tagger.forEach(el => $("#tagger").append("<option value=\"" + el + "\">" + el + "</option>").selectmenu('refresh'));
+                result.lemmatizer.forEach(el => $("#lemmatizer").append("<option value=\"" + el + "\">" + el + "</option>").selectmenu('refresh'));
+                result.dependency_analyzer.forEach(el => $("#dependency_analyzer").append("<option value=\"" + el + "\">" + el + "</option>").selectmenu('refresh'));
+                
+            },
+            error : function(response, status, errorType){
+
+                Overlay.available_processors.forEach(function(el){
+                    $("#tokenizer").append("<option value=\"" + el + "\">" + el + "</option>");
+                    $("#tagger").append("<option value=\"" + el + "\">" + el + "</option>");
+                    $("#lemmatizer").append("<option value=\"" + el + "\">" + el + "</option>");
+                    $("#dependency_analyzer").append("<option value=\"" + el + "\">" + el + "</option>");
+                });
+
+            }
         });
 
         //$("#selectType").selectmenu( "refresh" );

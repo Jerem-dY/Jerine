@@ -91,7 +91,26 @@
 <span class="c1">#TODO : ajouter en arguments au constructeur les données attendues (après les avoir retravaillé)</span>
 
 
-<div class="viewcode-block" id="TokenizedDocument"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.Document.TokenizedDocument">[docs]</a><span class="k">class</span> <span class="nc">TokenizedDocument</span><span class="p">:</span>
+<div class="viewcode-block" id="RawDocument"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.Document.RawDocument">[docs]</a><span class="k">class</span> <span class="nc">RawDocument</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classe représentant un document brut. </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructeur de la classe.</span>
+
+<span class="sd">        :param name: Le nom du document</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param content: Le contenu du document</span>
+<span class="sd">        :type content: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">str</span><span class="p">))</span> <span class="ow">or</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="ow">or</span> <span class="n">content</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;name and content must be non-empty strings.&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span></div>
+
+
+<div class="viewcode-block" id="TokenizedDocument"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.Document.TokenizedDocument">[docs]</a><span class="k">class</span> <span class="nc">TokenizedDocument</span><span class="p">(</span><span class="n">RawDocument</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Classe représentant un document tokenisé par un processeur. </span>
 
 <span class="sd">    :raises ValueError: Lorsque toutes les données nécessaires n&#39;ont pas été livrées</span>
@@ -138,15 +157,15 @@
                         <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s2">&quot;Inconsistency in lists&#39; length&quot;</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">RawDocument</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructeur de la classe.</span>
 
-<span class="sd">        :param name: le nom du document</span>
-<span class="sd">        :type name: str</span>
+<span class="sd">        :param doc: le document brut</span>
+<span class="sd">        :type doc: RawDocument</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># On vérifie l&#39;intégrité des arguments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_argument</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_argument</span><span class="p">(</span><span class="n">RawDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span>
             <span class="s1">&#39;token_forms&#39;</span><span class="p">,</span>
             <span class="s1">&#39;token_sent_inds&#39;</span><span class="p">,</span>
             <span class="s1">&#39;sentence_doc_inds&#39;</span><span class="p">,</span>
@@ -158,7 +177,7 @@
         <span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># On met à jour les propriétés de l&#39;objet</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 

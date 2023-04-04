@@ -1,0 +1,7 @@
+generate\_parsers module
+========================
+
+.. automodule:: generate_parsers
+   :members:
+   :undoc-members:
+   :show-inheritance:

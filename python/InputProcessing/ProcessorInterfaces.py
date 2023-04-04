@@ -16,7 +16,7 @@ Python ver. 3.11.1
 '''
 
 import abc
-from .Document import TokenizedDocument, TaggedDocument, LemmatizedDocument, Document
+from .Document import RawDocument, TokenizedDocument, TaggedDocument, LemmatizedDocument, Document
 
 
 class TokenizerInterface(metaclass=abc.ABCMeta):
@@ -28,7 +28,7 @@ class TokenizerInterface(metaclass=abc.ABCMeta):
         return (hasattr(subclass, 'tokenize') and callable(subclass.tokenize) or NotImplemented)
     
     @abc.abstractmethod
-    def tokenize(self, txt: str, name: str) -> TokenizedDocument:
+    def tokenize(self, document: RawDocument) -> TokenizedDocument:
         """Méthode permettant la tokenisation d'un texte brut (y compris la segmentation en phrase)
 
         :param txt: Le texte brut à tokeniser

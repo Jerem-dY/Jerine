@@ -1,0 +1,25 @@
+InputProcessing.Parsers package
+===============================
+
+Submodules
+----------
+
+InputProcessing.Parsers.TXT module
+----------------------------------
+
+.. inheritance-diagram:: InputProcessing.Parsers.TXT
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.Parsers.TXT
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: InputProcessing.Parsers
+   :members:
+   :undoc-members:
+   :show-inheritance:

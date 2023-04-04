@@ -1,15 +1,15 @@
-from .. import ProcessorTemplate
+from .. import ProcessorInterfaces
 from .. import Document
 import spacy
 
 
 class Spacy(
-    ProcessorTemplate.TokenizerInterface, 
-    ProcessorTemplate.PosTaggerInterface, 
-    ProcessorTemplate.LemmatizerInterface, 
-    ProcessorTemplate.DeprelAnalyzerInterface):
+    ProcessorInterfaces.TokenizerInterface, 
+    ProcessorInterfaces.PosTaggerInterface, 
+    ProcessorInterfaces.LemmatizerInterface, 
+    ProcessorInterfaces.DeprelAnalyzerInterface):
 
-    def tokenize(self, txt: str, name: str) -> Document.TokenizedDocument:
+    def tokenize(self, document: Document.RawDocument) -> Document.TokenizedDocument:
         pass
 
     def tag(self, document: Document.TokenizedDocument) -> Document.TaggedDocument:

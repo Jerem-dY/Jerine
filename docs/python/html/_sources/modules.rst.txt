@@ -6,6 +6,7 @@ python
 
    InputProcessing
    benchmark
+   generate_parsers
    generate_processors
    inputdata
    pipeline

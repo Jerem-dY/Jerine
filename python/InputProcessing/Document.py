@@ -18,7 +18,26 @@ from typing import Callable
 #TODO : ajouter en arguments au constructeur les données attendues (après les avoir retravaillé)
 
 
-class TokenizedDocument:
+class RawDocument:
+    """Classe représentant un document brut. 
+    """
+
+    def __init__(self, name: str, content: str):
+        """Constructeur de la classe.
+
+        :param name: Le nom du document
+        :type name: str
+        :param content: Le contenu du document
+        :type content: str
+        """
+        if not (isinstance(name, str) and isinstance(content, str)) or name == "" or content == "":
+            raise TypeError("name and content must be non-empty strings.")
+        
+        self.name = name
+        self.content = content
+
+
+class TokenizedDocument(RawDocument):
     """Classe représentant un document tokenisé par un processeur. 
 
     :raises ValueError: Lorsque toutes les données nécessaires n'ont pas été livrées
@@ -65,15 +84,15 @@ class TokenizedDocument:
                         raise IndexError("Inconsistency in lists' length")
 
 
-    def __init__(self, name: str, **kwargs):
+    def __init__(self, doc: RawDocument, **kwargs):
         """Constructeur de la classe.
 
-        :param name: le nom du document
-        :type name: str
+        :param doc: le document brut
+        :type doc: RawDocument
         """
 
         # On vérifie l'intégrité des arguments
-        self._check_argument(str, name, {
+        self._check_arguments(RawDocument, doc, {
             'token_forms',
             'token_sent_inds',
             'sentence_doc_inds',
@@ -85,7 +104,7 @@ class TokenizedDocument:
         }, **kwargs)
 
         # On met à jour les propriétés de l'objet
-        self.name = name
+        self.__dict__.update(doc.__dict__)
         self.__dict__.update(kwargs)
 
 
@@ -101,7 +120,7 @@ class TaggedDocument(TokenizedDocument):
         """
 
         # On vérifie l'intégrité des arguments
-        self._check_argument(TokenizedDocument, doc, {'lemma_pos'}, **kwargs)
+        self._check_arguments(TokenizedDocument, doc, {'lemma_pos'}, **kwargs)
 
         # On met à jour les propriétés de l'objet
         self.__dict__.update(doc.__dict__)
@@ -120,7 +139,7 @@ class LemmatizedDocument(TaggedDocument):
         """
 
         # On vérifie l'intégrité des arguments
-        self._check_argument(TaggedDocument, doc, {'lemma_form'}, **kwargs)
+        self._check_arguments(TaggedDocument, doc, {'lemma_form'}, **kwargs)
 
         # On met à jour les propriétés de l'objet
         self.__dict__.update(doc.__dict__)
@@ -139,7 +158,7 @@ class Document(LemmatizedDocument):
         """
 
         # On vérifie l'intégrité des arguments
-        self._check_argument(LemmatizedDocument, doc, {'deprels', 'heads'}, **kwargs)
+        self._check_arguments(LemmatizedDocument, doc, {'deprels', 'heads'}, **kwargs)
 
         # On met à jour les propriétés de l'objet
         self.__dict__.update(doc.__dict__)
