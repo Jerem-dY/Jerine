@@ -24,7 +24,7 @@ form {
     margin-bottom: 10px;
   }
   input[type="username"],
-  input[type="email"],
+  input[type="login"],
   input[type="password"] {
     font-size: 16px;
     padding: 10px;
