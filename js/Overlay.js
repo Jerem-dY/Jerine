@@ -72,9 +72,11 @@ class Overlay{
             cache: false,
             contentType: false,
             processData: false,
-            success : function(result, status){
-                result.forEach(el => $("#selectType").append("<option value=\"" + el + "\">" + el + "</option>").selectmenu('refresh'));
-            },
+            success : (function(result, status){
+
+                this.parsers = result;
+                result.forEach(el => $("#selectType").append("<option value=\"" + el["parser"] + "\">" + el["parser"] + "</option>").selectmenu('refresh'));
+            }.bind(this)),
             error : function(response, status, errorType){
                 Overlay.accepted_types.forEach(function(el){$("#selectType").append("<option value=\"" + el + "\">" + el + "</option>");});
             }
@@ -210,7 +212,7 @@ class Overlay{
                 let name = this.fileList.item(i).name;
                 let size = this.fileList.item(i).size/1000;
 
-                switch(type){
+                /*switch(type){
 
                     case "text/xml":
                         type = "XML";
@@ -223,23 +225,33 @@ class Overlay{
                         break;
                     default:
                         type = "";
-                }
+                }*/
 
-                if(type == ""){
-                    switch(name.split('.').at(-1)){
-                        case "conllu":
-                            type = "CoNLL-U";
-                            break;
-                        case "xml":
-                            type = "XML";
-                            break;
-                        case "tsv":
-                            type = "CoNLL-U";
-                            break;
-                        default:
-                            type = "";
+                let extension = name.split('.').at(-1);
+
+                this.parsers.some(function(parser){ 
+                    if(parser["ext"].includes(extension)){
+                        type = parser["parser"]
+                        return true;
                     }
-                }
+                    else{
+                        return false;
+                    }
+                });
+
+                /*switch(name.split('.').at(-1)){
+                    case "conllu":
+                        type = "CoNLL-U";
+                        break;
+                    case "xml":
+                        type = "XML";
+                        break;
+                    case "tsv":
+                        type = "CoNLL-U";
+                        break;
+                    default:
+                        type = "";
+                }*/
 
                 event.data.overlay.table.row.add([name, size, type]);
 

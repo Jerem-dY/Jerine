@@ -1,6 +1,5 @@
 from .. import ProcessorInterfaces
 from .. import Document
-import spacy
 
 
 class Spacy(
@@ -8,6 +7,9 @@ class Spacy(
     ProcessorInterfaces.PosTaggerInterface, 
     ProcessorInterfaces.LemmatizerInterface, 
     ProcessorInterfaces.DeprelAnalyzerInterface):
+
+    def __init__(self):
+        import spacy
 
     def tokenize(self, document: Document.RawDocument) -> Document.TokenizedDocument:
         pass

@@ -1,0 +1,133 @@
+.overlay_form{
+    display: flex;
+}
+
+.overlay_section{
+    padding: 2%;
+    margin: 0.5%;
+    background-color: rgba(82, 217, 199, 0.289);
+}
+
+.overlay_left{
+    width:50%;
+}
+
+label{
+    margin-left: 10%;
+    font-style: italic;
+    font-size:16px;
+}
+
+td{
+    cursor:cell;
+}
+
+body{
+    backdrop-filter: blur(10px);
+}
+
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    scrollbar-color: rgba(0, 170, 255, 0.697) rgba(255, 166, 0, 0.615);
+}
+
+body::-webkit-scrollbar-track {
+    background: rgba(255, 166, 0, 0.697);        /* color of the tracking area */
+  }
+
+body::before{
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-image: url("../images/icon.png");
+    opacity: 0.3;
+    background-repeat: repeat;
+	filter: blur(10px);
+	z-index: -1;
+}
+
+.fg{
+    backdrop-filter: blur(10px);
+    width: 100%;
+    height: 100%;
+}
+
+#mainarea{
+    display: flex;
+    justify-content: space-between;
+    min-height: 82vh;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    width: 100%;
+    height:fit-content;
+    backdrop-filter: blur(10px);
+}
+
+#topbar{
+    max-height: 10vh;
+    padding: 0.25%;
+    display: flex;
+    flex-direction: row-reverse;
+    backdrop-filter: blur(10px);
+}
+
+
+.central_area{
+    width: 1000px;
+    height: 100%;
+    min-height: 100%;
+}
+
+.leftpannel .rightpannel{
+    padding: 1%;
+    margin: 1%;
+    width: 300px;
+    min-width: 300px;
+}
+
+.jstree{
+    min-width: 300px;
+}
+
+
+
+.viewtab{
+    min-width: 1200x;
+}
+
+#datatab{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding:0%;
+}
+
+.ui-widget-content{
+    background: none;
+    background-color: rgba(213, 213, 213, 0.219);
+    backdrop-filter: blur(5px);
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{
+    background: none;
+    backdrop-filter: blur(5px);
+}
+
+li .ui-icon-close { 
+    float: left; 
+    margin: 0.4em 0.2em 0 0; 
+    cursor: pointer; 
+}
+
+td{
+    user-select: none;
+}
+
+.ui-selectmenu-button.ui-button {
+    min-width: 350px;
+  }

@@ -14,7 +14,11 @@ if __name__ == "__main__":
     for cls in classes:
 
         if issubclass(cls, ParserInterface) and cls.__name__ != "ParserInterface":
-            parsers.append(cls.__name__)
+
+            if hasattr(cls, "extensions") and isinstance(getattr(cls, "extensions"), list):
+                parsers.append({"parser" : cls.__name__, "ext" : getattr(cls, "extensions")})
+            else:
+                parsers.append({"parser" : cls.__name__, "ext" : []})
 
     
     print(json.dumps(parsers))

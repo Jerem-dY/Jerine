@@ -57,12 +57,12 @@ if(!(isset($_SESSION) && isset($_SESSION["user_id"]))){
     <head>
         <meta charset="utf-8">
         <title>Bourdillat-Adjoudj - espace de travail</title>
-        <link rel="icon" type="image/x-icon" href="icon.png">
+        <link rel="icon" type="image/x-icon" href="images/icon.png">
         <link rel="root" href="./"/>
         <link rel="stylesheet" href="js/libs/jquery/jquery-ui/jquery-ui.css">
         <link rel="stylesheet" href="js/libs/jquery/DataTables/datatables.min.css"/>
         <link rel="stylesheet" href="js/libs/jquery/jsTree/themes/default/style.min.css"/>
-        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/main.css"/>
         <link rel="stylesheet" href="js/libs/annodoc/css/main.css">
 		<link rel="stylesheet" href="js/libs/annodoc/css/style-vis.css">
 

@@ -14,7 +14,8 @@ if(isset($_SESSION) && isset($_SESSION["user_id"])){
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="js/libs/jquery/jquery-ui/jquery-ui.css">
-    <link rel="stylesheet" href="css/style2.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" type="image/x-icon" href="images/icon.png">
     <script type="text/javascript" src="js/libs/jquery/jquery-3.6.1.min.js"></script>
     <script type="text/javascript" src="js/libs/jquery/jquery-ui/jquery-ui.js"></script>
     <title>JérIne</title>
@@ -42,7 +43,7 @@ if(isset($_SESSION) && isset($_SESSION["user_id"])){
       
     </form>
 
-    <form id="creer_compte" action="creation_de_compte.html"> <button type="submit"> Créer un compte </button> </form>
+    <form id="creer_compte" action="creation_de_compte.php"> <button type="submit"> Créer un compte </button> </form>
     <a href="docs/index.html">Documentation du projet</a> 
     
   </body>

@@ -1,13 +1,12 @@
-# Bourdillat-Adjoudj
+# Jérine
 
 Plateforme web de gestion de documents et d'import/export en fichiers **CoNLL-U, TXT et XML**.  
 *Le cahier des charges et autres ressources se trouvent dans [docs/readable](/docs/readable)*  
 
-Le site est accessible ici : [***Adjoudj-Bourdillat***](http://i3l.univ-grenoble-alpes.fr/~bourdillat/Bourdillat-Adjoudj/) 
+Le site est accessible ici : [***Jérine***](http://i3l.univ-grenoble-alpes.fr/~bourdillat/Jerine/) 
 
 ## Description 
 Ce site est une application web (s'éxecutant dans un navigateur) mettant à disposition de l'utilisateur un espace de travail et un stockage pour déposer des documents tokenisés, segmentés en phrases et analysés syntaxiquement. L'application permet l'import de fichiers de type *texte brut*, *XML* ou *CoNLL-U*. Il est possible de compléter les informations manquantes à l'aide des processeurs disponibles (spaCy, stanza, nltk, etc.). L'export des documents dans les mêmes formats que ceux cités précédemment est possible. L'utilisateur a aussi accès à diverses visualisations de ses données, elles aussi exportables.  
-et ça sera tout.
 
 
 ## Wiki :
@@ -28,6 +27,7 @@ et ça sera tout.
 - [jquery](https://jquery.com/) *>= 3.6.1*  
 - [jquery-ui](https://jqueryui.com/)  *>= 1.13.2*  
 - [DataTables](https://datatables.net/) *>= 1.13.4* 
+- [annodoc](https://spyysalo.github.io/annodoc/)  
 
 ##### *Documentation* 
 - [JSDoc](https://jsdoc.app/) *>= 4.0.2*  
@@ -40,6 +40,7 @@ et ça sera tout.
 - numpy *>= 1.23.5*  
 - [spacy](https://spacy.io/) *>= 3.5.1*  
 - [nltk](https://www.nltk.org/) *>= 3.8.1*  
+- [treetaggerwrapper](https://treetaggerwrapper.readthedocs.io/en/latest/) *>= 2.3*  
 
 ##### *Documentation*
 - [sphinx](https://www.sphinx-doc.org/en/master/) *>= 6.1.3*  
@@ -49,8 +50,9 @@ et ça sera tout.
 
 ### Rust
 
-##### *Runtime* 
-- [cpython](https://docs.rs/cpython/latest/cpython/) *>= 0.7.1*  
+##### *Compilation* 
+- [maturin](https://www.maturin.rs/) *>= 0.14.16*  
+- [PyO3](https://pyo3.rs/v0.12.3/) *>= 0.12.3*  
 
 ##### *Documentation*
 - [rustdoc](https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html) *>= 1.68.0*  
