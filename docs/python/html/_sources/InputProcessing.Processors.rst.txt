@@ -16,6 +16,18 @@ InputProcessing.Processors.Hops module
    :undoc-members:
    :show-inheritance:
 
+InputProcessing.Processors.NLTK module
+--------------------------------------
+
+.. inheritance-diagram:: InputProcessing.Processors.NLTK
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.Processors.NLTK
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 InputProcessing.Processors.Spacy module
 ---------------------------------------
 
@@ -24,6 +36,18 @@ InputProcessing.Processors.Spacy module
    
 
 .. automodule:: InputProcessing.Processors.Spacy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+InputProcessing.Processors.TreeTagger module
+--------------------------------------------
+
+.. inheritance-diagram:: InputProcessing.Processors.TreeTagger
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.Processors.TreeTagger
    :members:
    :undoc-members:
    :show-inheritance:

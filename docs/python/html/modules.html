@@ -51,7 +51,6 @@
 <li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html">pipeline module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
 </ul>
 </li>
@@ -97,7 +96,9 @@
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html">InputProcessing.Processors package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-hops-module">InputProcessing.Processors.Hops module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-nltk-module">InputProcessing.Processors.NLTK module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-spacy-module">InputProcessing.Processors.Spacy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-treetagger-module">InputProcessing.Processors.TreeTagger module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#module-InputProcessing.Processors">Module contents</a></li>
 </ul>
 </li>
@@ -117,9 +118,20 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-documentbuilder-module">InputProcessing.DocumentBuilder module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id1">INFORMATIONS GENERALES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id2">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.close"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.pipeline()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.run"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id3">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id4">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ParserInterface.ParserInterface"><code class="docutils literal notranslate"><span class="pre">ParserInterface</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ParserInterface.ParserInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">ParserInterface._abc_impl</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ParserInterface.ParserInterface.parse"><code class="docutils literal notranslate"><span class="pre">ParserInterface.parse()</span></code></a></li>
@@ -128,8 +140,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id3">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id4">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id5">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id6">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface._abc_impl</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface.deprel"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface.deprel()</span></code></a></li>
@@ -152,9 +164,34 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-uploadmachine-module">InputProcessing.UploadMachine module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id7">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id8">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadMachine.UploadMachine"><code class="docutils literal notranslate"><span class="pre">UploadMachine</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadMachine.UploadMachine.run"><code class="docutils literal notranslate"><span class="pre">UploadMachine.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadMachine.UploadMachine.worker"><code class="docutils literal notranslate"><span class="pre">UploadMachine.worker()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-uploadtask-module">InputProcessing.UploadTask module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id9">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id10">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask"><code class="docutils literal notranslate"><span class="pre">UploadTask</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.insert_document"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.insert_forms"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_forms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.insert_in_collection"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_in_collection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.insert_lemmas"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_lemmas()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.insert_sentences"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_sentences()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.insert_tokens"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_tokens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.process_file"><code class="docutils literal notranslate"><span class="pre">UploadTask.process_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id5">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id6">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id11">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#id12">INFORMATIONS SUR LE MODULE</a></li>
 </ul>
 </li>
 </ul>
@@ -176,16 +213,6 @@
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_tokens"><code class="docutils literal notranslate"><span class="pre">insert_tokens()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pipeline.html">pipeline module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#pipeline.DocType"><code class="docutils literal notranslate"><span class="pre">DocType</span></code></a><ul>
-<li class="toctree-l3"><a class="reference internal" href="pipeline.html#pipeline.DocType.CONLLU"><code class="docutils literal notranslate"><span class="pre">DocType.CONLLU</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipeline.html#pipeline.DocType.TXT"><code class="docutils literal notranslate"><span class="pre">DocType.TXT</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="pipeline.html#pipeline.DocType.XML"><code class="docutils literal notranslate"><span class="pre">DocType.XML</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html#pipeline.Pipeline"><code class="docutils literal notranslate"><span class="pre">Pipeline</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="test.html">test module</a><ul>

@@ -9,5 +9,4 @@ python
    generate_parsers
    generate_processors
    inputdata
-   pipeline
    test

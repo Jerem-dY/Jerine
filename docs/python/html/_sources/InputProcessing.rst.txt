@@ -25,6 +25,18 @@ InputProcessing.Document module
    :undoc-members:
    :show-inheritance:
 
+InputProcessing.DocumentBuilder module
+--------------------------------------
+
+.. inheritance-diagram:: InputProcessing.DocumentBuilder
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.DocumentBuilder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 InputProcessing.ParserInterface module
 --------------------------------------
 
@@ -45,6 +57,30 @@ InputProcessing.ProcessorInterfaces module
    
 
 .. automodule:: InputProcessing.ProcessorInterfaces
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+InputProcessing.UploadMachine module
+------------------------------------
+
+.. inheritance-diagram:: InputProcessing.UploadMachine
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.UploadMachine
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+InputProcessing.UploadTask module
+---------------------------------
+
+.. inheritance-diagram:: InputProcessing.UploadTask
+   :parts: 1
+   
+
+.. automodule:: InputProcessing.UploadTask
    :members:
    :undoc-members:
    :show-inheritance:

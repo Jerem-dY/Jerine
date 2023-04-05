@@ -63,24 +63,42 @@
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.Document.TokenizedDocument"><code class="docutils literal notranslate"><span class="pre">TokenizedDocument</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inputprocessing-documentbuilder-module">InputProcessing.DocumentBuilder module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#id1">INFORMATIONS GENERALES</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ParserInterface.ParserInterface"><code class="docutils literal notranslate"><span class="pre">ParserInterface</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id3">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id4">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.LemmatizerInterface"><code class="docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.TokenizerInterface"><code class="docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#inputprocessing-uploadmachine-module">InputProcessing.UploadMachine module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadMachine.UploadMachine"><code class="docutils literal notranslate"><span class="pre">UploadMachine</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#inputprocessing-uploadtask-module">InputProcessing.UploadTask module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id9">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id10">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask"><code class="docutils literal notranslate"><span class="pre">UploadTask</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-InputProcessing">Module contents</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id5">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#id6">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id12">INFORMATIONS SUR LE MODULE</a></li>
 </ul>
 </li>
 </ul>
@@ -89,7 +107,6 @@
 <li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html">pipeline module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
 </ul>
 </li>
@@ -113,9 +130,20 @@
 </li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#inputprocessing-documentbuilder-module">InputProcessing.DocumentBuilder module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#id1">INFORMATIONS GENERALES</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id2">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.close"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.pipeline()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.run"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#InputProcessing.ParserInterface.ParserInterface"><code class="docutils literal notranslate"><span class="pre">ParserInterface</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ParserInterface.ParserInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">ParserInterface._abc_impl</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ParserInterface.ParserInterface.parse"><code class="docutils literal notranslate"><span class="pre">ParserInterface.parse()</span></code></a></li>
@@ -124,8 +152,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id3">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface._abc_impl"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface._abc_impl</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface.deprel"><code class="docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface.deprel()</span></code></a></li>
@@ -148,9 +176,34 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#inputprocessing-uploadmachine-module">InputProcessing.UploadMachine module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id7">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.UploadMachine.UploadMachine"><code class="docutils literal notranslate"><span class="pre">UploadMachine</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadMachine.UploadMachine.run"><code class="docutils literal notranslate"><span class="pre">UploadMachine.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadMachine.UploadMachine.worker"><code class="docutils literal notranslate"><span class="pre">UploadMachine.worker()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#inputprocessing-uploadtask-module">InputProcessing.UploadTask module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id9">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id10">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask"><code class="docutils literal notranslate"><span class="pre">UploadTask</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.insert_document"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_document()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.insert_forms"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_forms()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.insert_in_collection"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_in_collection()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.insert_lemmas"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_lemmas()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.insert_sentences"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_sentences()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.insert_tokens"><code class="docutils literal notranslate"><span class="pre">UploadTask.insert_tokens()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.process_file"><code class="docutils literal notranslate"><span class="pre">UploadTask.process_file()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#module-InputProcessing">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id5">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id11">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id12">INFORMATIONS SUR LE MODULE</a></li>
 </ul>
 </li>
 </ul>
@@ -193,6 +246,7 @@
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.Parsers.html#inputprocessing-parsers-txt-module">InputProcessing.Parsers.TXT module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.Parsers.html#InputProcessing.Parsers.TXT.TXT"><code class="docutils literal notranslate"><span class="pre">TXT</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html#InputProcessing.Parsers.TXT.TXT._abc_impl"><code class="docutils literal notranslate"><span class="pre">TXT._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html#InputProcessing.Parsers.TXT.TXT.extensions"><code class="docutils literal notranslate"><span class="pre">TXT.extensions</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Parsers.html#InputProcessing.Parsers.TXT.TXT.parse"><code class="docutils literal notranslate"><span class="pre">TXT.parse()</span></code></a></li>
 </ul>
 </li>
@@ -215,6 +269,19 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-nltk-module">InputProcessing.Processors.NLTK module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#informations-generales">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#informations-sur-le-module">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.NLTK.NLTK"><code class="docutils literal notranslate"><span class="pre">NLTK</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.NLTK.NLTK._abc_impl"><code class="docutils literal notranslate"><span class="pre">NLTK._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.NLTK.NLTK.close"><code class="docutils literal notranslate"><span class="pre">NLTK.close()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.NLTK.NLTK.deprel"><code class="docutils literal notranslate"><span class="pre">NLTK.deprel()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.NLTK.NLTK.tag"><code class="docutils literal notranslate"><span class="pre">NLTK.tag()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.NLTK.NLTK.tokenize"><code class="docutils literal notranslate"><span class="pre">NLTK.tokenize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-spacy-module">InputProcessing.Processors.Spacy module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.Spacy.Spacy"><code class="docutils literal notranslate"><span class="pre">Spacy</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.Spacy.Spacy._abc_impl"><code class="docutils literal notranslate"><span class="pre">Spacy._abc_impl</span></code></a></li>
@@ -226,9 +293,21 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.Processors.html#inputprocessing-processors-treetagger-module">InputProcessing.Processors.TreeTagger module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#id1">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#id2">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger"><code class="docutils literal notranslate"><span class="pre">TreeTagger</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger._abc_impl"><code class="docutils literal notranslate"><span class="pre">TreeTagger._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.lemmatize"><code class="docutils literal notranslate"><span class="pre">TreeTagger.lemmatize()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.tag"><code class="docutils literal notranslate"><span class="pre">TreeTagger.tag()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.tokenize"><code class="docutils literal notranslate"><span class="pre">TreeTagger.tokenize()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.Processors.html#module-InputProcessing.Processors">Module contents</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#informations-generales">INFORMATIONS GENERALES</a></li>
-<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#informations-sur-le-module">INFORMATIONS SUR LE MODULE</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#id3">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#id4">INFORMATIONS SUR LE MODULE</a></li>
 </ul>
 </li>
 </ul>
@@ -331,19 +410,73 @@ Projet de fin de semestre</p>
 </dd></dl>
 
 </section>
+<section id="inputprocessing-documentbuilder-module">
+<h2>InputProcessing.DocumentBuilder module<a class="headerlink" href="#inputprocessing-documentbuilder-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-7bdf94b845da42f271a8a7692f3de3c4df66cf64.png" alt="Inheritance diagram of InputProcessing.DocumentBuilder" usemap="#inheritance9847e54fef" class="inheritance graphviz" /></div>
+<map id="inheritance9847e54fef" name="inheritance9847e54fef">
+<area shape="rect" id="node1" href="#InputProcessing.DocumentBuilder.DocumentBuilder" target="_top" title="La classe DocumentBuilder s&#39;occupe de traiter les documents d&#39;entrée sur plusieurs threads et envoie le document finalisé dans la queue de l&#39;UploadMachine." alt="" coords="5,79,139,104"/>
+</map><span class="target" id="module-InputProcessing.DocumentBuilder"></span><section id="id1">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant la classe DocumentBuilder de traitement des documents d’entrée.</p>
+</section>
+<section id="id2">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id2" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.DocumentBuilder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.DocumentBuilder.</span></span><span class="sig-name descname"><span class="pre">DocumentBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">input</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upload_queue</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Queue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">processors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">Thread</span></code></p>
+<p>La classe DocumentBuilder s’occupe de traiter les documents d’entrée sur plusieurs threads et envoie le document finalisé dans la queue de l’UploadMachine.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.DocumentBuilder.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder.close" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode s’assurant de fermer correctement tous les organes de traitement si une méthode est disponible.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.DocumentBuilder.pipeline">
+<span class="sig-name descname"><span class="pre">pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder.pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Fonction principale de traitement d’un document, exécutée dans un thread à part.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> (<em>dict</em>) – structure contenant un document brut (« doc ») et le parser à utiliser (« type »)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.DocumentBuilder.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder.run" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Fonction permettant de démarrer le traitement des fichiers fournis.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="inputprocessing-parserinterface-module">
 <h2>InputProcessing.ParserInterface module<a class="headerlink" href="#inputprocessing-parserinterface-module" title="Lien permanent vers cette rubrique"></a></h2>
 <div class="graphviz"><img src="_images/inheritance-cc45b879d020ebb4b29d1c7a05b99201e0f543ab.png" alt="Inheritance diagram of InputProcessing.ParserInterface" usemap="#inheritance2f891d33f1" class="inheritance graphviz" /></div>
 <map id="inheritance2f891d33f1" name="inheritance2f891d33f1">
 <area shape="rect" id="node1" href="#InputProcessing.ParserInterface.ParserInterface" target="_top" title="Interface visant à implémenter un parser de fichier d&#39;un certain type." alt="" coords="5,5,124,31"/>
-</map><span class="target" id="module-InputProcessing.ParserInterface"></span><section id="id1">
-<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique"></a></h3>
+</map><span class="target" id="module-InputProcessing.ParserInterface"></span><section id="id3">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id3" title="Lien permanent vers cette rubrique"></a></h3>
 <p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
 Projet de fin de semestre</p>
 <p>Ce module met en place une interface pour rapidement et facilement ajouter des types de fichiers d’entrée et leur traitement préliminaire.</p>
 </section>
-<section id="id2">
-<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id2" title="Lien permanent vers cette rubrique"></a></h3>
+<section id="id4">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id4" title="Lien permanent vers cette rubrique"></a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">auteur<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
@@ -398,14 +531,14 @@ Projet de fin de semestre</p>
 <area shape="rect" id="node2" href="#InputProcessing.ProcessorInterfaces.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="205,5,359,31"/>
 <area shape="rect" id="node3" href="#InputProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="384,5,529,31"/>
 <area shape="rect" id="node4" href="#InputProcessing.ProcessorInterfaces.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="554,5,693,31"/>
-</map><span class="target" id="module-InputProcessing.ProcessorInterfaces"></span><section id="id3">
-<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id3" title="Lien permanent vers cette rubrique"></a></h3>
+</map><span class="target" id="module-InputProcessing.ProcessorInterfaces"></span><section id="id5">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id5" title="Lien permanent vers cette rubrique"></a></h3>
 <p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
 Projet de fin de semestre</p>
 <p>Ce module met en place des classes abstraites ayant pour objectif de permettre une implémentation rapide et rigoureuse de processeurs de traitement des textes.</p>
 </section>
-<section id="id4">
-<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id4" title="Lien permanent vers cette rubrique"></a></h3>
+<section id="id6">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id6" title="Lien permanent vers cette rubrique"></a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">auteur<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
@@ -548,16 +681,133 @@ Projet de fin de semestre</p>
 </dd></dl>
 
 </section>
+<section id="inputprocessing-uploadmachine-module">
+<h2>InputProcessing.UploadMachine module<a class="headerlink" href="#inputprocessing-uploadmachine-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-4183c1697e18403569e9e21d35f93c9f9d54497c.png" alt="Inheritance diagram of InputProcessing.UploadMachine" usemap="#inheritance36a82b10fc" class="inheritance graphviz" /></div>
+<map id="inheritance36a82b10fc" name="inheritance36a82b10fc">
+<area shape="rect" id="node1" href="#InputProcessing.UploadMachine.UploadMachine" target="_top" title="Classe représentant l&#39;UploadMachine, une bête féroce destinée à mettre dans la base de données les documents fournis par l&#39;utilisateur." alt="" coords="5,5,125,31"/>
+</map><span class="target" id="module-InputProcessing.UploadMachine"></span><section id="id7">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id7" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant l’UploadMachine, permettant la mise en ligne de documents.</p>
+</section>
+<section id="id8">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id8" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="InputProcessing.UploadMachine.UploadMachine">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadMachine.</span></span><span class="sig-name descname"><span class="pre">UploadMachine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_treat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadMachine.html#UploadMachine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadMachine.UploadMachine" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe représentant l’UploadMachine, une bête féroce destinée à mettre dans la base de données les documents fournis par l’utilisateur.
+Elle communique directement avec le DocumentBuilder.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadMachine.UploadMachine.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadMachine.html#UploadMachine.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadMachine.UploadMachine.run" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant de démarrer la machine.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadMachine.UploadMachine.worker">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">worker</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadMachine.html#UploadMachine.worker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadMachine.UploadMachine.worker" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode décrivant un worker, unité de travail asynchrone gérant une seule tâche.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="inputprocessing-uploadtask-module">
+<h2>InputProcessing.UploadTask module<a class="headerlink" href="#inputprocessing-uploadtask-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-a3eb6379108c7a1f8ab912145466df750cca11b6.png" alt="Inheritance diagram of InputProcessing.UploadTask" usemap="#inheritance9b507fa923" class="inheritance graphviz" /></div>
+<map id="inheritance9b507fa923" name="inheritance9b507fa923">
+<area shape="rect" id="node1" href="#InputProcessing.UploadTask.UploadTask" target="_top" title="Classe représentant une tâche de mise en ligne d&#39;un document dans la base de données." alt="" coords="5,5,101,31"/>
+</map><span class="target" id="module-InputProcessing.UploadTask"></span><section id="id9">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id9" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant la classe UploadTask destinée à l’UploadMachine.</p>
+</section>
+<section id="id10">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id10" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadTask.</span></span><span class="sig-name descname"><span class="pre">UploadTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#InputProcessing.Document.Document" title="InputProcessing.Document.Document"><span class="pre">Document</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">forms_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemmas_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentences_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens_lock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Classe représentant une tâche de mise en ligne d’un document dans la base de données.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_document">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_document</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_document" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode effectuant l’insertion du document dans la table « document » de la base de données.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_forms">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_forms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_forms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_forms" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode effectuant l’insertion des formes du document dans la table « form » de la base de données.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_in_collection">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_in_collection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_in_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_in_collection" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode effectuant l’insertion du document dans la table « document_has_collection » de la base de données.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_lemmas">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_lemmas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_lemmas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_lemmas" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode effectuant l’insertion des lemmes du document dans la table « lemma » de la base de données.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_sentences">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_sentences</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_sentences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_sentences" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode effectuant l’insertion des phrases du document dans la table « sentence » de la base de données.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_tokens">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_tokens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_tokens" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode effectuant l’insertion des tokens du document dans la table « token » de la base de données.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.process_file">
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">process_file</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.process_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.process_file" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode principale permettant la mise en ligne du document.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-InputProcessing">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-InputProcessing" title="Lien permanent vers cette rubrique"></a></h2>
-<section id="id5">
-<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id5" title="Lien permanent vers cette rubrique"></a></h3>
+<section id="id11">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id11" title="Lien permanent vers cette rubrique"></a></h3>
 <p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
 Projet de fin de semestre</p>
 <p>Ce package regroupe des classes et fonctions pour permettre le traitement des fichiers envoyés par l’utilisateur.</p>
 </section>
-<section id="id6">
-<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id6" title="Lien permanent vers cette rubrique"></a></h3>
+<section id="id12">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id12" title="Lien permanent vers cette rubrique"></a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">auteur<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>

@@ -54,8 +54,11 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-document-module">InputProcessing.Document module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-documentbuilder-module">InputProcessing.DocumentBuilder module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-uploadmachine-module">InputProcessing.UploadMachine module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#inputprocessing-uploadtask-module">InputProcessing.UploadTask module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a></li>
 </ul>
 </li>
@@ -63,7 +66,6 @@
 <li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pipeline.html">pipeline module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
 </ul>
 </li>
@@ -73,7 +75,9 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">InputProcessing.Processors package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inputprocessing-processors-hops-module">InputProcessing.Processors.Hops module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inputprocessing-processors-nltk-module">InputProcessing.Processors.NLTK module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#inputprocessing-processors-spacy-module">InputProcessing.Processors.Spacy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inputprocessing-processors-treetagger-module">InputProcessing.Processors.TreeTagger module</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#module-InputProcessing.Processors">Module contents</a></li>
 </ul>
 </li>
@@ -81,8 +85,11 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-document-module">InputProcessing.Document module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-documentbuilder-module">InputProcessing.DocumentBuilder module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-processorinterfaces-module">InputProcessing.ProcessorInterfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-uploadmachine-module">InputProcessing.UploadMachine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-uploadtask-module">InputProcessing.UploadTask module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a></li>
 </ul>
 </li>
@@ -150,6 +157,112 @@
 </dd>
 <dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.Document" title="InputProcessing.Document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="inputprocessing-processors-nltk-module">
+<h2>InputProcessing.Processors.NLTK module<a class="headerlink" href="#inputprocessing-processors-nltk-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-8a3336f01b21580e622d0c2cd67f75918025b71c.png" alt="Inheritance diagram of InputProcessing.Processors.NLTK" usemap="#inheritance0734bf6cac" class="inheritance graphviz" /></div>
+<map id="inheritance0734bf6cac" name="inheritance0734bf6cac">
+<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node2" href="#InputProcessing.Processors.NLTK.NLTK" target="_top" title="NLTK" alt="" coords="238,79,310,104"/>
+<area shape="rect" id="node3" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="205,5,343,31"/>
+<area shape="rect" id="node4" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="368,5,513,31"/>
+</map><span class="target" id="module-InputProcessing.Processors.NLTK"></span><section id="informations-generales">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#informations-generales" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant les processeurs NLTK (tokenisation, étiquetage, lemmatisation et analyse syntaxique en dépendances).</p>
+</section>
+<section id="informations-sur-le-module">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#informations-sur-le-module" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="InputProcessing.Processors.NLTK.NLTK">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.Processors.NLTK.</span></span><span class="sig-name descname"><span class="pre">NLTK</span></span><a class="reference internal" href="_modules/InputProcessing/Processors/NLTK.html#NLTK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.NLTK.NLTK" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface" title="InputProcessing.ProcessorInterfaces.TokenizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface" title="InputProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" title="InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="InputProcessing.Processors.NLTK.NLTK._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#InputProcessing.Processors.NLTK.NLTK._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.NLTK.NLTK.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/Processors/NLTK.html#NLTK.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.NLTK.NLTK.close" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.NLTK.NLTK.deprel">
+<span class="sig-name descname"><span class="pre">deprel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.LemmatizedDocument" title="InputProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">&lt;module</span> <span class="pre">'InputProcessing.Document'</span> <span class="pre">from</span> <span class="pre">'D:\\documents\\COURS\\Master</span> <span class="pre">IDL\\M1\\S2\\Programmation</span> <span class="pre">Web</span> <span class="pre">et</span> <span class="pre">base</span> <span class="pre">de</span> <span class="pre">données</span> <span class="pre">pour</span> <span class="pre">le</span> <span class="pre">TAL\\projet\\python\\InputProcessing\\Document.py'&gt;</span></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/NLTK.html#NLTK.deprel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.NLTK.NLTK.deprel" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’analyse syntaxique des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="InputProcessing.html#InputProcessing.Document.LemmatizedDocument" title="InputProcessing.Document.LemmatizedDocument"><em>LemmatizedDocument</em></a>) – le document lemmatisé à analyser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document analysé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.Document" title="InputProcessing.Document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.NLTK.NLTK.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument" title="InputProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/NLTK.html#NLTK.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.NLTK.NLTK.tag" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’étiquetage des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><em>TokenizedDocument</em></a>) – Le document tokenisé à étiqueter</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document étiqueté</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument" title="InputProcessing.Document.TaggedDocument">TaggedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.NLTK.NLTK.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.RawDocument" title="InputProcessing.Document.RawDocument"><span class="pre">RawDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/NLTK.html#NLTK.tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.NLTK.NLTK.tokenize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la tokenisation d’un texte brut (y compris la segmentation en phrase)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txt</strong> (<em>str</em>) – Le texte brut à tokeniser</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – le nom du document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document tokenisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument">TokenizedDocument</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -261,16 +374,119 @@
 </dd></dl>
 
 </section>
+<section id="inputprocessing-processors-treetagger-module">
+<h2>InputProcessing.Processors.TreeTagger module<a class="headerlink" href="#inputprocessing-processors-treetagger-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-ba23a9cbe4348e41c434a0f0d9916da135b3e1bb.png" alt="Inheritance diagram of InputProcessing.Processors.TreeTagger" usemap="#inheritance17cf5e7cae" class="inheritance graphviz" /></div>
+<map id="inheritance17cf5e7cae" name="inheritance17cf5e7cae">
+<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="5,5,160,31"/>
+<area shape="rect" id="node4" href="#InputProcessing.Processors.TreeTagger.TreeTagger" target="_top" title="Classe représentant les processeurs utilisables pour l&#39;outil TreeTagger." alt="" coords="210,79,305,104"/>
+<area shape="rect" id="node2" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="185,5,330,31"/>
+<area shape="rect" id="node3" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="355,5,493,31"/>
+</map><span class="target" id="module-InputProcessing.Processors.TreeTagger"></span><section id="id1">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant les processeurs TreeTagger (tokenisation, étiquetage, lemmatisation).
+L’usage de la tokenisation est déconseillé car TreeTagger ne segmente pas en phrase, ainsi tout le texte sera casé dans une seule et même phrase.</p>
+</section>
+<section id="id2">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id2" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="InputProcessing.Processors.TreeTagger.TreeTagger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.Processors.TreeTagger.</span></span><span class="sig-name descname"><span class="pre">TreeTagger</span></span><a class="reference internal" href="_modules/InputProcessing/Processors/TreeTagger.html#TreeTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.TreeTagger.TreeTagger" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.TokenizerInterface" title="InputProcessing.ProcessorInterfaces.TokenizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.PosTaggerInterface" title="InputProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.LemmatizerInterface" title="InputProcessing.ProcessorInterfaces.LemmatizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a></p>
+<p>Classe représentant les processeurs utilisables pour l’outil TreeTagger.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="InputProcessing.Processors.TreeTagger.TreeTagger._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#InputProcessing.Processors.TreeTagger.TreeTagger._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.TreeTagger.TreeTagger.lemmatize">
+<span class="sig-name descname"><span class="pre">lemmatize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument" title="InputProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.LemmatizedDocument" title="InputProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/TreeTagger.html#TreeTagger.lemmatize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.TreeTagger.TreeTagger.lemmatize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la lemmatisation des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument" title="InputProcessing.Document.TaggedDocument"><em>TaggedDocument</em></a>) – le document étiqueté à lemmatiser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document lemmatisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.LemmatizedDocument" title="InputProcessing.Document.LemmatizedDocument">LemmatizedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.TreeTagger.TreeTagger.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument" title="InputProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/TreeTagger.html#TreeTagger.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.TreeTagger.TreeTagger.tag" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’étiquetage des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><em>TokenizedDocument</em></a>) – Le document tokenisé à étiqueter</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document étiqueté</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TaggedDocument" title="InputProcessing.Document.TaggedDocument">TaggedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.Processors.TreeTagger.TreeTagger.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.RawDocument" title="InputProcessing.Document.RawDocument"><span class="pre">RawDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></span><a class="reference internal" href="_modules/InputProcessing/Processors/TreeTagger.html#TreeTagger.tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.Processors.TreeTagger.TreeTagger.tokenize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la tokenisation d’un texte brut (y compris la segmentation en phrase)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txt</strong> (<em>str</em>) – Le texte brut à tokeniser</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – le nom du document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document tokenisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="InputProcessing.html#InputProcessing.Document.TokenizedDocument" title="InputProcessing.Document.TokenizedDocument">TokenizedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
 <section id="module-InputProcessing.Processors">
 <span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-InputProcessing.Processors" title="Lien permanent vers cette rubrique"></a></h2>
-<section id="informations-generales">
-<h3>INFORMATIONS GENERALES<a class="headerlink" href="#informations-generales" title="Lien permanent vers cette rubrique"></a></h3>
+<section id="id3">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id3" title="Lien permanent vers cette rubrique"></a></h3>
 <p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
 Projet de fin de semestre</p>
 <p>Ce package regroupe les wrappers de traitement pour divers systèmes comme spaCy, HOPS, stanza, etc.</p>
 </section>
-<section id="informations-sur-le-module">
-<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#informations-sur-le-module" title="Lien permanent vers cette rubrique"></a></h3>
+<section id="id4">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id4" title="Lien permanent vers cette rubrique"></a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">auteur<span class="colon">:</span></dt>
 <dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>

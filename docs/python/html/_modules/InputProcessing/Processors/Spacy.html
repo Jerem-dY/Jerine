@@ -73,7 +73,6 @@
   <h1>Code source de InputProcessing.Processors.Spacy</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">ProcessorInterfaces</span>
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Document</span>
-<span class="kn">import</span> <span class="nn">spacy</span>
 
 
 <div class="viewcode-block" id="Spacy"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.Spacy.Spacy">[docs]</a><span class="k">class</span> <span class="nc">Spacy</span><span class="p">(</span>
@@ -81,6 +80,9 @@
     <span class="n">ProcessorInterfaces</span><span class="o">.</span><span class="n">PosTaggerInterface</span><span class="p">,</span> 
     <span class="n">ProcessorInterfaces</span><span class="o">.</span><span class="n">LemmatizerInterface</span><span class="p">,</span> 
     <span class="n">ProcessorInterfaces</span><span class="o">.</span><span class="n">DeprelAnalyzerInterface</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">spacy</span>
 
 <div class="viewcode-block" id="Spacy.tokenize"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.Spacy.Spacy.tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">Document</span><span class="o">.</span><span class="n">RawDocument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="o">.</span><span class="n">TokenizedDocument</span><span class="p">:</span>
         <span class="k">pass</span></div>

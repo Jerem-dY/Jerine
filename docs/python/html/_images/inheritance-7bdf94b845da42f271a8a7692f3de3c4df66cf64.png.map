@@ -1,0 +1,4 @@
+<map id="inheritance9847e54fef" name="inheritance9847e54fef">
+<area shape="rect" id="node1" href="#InputProcessing.DocumentBuilder.DocumentBuilder" target="_top" title="La classe DocumentBuilder s&#39;occupe de traiter les documents d&#39;entrée sur plusieurs threads et envoie le document finalisé dans la queue de l&#39;UploadMachine." alt="" coords="5,79,139,104"/>
+<area shape="rect" id="node2" title="A class that represents a thread of control." alt="" coords="36,5,108,31"/>
+</map>

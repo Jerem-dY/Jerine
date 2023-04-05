@@ -165,7 +165,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># On vérifie l&#39;intégrité des arguments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_argument</span><span class="p">(</span><span class="n">RawDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_arguments</span><span class="p">(</span><span class="n">RawDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span>
             <span class="s1">&#39;token_forms&#39;</span><span class="p">,</span>
             <span class="s1">&#39;token_sent_inds&#39;</span><span class="p">,</span>
             <span class="s1">&#39;sentence_doc_inds&#39;</span><span class="p">,</span>
@@ -193,7 +193,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># On vérifie l&#39;intégrité des arguments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_argument</span><span class="p">(</span><span class="n">TokenizedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;lemma_pos&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_arguments</span><span class="p">(</span><span class="n">TokenizedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;lemma_pos&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># On met à jour les propriétés de l&#39;objet</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
@@ -212,7 +212,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># On vérifie l&#39;intégrité des arguments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_argument</span><span class="p">(</span><span class="n">TaggedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;lemma_form&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_arguments</span><span class="p">(</span><span class="n">TaggedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;lemma_form&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># On met à jour les propriétés de l&#39;objet</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
@@ -231,7 +231,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># On vérifie l&#39;intégrité des arguments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_argument</span><span class="p">(</span><span class="n">LemmatizedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;deprels&#39;</span><span class="p">,</span> <span class="s1">&#39;heads&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_arguments</span><span class="p">(</span><span class="n">LemmatizedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;deprels&#39;</span><span class="p">,</span> <span class="s1">&#39;heads&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># On met à jour les propriétés de l&#39;objet</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>

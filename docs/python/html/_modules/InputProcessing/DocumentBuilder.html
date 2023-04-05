@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>InputProcessing.DocumentBuilder &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Bourdillat-Adjoudj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InputProcessing.html">InputProcessing package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bourdillat-Adjoudj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">InputProcessing.DocumentBuilder</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de InputProcessing.DocumentBuilder</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">INFORMATIONS GENERALES</span>
+<span class="sd">=========================================================================</span>
+<span class="sd">Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  </span>
+<span class="sd">Projet de fin de semestre  </span>
+
+<span class="sd">Module contenant la classe DocumentBuilder de traitement des documents d&#39;entrée.</span>
+
+<span class="sd">INFORMATIONS SUR LE MODULE</span>
+<span class="sd">=========================================================================</span>
+<span class="sd">:auteur: Jérémy Bourdillat &lt;Jeremy.Bourdillat@etu.univ-grenoble-alpes.fr&gt;</span>
+<span class="sd">:version: 1.0</span>
+<span class="sd">Python ver. 3.11.1</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+<span class="kn">from</span> <span class="nn">multiprocessing.pool</span> <span class="kn">import</span> <span class="n">ThreadPool</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+<span class="kn">from</span> <span class="nn">benchmark</span> <span class="kn">import</span> <span class="n">timeit</span>
+<span class="kn">from</span> <span class="nn">asyncio</span> <span class="kn">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">get_event_loop</span>
+<span class="kn">from</span> <span class="nn">.Parsers</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.Processors</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">.Document</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="n">MAX_THREADS</span> <span class="o">=</span> <span class="mi">5</span>
+
+<div class="viewcode-block" id="DocumentBuilder"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder">[docs]</a><span class="k">class</span> <span class="nc">DocumentBuilder</span><span class="p">(</span><span class="n">Thread</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;La classe DocumentBuilder s&#39;occupe de traiter les documents d&#39;entrée sur plusieurs threads et envoie le document finalisé dans la queue de l&#39;UploadMachine.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">upload_queue</span><span class="p">:</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">parsers</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">processors</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Le constructeur de la classe.</span>
+
+<span class="sd">        :param input: Liste des chemins de fichiers à traiter</span>
+<span class="sd">        :type input: list[str]</span>
+<span class="sd">        :param upload_queue: Référence vers la queue de l&#39;UploadMachine</span>
+<span class="sd">        :type upload_queue: Queue</span>
+<span class="sd">        :param parsers: Liste des parsers à utiliser pour chaque fichier</span>
+<span class="sd">        :type parsers: list</span>
+<span class="sd">        :param processors: Dictionnaire décrivant les différents processeurs de traitement à utiliser</span>
+<span class="sd">        :type processors: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">threads</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">upload_queue</span> <span class="o">=</span> <span class="n">upload_queue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop</span> <span class="o">=</span> <span class="n">get_event_loop</span><span class="p">()</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">ThreadPool</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="nb">input</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">MAX_THREADS</span> <span class="k">else</span> <span class="n">MAX_THREADS</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">processors</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="c1"># On instancie chaque parser</span>
+        <span class="k">for</span> <span class="n">parser</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">parsers</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">[</span><span class="n">parser</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="n">parser</span><span class="p">)()</span>
+            
+        <span class="c1"># On instancie chaque processeur</span>
+        <span class="k">for</span> <span class="n">processor</span> <span class="ow">in</span> <span class="n">processors</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="n">processor</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="n">processors</span><span class="p">[</span><span class="n">processor</span><span class="p">])()</span>
+
+        <span class="c1"># On génère les documents bruts</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
+             <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;doc&quot;</span> <span class="p">:</span> <span class="n">RawDocument</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()),</span> <span class="s2">&quot;type&quot;</span> <span class="p">:</span> <span class="n">parsers</span><span class="p">[</span><span class="n">i</span><span class="p">]})</span>
+
+
+<div class="viewcode-block" id="DocumentBuilder.pipeline"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline">[docs]</a>    <span class="k">def</span> <span class="nf">pipeline</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fonction principale de traitement d&#39;un document, exécutée dans un thread à part.</span>
+
+<span class="sd">        :param text: structure contenant un document brut (&quot;doc&quot;) et le parser à utiliser (&quot;type&quot;)</span>
+<span class="sd">        :type text: dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="s1">&#39;doc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; travaille...&quot;</span><span class="p">)</span>
+
+        <span class="c1">##################################################</span>
+
+        <span class="c1"># Parsing :</span>
+        <span class="c1"># Le parser fournira au moins un objet de type RawDocument ; en fonction du type de fichier et de son contenu, </span>
+        <span class="c1"># il peut fournir des sous-classes, permettant de sauter les étapes non nécessaires.</span>
+        <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">[</span><span class="n">text</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="s2">&quot;doc&quot;</span><span class="p">])</span>
+
+
+        <span class="c1"># Tokenisation : </span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">RawDocument</span><span class="p">):</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="s2">&quot;tokenizer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+        <span class="c1"># Etiquetage :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">TokenizedDocument</span><span class="p">):</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="s2">&quot;tagger&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tag</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+        <span class="c1"># Lemmatisation :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">TaggedDocument</span><span class="p">):</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="s2">&quot;lemmatizer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lemmatize</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+        <span class="c1"># Analyse syntaxique :</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">LemmatizedDocument</span><span class="p">):</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="s2">&quot;dependency_analyzer&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">deprel</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+                
+
+        <span class="c1">##################################################</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="o">.</span><span class="n">call_soon_threadsafe</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">upload_queue</span><span class="o">.</span><span class="n">put_nowait</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">text</span><span class="p">[</span><span class="s1">&#39;doc&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; a fini !&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="DocumentBuilder.run"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.run">[docs]</a>    <span class="nd">@timeit</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fonction permettant de démarrer le traitement des fichiers fournis.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pipeline</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">):</span>
+            <span class="k">pass</span></div>
+
+<div class="viewcode-block" id="DocumentBuilder.close"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode s&#39;assurant de fermer correctement tous les organes de traitement si une méthode est disponible.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># Pour chaque parser, on vérifie s&#39;il a une méthode close(), et si oui on l&#39;exécute</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="s2">&quot;close&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">parsers</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+        <span class="c1"># Pour chaque processeur, on vérifie s&#39;il a une méthode close(), et si oui on l&#39;exécute</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="n">p</span><span class="p">],</span> <span class="s2">&quot;close&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">processors</span><span class="p">[</span><span class="n">p</span><span class="p">]</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jérémy Bourdillat &amp; Inès Adjoudj.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

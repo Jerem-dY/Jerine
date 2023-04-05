@@ -98,6 +98,9 @@ class NLTK(ProcessorInterfaces.TokenizerInterface,
 
 
         return Document.Document(document, **args)
+    
+    def close(self):
+        os.killpg(self.server.pid, signal.SIGTERM)
 
     
     def __del__(self):
