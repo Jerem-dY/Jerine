@@ -9,4 +9,6 @@ python
    generate_parsers
    generate_processors
    inputdata
+   inputdata_legacy
    test
+   testUM

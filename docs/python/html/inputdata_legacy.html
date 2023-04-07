@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>inputdata_legacy module &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="test module" href="test.html" />
+    <link rel="prev" title="inputdata module" href="inputdata.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bourdillat-Adjoudj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">python</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="benchmark.html">benchmark module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">inputdata_legacy module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.init_worker"><code class="docutils literal notranslate"><span class="pre">init_worker()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.insert_document"><code class="docutils literal notranslate"><span class="pre">insert_document()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.insert_forms"><code class="docutils literal notranslate"><span class="pre">insert_forms()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.insert_in_collection"><code class="docutils literal notranslate"><span class="pre">insert_in_collection()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.insert_lemmas"><code class="docutils literal notranslate"><span class="pre">insert_lemmas()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.insert_sentences"><code class="docutils literal notranslate"><span class="pre">insert_sentences()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.insert_tokens"><code class="docutils literal notranslate"><span class="pre">insert_tokens()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#inputdata_legacy.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testUM.html">testUM module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bourdillat-Adjoudj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">python</a></li>
+      <li class="breadcrumb-item active">inputdata_legacy module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/inputdata_legacy.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-inputdata_legacy">
+<span id="inputdata-legacy-module"></span><h1>inputdata_legacy module<a class="headerlink" href="#module-inputdata_legacy" title="Lien permanent vers cette rubrique"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.hash_doc">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">hash_doc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#hash_doc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.hash_doc" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.init_worker">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">init_worker</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">connection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">escape_table</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#init_worker"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.init_worker" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.insert_document">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">insert_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#insert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.insert_document" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.insert_forms">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">insert_forms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forms</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#insert_forms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.insert_forms" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.insert_in_collection">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">insert_in_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">document_id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#insert_in_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.insert_in_collection" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.insert_lemmas">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">insert_lemmas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemma_form_ids</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemma_pos</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#insert_lemmas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.insert_lemmas" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.insert_sentences">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">insert_sentences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">text_id</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentence_doc_ind</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#insert_sentences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.insert_sentences" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.insert_tokens">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">insert_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_sent_ind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_doc_ind</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">token_form</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemma</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentence</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deprel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">head</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spaceafter</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#insert_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.insert_tokens" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.process_file">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">process_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#process_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.process_file" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="inputdata_legacy.transaction">
+<span class="sig-prename descclassname"><span class="pre">inputdata_legacy.</span></span><span class="sig-name descname"><span class="pre">transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">db</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/inputdata_legacy.html#transaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#inputdata_legacy.transaction" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="inputdata.html" class="btn btn-neutral float-left" title="inputdata module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="test.html" class="btn btn-neutral float-right" title="test module" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jérémy Bourdillat &amp; Inès Adjoudj.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

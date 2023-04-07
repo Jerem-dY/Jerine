@@ -18,8 +18,9 @@ Python ver. 3.11.1
 
 from .UploadTask import UploadTask
 import asyncio
+import aiomysql
 from benchmark import timeit
-import functools
+from .Document import Document
 
 
 
@@ -28,14 +29,14 @@ class UploadMachine:
     Elle communique directement avec le DocumentBuilder.
     """
 
-    def __init__(self, to_treat: int):
+    def __init__(self, to_treat: int, user_id: int):
         """Constructeur de la classe.
 
         :param to_treat: Nombre de documents à traiter
         :type to_treat: int
         """
 
-
+        self.user_id = user_id
         self.to_treat = to_treat
         self.queue = asyncio.Queue(to_treat)
 
@@ -45,6 +46,16 @@ class UploadMachine:
         self.tokens_lock = asyncio.Lock()
 
         self.loop = asyncio.get_event_loop()
+
+        self.connection_params = {
+        'host': "localhost",
+        'user': "bourdillat",
+        'password': "Uibbnqkbavs09//",
+        'db': "bourdillat",
+        'loop': self.loop,
+        'autocommit': True
+        }
+        self.connection_pool: aiomysql.Pool = self.loop.run_until_complete(aiomysql.create_pool(**self.connection_params))
 
     @timeit
     def run(self):
@@ -59,14 +70,16 @@ class UploadMachine:
     async def worker(self):
         """Méthode décrivant un worker, unité de travail asynchrone gérant une seule tâche.
         """
+        
+        doc: Document = await self.queue.get()
 
-        doc: tuple = await self.queue.get()
-        task = UploadTask(doc, self.forms_lock, self.lemmas_lock, self.sentences_lock, self.tokens_lock)
+        #async with self.connection_pool.acquire() as conn:
+        task = UploadTask(self.user_id, doc, self.connection_pool, self.forms_lock, self.lemmas_lock, self.sentences_lock, self.tokens_lock)
 
         await task.process_file()
 
         self.to_treat -= 1
         self.queue.task_done()
-        print(f"Uploaded : {doc[0]}")
+        print(f"Uploaded : {doc.name}")
         print(f"{self.to_treat} more to go.")
             

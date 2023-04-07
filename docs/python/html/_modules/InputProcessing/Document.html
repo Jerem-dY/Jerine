@@ -107,7 +107,14 @@
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;name and content must be non-empty strings.&quot;</span><span class="p">)</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">content</span>
+
+    
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;Document &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;</span><span class="se">\n</span><span class="s2">========================</span><span class="se">\n\n\&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="si">}</span><span class="se">\&quot;</span><span class="s2">&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">token_forms</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="TokenizedDocument"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.Document.TokenizedDocument">[docs]</a><span class="k">class</span> <span class="nc">TokenizedDocument</span><span class="p">(</span><span class="n">RawDocument</span><span class="p">):</span>
@@ -169,7 +176,6 @@
             <span class="s1">&#39;token_forms&#39;</span><span class="p">,</span>
             <span class="s1">&#39;token_sent_inds&#39;</span><span class="p">,</span>
             <span class="s1">&#39;sentence_doc_inds&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;sentences&#39;</span><span class="p">,</span>
             <span class="s1">&#39;cmptr_tokens&#39;</span><span class="p">,</span>
             <span class="s1">&#39;token_doc_ind&#39;</span><span class="p">,</span>
             <span class="s1">&#39;offset&#39;</span><span class="p">,</span>
@@ -212,7 +218,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1"># On vérifie l&#39;intégrité des arguments</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_check_arguments</span><span class="p">(</span><span class="n">TaggedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;lemma_form&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_check_arguments</span><span class="p">(</span><span class="n">TaggedDocument</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;lemma_forms&#39;</span><span class="p">},</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c1"># On met à jour les propriétés de l&#39;objet</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>

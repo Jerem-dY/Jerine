@@ -20,8 +20,7 @@ from .. import ProcessorInterfaces
 from .. import Document
 import itertools
 
-class TreeTagger(
-    ProcessorInterfaces.TokenizerInterface, 
+class TreeTagger( 
     ProcessorInterfaces.PosTaggerInterface, 
     ProcessorInterfaces.LemmatizerInterface):
     """Classe représentant les processeurs utilisables pour l'outil TreeTagger.
@@ -29,10 +28,10 @@ class TreeTagger(
 
     def __init__(self):
         from treetaggerwrapper import TreeTagger, make_tags
-        self.tagger = TreeTagger(TAGLANG='fr', TAGOPT=u'-token -lemma -quiet', TAGDIR='D:\documents\COURS\Master IDL\M1\S1\Modélisation de la langue écrite\TD étiquettage\TreeTagger\TreeTagger')
+        self.tagger = TreeTagger(TAGLANG='fr', TAGOPT=u'-token -lemma -quiet')
         self.mk_tags = make_tags
 
-    def tokenize(self, document: Document.RawDocument) -> Document.TokenizedDocument:
+    """def tokenize(self, document: Document.RawDocument) -> Document.TokenizedDocument:
         
         
         tags = self.tagger.tag_text(document.content)
@@ -47,22 +46,69 @@ class TreeTagger(
             'offset' : list(itertools.repeat("NULL", len(output))),
             'spaceafter' : list(itertools.repeat(1, len(output)))}
         
-        return Document.TokenizedDocument(document, **args)
+        return Document.TokenizedDocument(document, **args)"""
 
     def tag(self, document: Document.TokenizedDocument) -> Document.TaggedDocument:
 
-        tags = self.tagger.tag_text(document.token_forms)
-        output = self.mk_tags(tags)
+        output = []
 
-        args = {'lemma_pos' : [i.pos for i in output]}
+        for token in document.token_forms:
+            tags = self.tagger.tag_text(token)
+            output.append(self.mk_tags(tags)[0].pos if len(self.mk_tags(tags)) > 0 and self.mk_tags(tags)[0].pos != "" else "X")
+
+        args = {'lemma_pos' : self._convert_tagset(output)}
 
         return Document.TaggedDocument(document, **args)
 
     def lemmatize(self, document: Document.TaggedDocument) -> Document.LemmatizedDocument:
         
-        tags = self.tagger.tag_text(document.token_forms)
-        output = self.mk_tags(tags)
+        output = []
+        for token in document.token_forms:
+            tags = self.tagger.tag_text(token)
+            output.append(self.mk_tags(tags)[0].lemma if len(self.mk_tags(tags)) > 0 and self.mk_tags(tags)[0].lemma != "" else "NULL")
 
-        args = {'lemma_form' : [i.lemma for i in output]}
+        args = {'lemma_forms' : output}
 
         return Document.LemmatizedDocument(document, **args)
+    
+
+    def _convert_tagset(self, tags: list):
+
+        new = []
+
+        table = {'NUM' : 'NUM', 
+                'SYM' : 'SYM', 
+                'PUN:cit' : 'PUNCT', 
+                'X' : 'X', 
+                'VER:futu' : 'VERB', 
+                'PRO:IND' : 'PRON', 
+                'PRP:det' : 'ADP', 
+                'VER:pres' : 'VERB', 
+                'PRO' : 'PRON', 
+                'ADJ' : 'ADJ', 
+                'PRP' : 'ADP', 
+                'VER:ppre' : 'VERB', 
+                'VER:pper' : 'VERB', 
+                'PUN' : 'PUNCT', 
+                'VER:impf' : 'VERB', 
+                'KON' : 'CCONJ', 
+                'SENT' : 'PUNCT', 
+                'DET:ART' : 'DET', 
+                'PRO:DEM' : 'PRON', 
+                'VER:subp' : 'VERB', 
+                'ADV' : 'ADV', 
+                'NAM' : 'PROPN', 
+                'VER:infi' : 'VERB', 
+                'DET:POS' : 'DET', 
+                'NOM' : 'NOUN', 
+                'PRO:PER' : 'PRON', 
+                'ABR' : 'NOUN', 
+                'VER:cond' : 'VERB'}
+        
+        for token in tags:
+            new.append(table[token] if token in table else "X")
+
+        return new
+    
+    def close(self):
+        del self.tagger

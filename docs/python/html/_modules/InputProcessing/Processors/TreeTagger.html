@@ -93,8 +93,7 @@
 <span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Document</span>
 <span class="kn">import</span> <span class="nn">itertools</span>
 
-<div class="viewcode-block" id="TreeTagger"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger">[docs]</a><span class="k">class</span> <span class="nc">TreeTagger</span><span class="p">(</span>
-    <span class="n">ProcessorInterfaces</span><span class="o">.</span><span class="n">TokenizerInterface</span><span class="p">,</span> 
+<div class="viewcode-block" id="TreeTagger"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger">[docs]</a><span class="k">class</span> <span class="nc">TreeTagger</span><span class="p">(</span> 
     <span class="n">ProcessorInterfaces</span><span class="o">.</span><span class="n">PosTaggerInterface</span><span class="p">,</span> 
     <span class="n">ProcessorInterfaces</span><span class="o">.</span><span class="n">LemmatizerInterface</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Classe représentant les processeurs utilisables pour l&#39;outil TreeTagger.</span>
@@ -102,43 +101,90 @@
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">treetaggerwrapper</span> <span class="kn">import</span> <span class="n">TreeTagger</span><span class="p">,</span> <span class="n">make_tags</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span> <span class="o">=</span> <span class="n">TreeTagger</span><span class="p">(</span><span class="n">TAGLANG</span><span class="o">=</span><span class="s1">&#39;fr&#39;</span><span class="p">,</span> <span class="n">TAGOPT</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;-token -lemma -quiet&#39;</span><span class="p">,</span> <span class="n">TAGDIR</span><span class="o">=</span><span class="s1">&#39;D:\documents\COURS\Master IDL\M1\S1\Modélisation de la langue écrite\TD étiquettage\TreeTagger\TreeTagger&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span> <span class="o">=</span> <span class="n">TreeTagger</span><span class="p">(</span><span class="n">TAGLANG</span><span class="o">=</span><span class="s1">&#39;fr&#39;</span><span class="p">,</span> <span class="n">TAGOPT</span><span class="o">=</span><span class="sa">u</span><span class="s1">&#39;-token -lemma -quiet&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span> <span class="o">=</span> <span class="n">make_tags</span>
 
-<div class="viewcode-block" id="TreeTagger.tokenize"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.tokenize">[docs]</a>    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">Document</span><span class="o">.</span><span class="n">RawDocument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="o">.</span><span class="n">TokenizedDocument</span><span class="p">:</span>
-        
-        
-        <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">tag_text</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;def tokenize(self, document: Document.RawDocument) -&gt; Document.TokenizedDocument:</span>
+<span class="sd">        </span>
+<span class="sd">        </span>
+<span class="sd">        tags = self.tagger.tag_text(document.content)</span>
+<span class="sd">        output = self.mk_tags(tags)</span>
 
-        <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;token_forms&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">word</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">output</span><span class="p">],</span>
-            <span class="s1">&#39;token_sent_inds&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span>
-            <span class="s1">&#39;sentence_doc_inds&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">))),</span>
-            <span class="s1">&#39;sentences&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">))),</span>
-            <span class="s1">&#39;cmptr_tokens&#39;</span> <span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">),</span>
-            <span class="s1">&#39;token_doc_ind&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)),</span>
-            <span class="s1">&#39;offset&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s2">&quot;NULL&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">))),</span>
-            <span class="s1">&#39;spaceafter&#39;</span> <span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)))}</span>
-        
-        <span class="k">return</span> <span class="n">Document</span><span class="o">.</span><span class="n">TokenizedDocument</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+<span class="sd">        args = {&#39;token_forms&#39; : [i.word for i in output],</span>
+<span class="sd">            &#39;token_sent_inds&#39; : list(range(1, len(output)+1)),</span>
+<span class="sd">            &#39;sentence_doc_inds&#39; : list(itertools.repeat(1, len(output))),</span>
+<span class="sd">            &#39;sentences&#39; : list(itertools.repeat(1, len(output))),</span>
+<span class="sd">            &#39;cmptr_tokens&#39; : len(output),</span>
+<span class="sd">            &#39;token_doc_ind&#39; : list(range(1, len(output)+1)),</span>
+<span class="sd">            &#39;offset&#39; : list(itertools.repeat(&quot;NULL&quot;, len(output))),</span>
+<span class="sd">            &#39;spaceafter&#39; : list(itertools.repeat(1, len(output)))}</span>
+<span class="sd">        </span>
+<span class="sd">        return Document.TokenizedDocument(document, **args)&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TreeTagger.tag"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.tag">[docs]</a>    <span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">Document</span><span class="o">.</span><span class="n">TokenizedDocument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="o">.</span><span class="n">TaggedDocument</span><span class="p">:</span>
 
-        <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">tag_text</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">token_forms</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
 
-        <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lemma_pos&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">pos</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">output</span><span class="p">]}</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">document</span><span class="o">.</span><span class="n">token_forms</span><span class="p">:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">tag_text</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">pos</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+
+        <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lemma_pos&#39;</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_tagset</span><span class="p">(</span><span class="n">output</span><span class="p">)}</span>
 
         <span class="k">return</span> <span class="n">Document</span><span class="o">.</span><span class="n">TaggedDocument</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="TreeTagger.lemmatize"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.lemmatize">[docs]</a>    <span class="k">def</span> <span class="nf">lemmatize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">Document</span><span class="o">.</span><span class="n">TaggedDocument</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="o">.</span><span class="n">LemmatizedDocument</span><span class="p">:</span>
         
-        <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">tag_text</span><span class="p">(</span><span class="n">document</span><span class="o">.</span><span class="n">token_forms</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">document</span><span class="o">.</span><span class="n">token_forms</span><span class="p">:</span>
+            <span class="n">tags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span><span class="o">.</span><span class="n">tag_text</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lemma</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">mk_tags</span><span class="p">(</span><span class="n">tags</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lemma</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="k">else</span> <span class="s2">&quot;NULL&quot;</span><span class="p">)</span>
 
-        <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lemma_form&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">lemma</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">output</span><span class="p">]}</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;lemma_forms&#39;</span> <span class="p">:</span> <span class="n">output</span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">Document</span><span class="o">.</span><span class="n">LemmatizedDocument</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">Document</span><span class="o">.</span><span class="n">LemmatizedDocument</span><span class="p">(</span><span class="n">document</span><span class="p">,</span> <span class="o">**</span><span class="n">args</span><span class="p">)</span></div>
+    
+
+<div class="viewcode-block" id="TreeTagger._convert_tagset"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger._convert_tagset">[docs]</a>    <span class="k">def</span> <span class="nf">_convert_tagset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tags</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
+
+        <span class="n">new</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">table</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;NUM&#39;</span> <span class="p">:</span> <span class="s1">&#39;NUM&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;SYM&#39;</span> <span class="p">:</span> <span class="s1">&#39;SYM&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PUN:cit&#39;</span> <span class="p">:</span> <span class="s1">&#39;PUNCT&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;X&#39;</span> <span class="p">:</span> <span class="s1">&#39;X&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:futu&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PRO:IND&#39;</span> <span class="p">:</span> <span class="s1">&#39;PRON&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PRP:det&#39;</span> <span class="p">:</span> <span class="s1">&#39;ADP&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:pres&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PRO&#39;</span> <span class="p">:</span> <span class="s1">&#39;PRON&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;ADJ&#39;</span> <span class="p">:</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PRP&#39;</span> <span class="p">:</span> <span class="s1">&#39;ADP&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:ppre&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:pper&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PUN&#39;</span> <span class="p">:</span> <span class="s1">&#39;PUNCT&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:impf&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;KON&#39;</span> <span class="p">:</span> <span class="s1">&#39;CCONJ&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;SENT&#39;</span> <span class="p">:</span> <span class="s1">&#39;PUNCT&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;DET:ART&#39;</span> <span class="p">:</span> <span class="s1">&#39;DET&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PRO:DEM&#39;</span> <span class="p">:</span> <span class="s1">&#39;PRON&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:subp&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;ADV&#39;</span> <span class="p">:</span> <span class="s1">&#39;ADV&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;NAM&#39;</span> <span class="p">:</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:infi&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;DET:POS&#39;</span> <span class="p">:</span> <span class="s1">&#39;DET&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;NOM&#39;</span> <span class="p">:</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;PRO:PER&#39;</span> <span class="p">:</span> <span class="s1">&#39;PRON&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;ABR&#39;</span> <span class="p">:</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> 
+                <span class="s1">&#39;VER:cond&#39;</span> <span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">}</span>
+        
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tags</span><span class="p">:</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">table</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">table</span> <span class="k">else</span> <span class="s2">&quot;X&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">new</span></div>
+    
+<div class="viewcode-block" id="TreeTagger.close"><a class="viewcode-back" href="../../../InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.close">[docs]</a>    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tagger</span></div></div>
 </pre></div>
 
            </div>

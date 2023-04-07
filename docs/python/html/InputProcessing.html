@@ -67,6 +67,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#id1">INFORMATIONS GENERALES</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id2">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.init_workers"><code class="docutils literal notranslate"><span class="pre">init_workers()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
@@ -94,6 +95,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#id9">INFORMATIONS GENERALES</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#id10">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask"><code class="docutils literal notranslate"><span class="pre">UploadTask</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.verbose"><code class="docutils literal notranslate"><span class="pre">verbose()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-InputProcessing">Module contents</a><ul>
@@ -107,7 +111,9 @@
 <li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html">inputdata_legacy module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testUM.html">testUM module</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">InputProcessing package</a><ul>
@@ -137,8 +143,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.close"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.close()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.pipeline()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.run"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#InputProcessing.DocumentBuilder.DocumentBuilder.toQueue"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.toQueue()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.DocumentBuilder.init_workers"><code class="docutils literal notranslate"><span class="pre">init_workers()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
@@ -199,6 +207,9 @@
 <li class="toctree-l4"><a class="reference internal" href="#InputProcessing.UploadTask.UploadTask.process_file"><code class="docutils literal notranslate"><span class="pre">UploadTask.process_file()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.UploadTask.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.UploadTask.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#InputProcessing.UploadTask.verbose"><code class="docutils literal notranslate"><span class="pre">verbose()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-InputProcessing">Module contents</a><ul>
@@ -298,9 +309,10 @@
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#id2">INFORMATIONS SUR LE MODULE</a></li>
 <li class="toctree-l3"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger"><code class="docutils literal notranslate"><span class="pre">TreeTagger</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger._abc_impl"><code class="docutils literal notranslate"><span class="pre">TreeTagger._abc_impl</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger._convert_tagset"><code class="docutils literal notranslate"><span class="pre">TreeTagger._convert_tagset()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.close"><code class="docutils literal notranslate"><span class="pre">TreeTagger.close()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.lemmatize"><code class="docutils literal notranslate"><span class="pre">TreeTagger.lemmatize()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.tag"><code class="docutils literal notranslate"><span class="pre">TreeTagger.tag()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="InputProcessing.Processors.html#InputProcessing.Processors.TreeTagger.TreeTagger.tokenize"><code class="docutils literal notranslate"><span class="pre">TreeTagger.tokenize()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -446,7 +458,7 @@ Projet de fin de semestre</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.DocumentBuilder.pipeline">
-<span class="sig-name descname"><span class="pre">pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder.pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline" title="Lien permanent vers cette définition"></a></dt>
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">pipeline</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder.pipeline"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline" title="Lien permanent vers cette définition"></a></dt>
 <dd><p>Fonction principale de traitement d’un document, exécutée dans un thread à part.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Paramètres<span class="colon">:</span></dt>
@@ -461,7 +473,17 @@ Projet de fin de semestre</p>
 <dd><p>Fonction permettant de démarrer le traitement des fichiers fournis.</p>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.DocumentBuilder.toQueue">
+<span class="sig-name descname"><span class="pre">toQueue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">result</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#DocumentBuilder.toQueue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.DocumentBuilder.toQueue" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="InputProcessing.DocumentBuilder.init_workers">
+<span class="sig-prename descclassname"><span class="pre">InputProcessing.DocumentBuilder.</span></span><span class="sig-name descname"><span class="pre">init_workers</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">processors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parsers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/DocumentBuilder.html#init_workers"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.DocumentBuilder.init_workers" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="inputprocessing-parserinterface-module">
@@ -706,7 +728,7 @@ Projet de fin de semestre</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="InputProcessing.UploadMachine.UploadMachine">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadMachine.</span></span><span class="sig-name descname"><span class="pre">UploadMachine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_treat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadMachine.html#UploadMachine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadMachine.UploadMachine" title="Lien permanent vers cette définition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadMachine.</span></span><span class="sig-name descname"><span class="pre">UploadMachine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_treat</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadMachine.html#UploadMachine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadMachine.UploadMachine" title="Lien permanent vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe représentant l’UploadMachine, une bête féroce destinée à mettre dans la base de données les documents fournis par l’utilisateur.
 Elle communique directement avec le DocumentBuilder.</p>
@@ -750,44 +772,38 @@ Projet de fin de semestre</p>
 </section>
 <dl class="py class">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadTask.</span></span><span class="sig-name descname"><span class="pre">UploadTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#InputProcessing.Document.Document" title="InputProcessing.Document.Document"><span class="pre">Document</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">forms_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemmas_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentences_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens_lock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask" title="Lien permanent vers cette définition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadTask.</span></span><span class="sig-name descname"><span class="pre">UploadTask</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">user_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#InputProcessing.Document.Document" title="InputProcessing.Document.Document"><span class="pre">Document</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">pool</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Pool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">forms_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lemmas_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sentences_lock</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tokens_lock</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask" title="Lien permanent vers cette définition"></a></dt>
 <dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Classe représentant une tâche de mise en ligne d’un document dans la base de données.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_document">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_document</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_document" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Méthode effectuant l’insertion du document dans la table « document » de la base de données.</p>
-</dd></dl>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_document</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_document"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_document" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_forms">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_forms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_forms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_forms" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Méthode effectuant l’insertion des formes du document dans la table « form » de la base de données.</p>
-</dd></dl>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_forms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_forms"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_forms" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_in_collection">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_in_collection</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_in_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_in_collection" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Méthode effectuant l’insertion du document dans la table « document_has_collection » de la base de données.</p>
-</dd></dl>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_in_collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_in_collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_in_collection" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_lemmas">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_lemmas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_lemmas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_lemmas" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Méthode effectuant l’insertion des lemmes du document dans la table « lemma » de la base de données.</p>
-</dd></dl>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_lemmas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_lemmas"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_lemmas" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_sentences">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_sentences</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_sentences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_sentences" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Méthode effectuant l’insertion des phrases du document dans la table « sentence » de la base de données.</p>
-</dd></dl>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_sentences</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_sentences"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_sentences" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.insert_tokens">
-<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_tokens</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_tokens" title="Lien permanent vers cette définition"></a></dt>
-<dd><p>Méthode effectuant l’insertion des tokens du document dans la table « token » de la base de données.</p>
-</dd></dl>
+<em class="property"><span class="pre">async</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">insert_tokens</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#UploadTask.insert_tokens"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.UploadTask.insert_tokens" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="InputProcessing.UploadTask.UploadTask.process_file">
@@ -796,6 +812,21 @@ Projet de fin de semestre</p>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.hash_doc">
+<span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadTask.</span></span><span class="sig-name descname"><span class="pre">hash_doc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">doc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#hash_doc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.hash_doc" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.transaction">
+<span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadTask.</span></span><span class="sig-name descname"><span class="pre">transaction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#transaction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.transaction" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="InputProcessing.UploadTask.verbose">
+<span class="sig-prename descclassname"><span class="pre">InputProcessing.UploadTask.</span></span><span class="sig-name descname"><span class="pre">verbose</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/InputProcessing/UploadTask.html#verbose"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#InputProcessing.UploadTask.verbose" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
 
 </section>
 <section id="module-InputProcessing">

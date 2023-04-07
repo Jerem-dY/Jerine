@@ -91,8 +91,9 @@
 
 <span class="kn">from</span> <span class="nn">.UploadTask</span> <span class="kn">import</span> <span class="n">UploadTask</span>
 <span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">aiomysql</span>
 <span class="kn">from</span> <span class="nn">benchmark</span> <span class="kn">import</span> <span class="n">timeit</span>
-<span class="kn">import</span> <span class="nn">functools</span>
+<span class="kn">from</span> <span class="nn">.Document</span> <span class="kn">import</span> <span class="n">Document</span>
 
 
 
@@ -101,14 +102,14 @@
 <span class="sd">    Elle communique directement avec le DocumentBuilder.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to_treat</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">to_treat</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructeur de la classe.</span>
 
 <span class="sd">        :param to_treat: Nombre de documents à traiter</span>
 <span class="sd">        :type to_treat: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user_id</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">to_treat</span> <span class="o">=</span> <span class="n">to_treat</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Queue</span><span class="p">(</span><span class="n">to_treat</span><span class="p">)</span>
 
@@ -118,6 +119,16 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">tokens_lock</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">Lock</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">loop</span> <span class="o">=</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_params</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;host&#39;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;user&#39;</span><span class="p">:</span> <span class="s2">&quot;bourdillat&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;password&#39;</span><span class="p">:</span> <span class="s2">&quot;Uibbnqkbavs09//&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;db&#39;</span><span class="p">:</span> <span class="s2">&quot;bourdillat&quot;</span><span class="p">,</span>
+        <span class="s1">&#39;loop&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="p">,</span>
+        <span class="s1">&#39;autocommit&#39;</span><span class="p">:</span> <span class="kc">True</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connection_pool</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">Pool</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">loop</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">aiomysql</span><span class="o">.</span><span class="n">create_pool</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">connection_params</span><span class="p">))</span>
 
 <div class="viewcode-block" id="UploadMachine.run"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.UploadMachine.UploadMachine.run">[docs]</a>    <span class="nd">@timeit</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -132,15 +143,17 @@
 <div class="viewcode-block" id="UploadMachine.worker"><a class="viewcode-back" href="../../InputProcessing.html#InputProcessing.UploadMachine.UploadMachine.worker">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">worker</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode décrivant un worker, unité de travail asynchrone gérant une seule tâche.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">doc</span><span class="p">:</span> <span class="n">Document</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 
-        <span class="n">doc</span><span class="p">:</span> <span class="nb">tuple</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-        <span class="n">task</span> <span class="o">=</span> <span class="n">UploadTask</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lemmas_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentences_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokens_lock</span><span class="p">)</span>
+        <span class="c1">#async with self.connection_pool.acquire() as conn:</span>
+        <span class="n">task</span> <span class="o">=</span> <span class="n">UploadTask</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">connection_pool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lemmas_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentences_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokens_lock</span><span class="p">)</span>
 
         <span class="k">await</span> <span class="n">task</span><span class="o">.</span><span class="n">process_file</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">to_treat</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">task_done</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Uploaded : </span><span class="si">{</span><span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Uploaded : </span><span class="si">{</span><span class="n">doc</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">to_treat</span><span class="si">}</span><span class="s2"> more to go.&quot;</span><span class="p">)</span></div></div>
             
 </pre></div>

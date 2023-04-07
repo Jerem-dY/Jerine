@@ -1,0 +1,7 @@
+inputdata\_legacy module
+========================
+
+.. automodule:: inputdata_legacy
+   :members:
+   :undoc-members:
+   :show-inheritance:

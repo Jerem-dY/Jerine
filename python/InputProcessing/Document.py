@@ -36,6 +36,13 @@ class RawDocument:
         self.name = name
         self.content = content
 
+    
+    def __repr__(self):
+        return f"Document '{self.name}'\n========================\n\n\"{self.content}\""
+    
+    def __iter__(self):
+        return iter(self.token_forms)
+
 
 class TokenizedDocument(RawDocument):
     """Classe représentant un document tokenisé par un processeur. 
@@ -96,7 +103,6 @@ class TokenizedDocument(RawDocument):
             'token_forms',
             'token_sent_inds',
             'sentence_doc_inds',
-            'sentences',
             'cmptr_tokens',
             'token_doc_ind',
             'offset',
@@ -139,7 +145,7 @@ class LemmatizedDocument(TaggedDocument):
         """
 
         # On vérifie l'intégrité des arguments
-        self._check_arguments(TaggedDocument, doc, {'lemma_form'}, **kwargs)
+        self._check_arguments(TaggedDocument, doc, {'lemma_forms'}, **kwargs)
 
         # On met à jour les propriétés de l'objet
         self.__dict__.update(doc.__dict__)

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>inputdata &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+  <title>inputdata_legacy &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -61,7 +61,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Code du module</a></li>
-      <li class="breadcrumb-item active">inputdata</li>
+      <li class="breadcrumb-item active">inputdata_legacy</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -70,7 +70,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Code source de inputdata</h1><div class="highlight"><pre>
+  <h1>Code source de inputdata_legacy</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">mysql.connector</span>
 <span class="kn">from</span> <span class="nn">mysql.connector</span> <span class="kn">import</span> <span class="n">errors</span>
 <span class="kn">import</span> <span class="nn">argparse</span>
@@ -82,13 +82,13 @@
 <span class="kn">import</span> <span class="nn">asyncio</span>
 <span class="kn">from</span> <span class="nn">benchmark</span> <span class="kn">import</span> <span class="n">timeit</span><span class="p">,</span> <span class="n">time</span>
 
-<div class="viewcode-block" id="hash_doc"><a class="viewcode-back" href="../inputdata.html#inputdata.hash_doc">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="hash_doc"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.hash_doc">[docs]</a><span class="nd">@timeit</span>
 <span class="k">def</span> <span class="nf">hash_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">blake2b</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">digest_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">inner_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="transaction"><a class="viewcode-back" href="../inputdata.html#inputdata.transaction">[docs]</a><span class="k">def</span> <span class="nf">transaction</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
+<div class="viewcode-block" id="transaction"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.transaction">[docs]</a><span class="k">def</span> <span class="nf">transaction</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">db</span><span class="p">):</span>
 
     <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
 
@@ -110,7 +110,7 @@
 
     <span class="k">return</span> <span class="n">wrapper</span></div>
 
-<div class="viewcode-block" id="insert_forms"><a class="viewcode-back" href="../inputdata.html#inputdata.insert_forms">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="insert_forms"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.insert_forms">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_forms</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">forms</span><span class="p">):</span>
 
     <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO form (form_chars) VALUES (</span><span class="si">%s</span><span class="s2">) ON DUPLICATE KEY UPDATE form_id=LAST_INSERT_ID(form_id);&quot;</span><span class="p">,</span> <span class="n">forms</span><span class="p">)</span>
@@ -131,7 +131,7 @@
 
     <span class="k">return</span> <span class="n">ids</span></div>
 
-<div class="viewcode-block" id="insert_lemmas"><a class="viewcode-back" href="../inputdata.html#inputdata.insert_lemmas">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="insert_lemmas"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.insert_lemmas">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_lemmas</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">lemma_form_ids</span><span class="p">,</span> <span class="n">lemma_pos</span><span class="p">):</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lemma_form_ids</span><span class="p">,</span> <span class="n">lemma_pos</span><span class="p">)]</span>
@@ -152,7 +152,7 @@
 
     <span class="k">return</span> <span class="n">ids</span></div>
 
-<div class="viewcode-block" id="insert_document"><a class="viewcode-back" href="../inputdata.html#inputdata.insert_document">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="insert_document"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.insert_document">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_document</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">document_name</span><span class="p">,</span> <span class="n">content</span><span class="p">):</span>
     <span class="nb">hash</span> <span class="o">=</span> <span class="n">hash_doc</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 
@@ -170,7 +170,7 @@
         <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;insert into document (document_id, document_name) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="n">document_name</span><span class="p">))</span>
         <span class="k">return</span> <span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="insert_sentences"><a class="viewcode-back" href="../inputdata.html#inputdata.insert_sentences">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="insert_sentences"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.insert_sentences">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_sentences</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">text_id</span><span class="p">,</span> <span class="n">sentence_doc_ind</span><span class="p">):</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">type</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">text_id</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">type</span><span class="p">))]),</span> <span class="n">sentence_doc_ind</span><span class="p">)]</span>
@@ -190,7 +190,7 @@
 
     <span class="k">return</span> <span class="n">ids</span></div>
 
-<div class="viewcode-block" id="insert_tokens"><a class="viewcode-back" href="../inputdata.html#inputdata.insert_tokens">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="insert_tokens"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.insert_tokens">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_tokens</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">token_sent_ind</span><span class="p">,</span> <span class="n">token_doc_ind</span><span class="p">,</span> <span class="n">token_form</span><span class="p">,</span> <span class="n">lemma</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">deprel</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">spaceafter</span><span class="p">):</span>
 
     
@@ -198,14 +198,14 @@
 
     <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) ON DUPLICATE KEY UPDATE token_id=LAST_INSERT_ID(token_id);&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="insert_in_collection"><a class="viewcode-back" href="../inputdata.html#inputdata.insert_in_collection">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="insert_in_collection"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.insert_in_collection">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_in_collection</span><span class="p">(</span><span class="n">cursor</span><span class="p">,</span> <span class="n">user_id</span><span class="p">,</span> <span class="n">document_id</span><span class="p">):</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select documents from user where user_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">user_id</span><span class="p">,))</span>
 
     <span class="n">collection_id</span> <span class="o">=</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;insert into collection_has_document (collection_id, document_id) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) ON DUPLICATE KEY UPDATE collection_id=collection_id&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">collection_id</span><span class="p">,</span> <span class="n">document_id</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="process_file"><a class="viewcode-back" href="../inputdata.html#inputdata.process_file">[docs]</a><span class="nd">@timeit</span>
+<div class="viewcode-block" id="process_file"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.process_file">[docs]</a><span class="nd">@timeit</span>
 <span class="k">async</span> <span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
 
     
@@ -305,7 +305,7 @@
             <span class="n">db</span><span class="o">.</span><span class="n">rollback</span><span class="p">()</span> </div>
 
 
-<div class="viewcode-block" id="init_worker"><a class="viewcode-back" href="../inputdata.html#inputdata.init_worker">[docs]</a><span class="k">def</span> <span class="nf">init_worker</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">escape_table</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
+<div class="viewcode-block" id="init_worker"><a class="viewcode-back" href="../inputdata_legacy.html#inputdata_legacy.init_worker">[docs]</a><span class="k">def</span> <span class="nf">init_worker</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">escape_table</span><span class="p">,</span> <span class="n">user_id</span><span class="p">):</span>
     <span class="k">global</span> <span class="n">CONNECTION</span>
     <span class="n">CONNECTION</span> <span class="o">=</span> <span class="n">connection</span>
 

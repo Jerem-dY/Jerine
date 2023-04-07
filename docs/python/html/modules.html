@@ -51,7 +51,9 @@
 <li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html">inputdata_legacy module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="testUM.html">testUM module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a></li>
@@ -125,8 +127,10 @@
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.close"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.close()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.pipeline"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.pipeline()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.run"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.run()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.DocumentBuilder.toQueue"><code class="docutils literal notranslate"><span class="pre">DocumentBuilder.toQueue()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.DocumentBuilder.init_workers"><code class="docutils literal notranslate"><span class="pre">init_workers()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#inputprocessing-parserinterface-module">InputProcessing.ParserInterface module</a><ul>
@@ -187,6 +191,9 @@
 <li class="toctree-l4"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.UploadTask.process_file"><code class="docutils literal notranslate"><span class="pre">UploadTask.process_file()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="InputProcessing.html#InputProcessing.UploadTask.verbose"><code class="docutils literal notranslate"><span class="pre">verbose()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="InputProcessing.html#module-InputProcessing">Module contents</a><ul>
@@ -202,17 +209,18 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
-<li class="toctree-l1"><a class="reference internal" href="inputdata.html">inputdata module</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.init_worker"><code class="docutils literal notranslate"><span class="pre">init_worker()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_document"><code class="docutils literal notranslate"><span class="pre">insert_document()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_forms"><code class="docutils literal notranslate"><span class="pre">insert_forms()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_in_collection"><code class="docutils literal notranslate"><span class="pre">insert_in_collection()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_lemmas"><code class="docutils literal notranslate"><span class="pre">insert_lemmas()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_sentences"><code class="docutils literal notranslate"><span class="pre">insert_sentences()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.insert_tokens"><code class="docutils literal notranslate"><span class="pre">insert_tokens()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata.html#inputdata.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="inputdata_legacy.html">inputdata_legacy module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.hash_doc"><code class="docutils literal notranslate"><span class="pre">hash_doc()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.init_worker"><code class="docutils literal notranslate"><span class="pre">init_worker()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.insert_document"><code class="docutils literal notranslate"><span class="pre">insert_document()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.insert_forms"><code class="docutils literal notranslate"><span class="pre">insert_forms()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.insert_in_collection"><code class="docutils literal notranslate"><span class="pre">insert_in_collection()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.insert_lemmas"><code class="docutils literal notranslate"><span class="pre">insert_lemmas()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.insert_sentences"><code class="docutils literal notranslate"><span class="pre">insert_sentences()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.insert_tokens"><code class="docutils literal notranslate"><span class="pre">insert_tokens()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.process_file"><code class="docutils literal notranslate"><span class="pre">process_file()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html#inputdata_legacy.transaction"><code class="docutils literal notranslate"><span class="pre">transaction()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="test.html">test module</a><ul>
@@ -224,6 +232,7 @@
 <li class="toctree-l2"><a class="reference internal" href="test.html#test.process_token"><code class="docutils literal notranslate"><span class="pre">process_token()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="testUM.html">testUM module</a></li>
 </ul>
 </div>
 </section>
