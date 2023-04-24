@@ -19,7 +19,7 @@ Python ver. 3.11.1
 from .UploadTask import UploadTask
 import asyncio
 import aiomysql
-from benchmark import timeit
+from tools import timeit
 from .Document import Document
 
 
@@ -29,7 +29,7 @@ class UploadMachine:
     Elle communique directement avec le DocumentBuilder.
     """
 
-    def __init__(self, to_treat: int, user_id: int):
+    def __init__(self, to_treat: int, user_id: int, connection_params: dict):
         """Constructeur de la classe.
 
         :param to_treat: Nombre de documents à traiter
@@ -47,15 +47,8 @@ class UploadMachine:
 
         self.loop = asyncio.get_event_loop()
 
-        self.connection_params = {
-        'host': "localhost",
-        'user': "bourdillat",
-        'password': "Uibbnqkbavs09//",
-        'db': "bourdillat",
-        'loop': self.loop,
-        'autocommit': True
-        }
-        self.connection_pool: aiomysql.Pool = self.loop.run_until_complete(aiomysql.create_pool(**self.connection_params))
+
+        self.connection_pool: aiomysql.Pool = self.loop.run_until_complete(aiomysql.create_pool(**connection_params))
 
     @timeit
     def run(self):

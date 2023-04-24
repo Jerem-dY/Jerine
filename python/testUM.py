@@ -4,17 +4,25 @@ import glob
 import os
 
 
+CONNECTION_PARAMS = {
+        'host': "localhost",
+        'user': "bourdillat",
+        'password': "Uibbnqkbavs09//",
+        'db': "bourdillat"
+        }
+
+
 if __name__ == '__main__':
 
 
     files = glob.glob("testCorpus/*.txt")
 
 
-    machine = UploadMachine(len(files), 3)
+    machine = UploadMachine(len(files), 3, CONNECTION_PARAMS)
     docbuilder = DocumentBuilder(files, machine.queue, ["TXT" for i in files], {
         "tokenizer" : "Spacy",
-        "tagger" : "TreeTagger",
-        "lemmatizer" : "TreeTagger", 
+        "tagger" : "Spacy",
+        "lemmatizer" : "Spacy", 
         "dependency_analyzer" : "Spacy"
     })
 

@@ -14,6 +14,8 @@ Python ver. 3.11.1
 '''
 
 from typing import Callable
+from tools import chunks_iter
+from itertools import islice
 
 #TODO : ajouter en arguments au constructeur les données attendues (après les avoir retravaillé)
 
@@ -169,3 +171,31 @@ class Document(LemmatizedDocument):
         # On met à jour les propriétés de l'objet
         self.__dict__.update(doc.__dict__)
         self.__dict__.update(kwargs)
+
+
+    def chunk(self, size: int) -> list[dict]:
+
+        data = []
+        keys = []
+        out_docs = []
+        obj = self.__dict__
+
+        for key in obj:
+            if type(obj[key]) is list:
+                data.append(chunks_iter(obj[key], size))
+            else:
+                data.append([obj[key]]*obj['cmptr_tokens'])
+            keys.append(key)
+
+        for doc in zip(*data):
+
+            out_docs.append({})
+
+            for key, value in zip(keys, doc):
+
+                if type(value) is islice:
+                    out_docs[-1][key] = list(value)
+                else:
+                    out_docs[-1][key] = value
+        
+        return out_docs

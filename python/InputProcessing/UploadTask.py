@@ -16,11 +16,11 @@ Python ver. 3.11.1
 '''
 
 
-import asyncio
 import aiomysql
 import hashlib
 import textwrap
 import itertools
+import traceback
 from typing import Callable
 from .Document import Document
 
@@ -36,7 +36,9 @@ def transaction(func: Callable):
     async def wrapper(self: 'UploadTask', *args, **kwargs):
 
         async with self.pool.acquire() as conn:
+                #await conn.autocommit(True)
             async with conn.cursor(aiomysql.SSCursor) as cur:
+                await cur.execute("SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;")
                 out = await func(self, cur, *args, **kwargs)
                 await conn.commit()
         
@@ -62,7 +64,7 @@ def verbose(func: Callable):
         
         except Exception as e:
             if VERBOSE:
-                error = textwrap.indent(str(e), '\t> ')
+                error = textwrap.indent(str(e)+'\n'+str(traceback.format_exc()), '\t> ')
                 print(f"§ [{self.document.name:<40}]\t{func.__name__:<20}\t❌ ({error})\n")
 
 
@@ -111,25 +113,45 @@ class UploadTask:
         document_id, is_in_db = await self.insert_document()
         await self.insert_in_collection(document_id)
 
+        if is_in_db:
+            print(f"§ [{self.document.name:<12}]\tDEJA DANS LA BASE. ⏹")
+            return
+
         async with self.forms_lock:
             token_form_ids = await self.insert_forms(self.document.token_forms)
             lemma_form_ids = await self.insert_forms(self.document.lemma_forms)
 
-        async with self.lemmas_lock:
-            lemma_ids = await self.insert_lemmas(lemma_form_ids, self.document.lemma_pos)
+            async with self.lemmas_lock:
+                lemma_ids = await self.insert_lemmas(lemma_form_ids, self.document.lemma_pos)
         
         async with self.sentences_lock:
             sentence_ids = await self.insert_sentences(document_id, list(dict.fromkeys(self.document.sentence_doc_inds)))
 
 
+        
+        current_local = self.document.sentence_doc_inds[0]
+        ids = iter(sentence_ids)
+        current_global = next(ids)
+        sentences = [current_global]
+
+        for ind in self.document.sentence_doc_inds:
+            if current_local != ind:
+                current_local = ind
+                current_global = next(ids)
+
+            sentences.append(current_global)
+
+
+
+
         # token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter
-        async with self.tokens_lock:
+        async with self.tokens_lock, self.forms_lock:
 
             await self.insert_tokens(self.document.token_sent_inds, 
                                      self.document.token_doc_ind, 
                                      token_form_ids, 
                                      lemma_ids, 
-                                     self.document.sentence_doc_inds, 
+                                     sentences, 
                                      self.document.deprels, 
                                      self.document.heads, 
                                      self.document.offset, 
@@ -227,7 +249,7 @@ class UploadTask:
         """
 
         data = [i for i in zip(itertools.repeat("DEC", len(sentence_doc_ind)), itertools.repeat(text_id, len(sentence_doc_ind)), sentence_doc_ind)]
-        await cursor.executemany("INSERT INTO sentence (type, text_id, sentence_doc_ind) VALUES (%s, %s, %s) ON DUPLICATE KEY UPDATE sentence_id=LAST_INSERT_ID(sentence_id);", data)
+        await cursor.executemany("INSERT INTO sentence (type, text_id, sentence_doc_ind) VALUES (%s, %s, %s);", data)
         
         ids = []
 
@@ -252,8 +274,7 @@ class UploadTask:
 
         data = [i for i in zip(token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter)]
 
-        await cursor.executemany("INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s) ON DUPLICATE KEY UPDATE token_id=LAST_INSERT_ID(token_id);", data)
+        await cursor.executemany("INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s);", data)
 
 
         
-

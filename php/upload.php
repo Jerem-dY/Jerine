@@ -81,6 +81,22 @@ if($size > 1000000){
  * Etape 4 : on upload les fichiers à traiter.
  *  
  * */
+
+ // Volé ici : https://stackoverflow.com/questions/46842606/how-to-convert-a-file-to-utf-8-in-php
+ function convert_to_utf8($source) {
+
+    $content=file_get_contents($source);
+    # detect original encoding
+    $original_encoding=mb_detect_encoding($content, null, true);
+    # now convert
+    if ($original_encoding!='UTF-8') {
+        $content=mb_convert_encoding($content, 'UTF-8', $original_encoding);
+        echo "<br/>Fichier '".$file['name']."' converti en utf-8.<br/>";
+    }
+    $bom=chr(239) . chr(187) . chr(191); # use BOM to be on safe side
+    file_put_contents($source, $bom.$content);
+}
+
 $to_delete = array();
 
 foreach ($_FILES as $file) {
@@ -89,7 +105,8 @@ foreach ($_FILES as $file) {
 
     if (move_uploaded_file($file['tmp_name'], $target_path)) {
         array_push($to_delete, $target_path);
-        chmod($target_path, 0777);
+        //chmod($target_path, 0777);
+        convert_to_utf8($target_path);
         echo "<br/>File '".$file['name']."' is valid, and was successfully uploaded at '".$target_path."'.<br/>";
     } else {
         echo "<br/>Possible file upload attack! File '".$file['name']."' not uploaded.<br/>";
@@ -127,7 +144,10 @@ foreach($types as $t){
 $cmd = $cmd."2>&1";
 
 $process_out = exec($cmd, $return);
-print_r($return);
+
+foreach($return as $line){
+    echo $line."<br/>";
+}
 
 
 if($process_out != 0){

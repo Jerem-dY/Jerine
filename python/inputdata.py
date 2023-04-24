@@ -1,10 +1,14 @@
 import argparse
-import os
-from multiprocessing import Pool
-import asyncio
-from benchmark import timeit, time
 from InputProcessing.UploadMachine import *
 from InputProcessing.DocumentBuilder import *
+
+
+CONNECTION_PARAMS = {
+        'host': "localhost",
+        'user': "bourdillat",
+        'password': "Uibbnqkbavs09//",
+        'db': "bourdillat"
+        }
 
 
 
@@ -17,7 +21,8 @@ if __name__ == "__main__":
     argparser.add_argument('-u', "--user", help="ID de l'utilisateur.", type=int, default=None, nargs=1)
     args = argparser.parse_args()
 
-    machine = UploadMachine(len(args.input), args.user[0])
+
+    machine = UploadMachine(len(args.input), args.user[0], CONNECTION_PARAMS)
     docbuilder = DocumentBuilder(args.input, machine.queue, args.types, {k:v for k,v in zip(["tokenizer", "tagger", "lemmatizer", "dependency_analyzer"], args.processors)})
 
 

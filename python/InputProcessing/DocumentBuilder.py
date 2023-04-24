@@ -19,7 +19,7 @@ Python ver. 3.11.1
 from threading import Thread
 from concurrent import futures
 from time import sleep
-from benchmark import timeit
+from tools import timeit
 from asyncio import Queue, get_event_loop
 from .Parsers import *
 from .Processors import *
