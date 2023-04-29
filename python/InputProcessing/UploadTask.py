@@ -128,20 +128,11 @@ class UploadTask:
             sentence_ids = await self.insert_sentences(document_id, list(dict.fromkeys(self.document.sentence_doc_inds)))
 
 
-        
-        current_local = self.document.sentence_doc_inds[0]
-        ids = iter(sentence_ids)
-        current_global = next(ids)
-        sentences = [current_global]
+        # On attribue à chaque token l'id de la phrase à laquelle il appartient
+        sentences = []
 
-        for ind in self.document.sentence_doc_inds:
-            if current_local != ind:
-                current_local = ind
-                current_global = next(ids)
-
-            sentences.append(current_global)
-
-
+        for id, gr in zip(sentence_ids, [list(g) for k, g in itertools.groupby(self.document.sentence_doc_inds)]):
+            sentences += list(itertools.repeat(id, len(gr)))
 
 
         # token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter

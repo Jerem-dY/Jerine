@@ -104,19 +104,19 @@ class DocumentBuilder(Thread):
 
 
         # Tokenisation : 
-        if isinstance(doc, RawDocument):
+        if type(doc) is RawDocument:
             doc = PROCESSORS["tokenizer"].tokenize(doc)
 
         # Etiquetage :
-        if isinstance(doc, TokenizedDocument):
+        if type(doc) is TokenizedDocument:
             doc = PROCESSORS["tagger"].tag(doc)
 
         # Lemmatisation :
-        if isinstance(doc, TaggedDocument):
+        if type(doc) is TaggedDocument:
             doc = PROCESSORS["lemmatizer"].lemmatize(doc)
 
         # Analyse syntaxique :
-        if isinstance(doc, LemmatizedDocument):
+        if type(doc) is LemmatizedDocument:
             doc = PROCESSORS["dependency_analyzer"].deprel(doc)
                 
 

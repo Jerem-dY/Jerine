@@ -75,7 +75,9 @@ class Overlay{
             success : (function(result, status){
 
                 this.parsers = result;
+                Overlay.accepted_types = this.parsers.map(x => x.parser)
                 result.forEach(el => $("#selectType").append("<option value=\"" + el["parser"] + "\">" + el["parser"] + "</option>").selectmenu('refresh'));
+                
             }.bind(this)),
             error : function(response, status, errorType){
                 Overlay.accepted_types.forEach(function(el){$("#selectType").append("<option value=\"" + el + "\">" + el + "</option>");});
@@ -341,7 +343,6 @@ class Overlay{
         this.alertSize.hide();
 
         let size = 0;
-        let hasTxt = false;
         let error = false;
 
         for(let i=0; i < this.table.rows()[0].length; i++){
@@ -358,9 +359,9 @@ class Overlay{
                 $(this.table.row(i).node()).removeClass("ui-state-error");
             }
 
-            if(this.table.cell(i, 2).data() == "TXT"){
+            /*if(this.table.cell(i, 2).data() == "TXT"){
                 hasTxt = true;
-            }
+            }*/
         }
 
         if(size > Overlay.max_size){
@@ -378,7 +379,7 @@ class Overlay{
             $(".ui-dialog-buttonpane button:contains('Ajouter')").button('enable');
         }
 
-        if(!hasTxt){
+        if(this.table.rows()[0].length <= 0){
             this.processors.controlgroup('disable');
         }
         else{
