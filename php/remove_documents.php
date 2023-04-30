@@ -13,9 +13,6 @@ if(!(isset($_SESSION) && isset($_SESSION["user_id"]) && isset($_POST["document_i
 $collection_id = $_POST['collection_id'];
 $document_ids = json_decode($_POST["document_ids"], true);
 
-echo "ids : ";
-print_r($document_ids);
-
 /* Construction de la requête */
 //TODO: valider les données d'entrée pour éviter les injections
 $query = "DELETE FROM collection_has_document

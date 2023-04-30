@@ -91,7 +91,7 @@ class LeftPannel{
                         contentType: false,
                         processData: false,
                         success : (function(result, status){
-                            window.location.href = window.location.href;
+                            window.location.href = window.location.href; // On recharge la page
                             
                         }).bind(this),
                         error : (function(response, status, errorType){
