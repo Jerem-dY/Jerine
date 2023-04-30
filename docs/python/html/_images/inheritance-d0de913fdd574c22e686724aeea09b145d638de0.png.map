@@ -1,4 +1,0 @@
-<map id="inheritance705e9e70f2" name="inheritance705e9e70f2">
-<area shape="rect" id="node1" href="InputProcessing.html#InputProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
-<area shape="rect" id="node2" href="#InputProcessing.Processors.Hops.Hops" target="_top" title="Hops" alt="" coords="57,79,129,104"/>
-</map>

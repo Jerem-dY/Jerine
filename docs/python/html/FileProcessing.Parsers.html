@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FileProcessing.Parsers package &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="FileProcessing.Processors package" href="FileProcessing.Processors.html" />
+    <link rel="prev" title="FileProcessing package" href="FileProcessing.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bourdillat-Adjoudj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">python</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="FileProcessing.html">FileProcessing package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="FileProcessing.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FileProcessing.Parsers package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="FileProcessing.Processors.html">FileProcessing.Processors package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-document-module">FileProcessing.Document module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-documentbuilder-module">FileProcessing.DocumentBuilder module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-parserinterfaces-module">FileProcessing.ParserInterfaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-processorinterfaces-module">FileProcessing.ProcessorInterfaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadmachine-module">FileProcessing.UploadMachine module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadtask-module">FileProcessing.UploadTask module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#module-FileProcessing">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_producers.html">generate_producers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputdata.html">outputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_conllu.html">test_conllu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools module</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="FileProcessing.html">FileProcessing package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="FileProcessing.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FileProcessing.Parsers package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fileprocessing-parsers-conllu-module">FileProcessing.Parsers.CoNLLU module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fileprocessing-parsers-txt-module">FileProcessing.Parsers.TXT module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-FileProcessing.Parsers">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.Processors.html">FileProcessing.Processors package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-document-module">FileProcessing.Document module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-documentbuilder-module">FileProcessing.DocumentBuilder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-parserinterfaces-module">FileProcessing.ParserInterfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-processorinterfaces-module">FileProcessing.ProcessorInterfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadmachine-module">FileProcessing.UploadMachine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadtask-module">FileProcessing.UploadTask module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#module-FileProcessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bourdillat-Adjoudj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">python</a></li>
+          <li class="breadcrumb-item"><a href="FileProcessing.html">FileProcessing package</a></li>
+      <li class="breadcrumb-item active">FileProcessing.Parsers package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/FileProcessing.Parsers.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fileprocessing-parsers-package">
+<h1>FileProcessing.Parsers package<a class="headerlink" href="#fileprocessing-parsers-package" title="Lien permanent vers cette rubrique"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers cette rubrique"></a></h2>
+</section>
+<section id="fileprocessing-parsers-conllu-module">
+<h2>FileProcessing.Parsers.CoNLLU module<a class="headerlink" href="#fileprocessing-parsers-conllu-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-0f9ea5452eb1825c600bbfc533d8e84edbc99278.png" alt="Inheritance diagram of FileProcessing.Parsers.CoNLLU" usemap="#inheritance1a2767f65c" class="inheritance graphviz" /></div>
+<map id="inheritance1a2767f65c" name="inheritance1a2767f65c">
+<area shape="rect" id="node1" href="#FileProcessing.Parsers.CoNLLU.CoNLLU" target="_top" title="CoNLLU" alt="" coords="103,79,176,104"/>
+<area shape="rect" id="node2" href="FileProcessing.html#FileProcessing.ParserInterfaces.ParserInterface" target="_top" title="Interface visant à implémenter un parser de fichier d&#39;un certain type." alt="" coords="5,5,124,31"/>
+<area shape="rect" id="node3" href="FileProcessing.html#FileProcessing.ParserInterfaces.ProducerInterface" target="_top" title="Interface visant à implémenter un traitement des données dans la DB pour une sortie textuelle spécifique." alt="" coords="148,5,283,31"/>
+</map><span class="target" id="module-FileProcessing.Parsers.CoNLLU"></span><section id="informations-generales">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#informations-generales" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
+Projet de fin de semestre</p>
+<p>Le parser et producer “CoNLLU” permet :
+- de traiter un fichier CoNLL-U en entrée
+- de fournir une sortie d’un texte (tout ou partie) au format CoNLL-U</p>
+<p>Le format CoNLL-U est détaillé ici : <a class="reference external" href="https://universaldependencies.org/format.html">https://universaldependencies.org/format.html</a></p>
+</section>
+<section id="informations-sur-le-module">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#informations-sur-le-module" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FileProcessing.Parsers.CoNLLU.</span></span><span class="sig-name descname"><span class="pre">CoNLLU</span></span><a class="reference internal" href="_modules/FileProcessing/Parsers/CoNLLU.html#CoNLLU"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="FileProcessing.html#FileProcessing.ParserInterfaces.ParserInterface" title="FileProcessing.ParserInterfaces.ParserInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParserInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ParserInterfaces.ProducerInterface" title="FileProcessing.ParserInterfaces.ProducerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ProducerInterface</span></code></a></p>
+<dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <code class="xref py py-class docutils literal notranslate"><span class="pre">IntEnum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.DEPREL">
+<span class="sig-name descname"><span class="pre">DEPREL</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">7</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.DEPREL" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.DEPS">
+<span class="sig-name descname"><span class="pre">DEPS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">8</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.DEPS" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.FEATS">
+<span class="sig-name descname"><span class="pre">FEATS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.FEATS" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.FORM">
+<span class="sig-name descname"><span class="pre">FORM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.FORM" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.HEAD">
+<span class="sig-name descname"><span class="pre">HEAD</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.HEAD" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.ID">
+<span class="sig-name descname"><span class="pre">ID</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.ID" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.LEMMA">
+<span class="sig-name descname"><span class="pre">LEMMA</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.LEMMA" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.MISC">
+<span class="sig-name descname"><span class="pre">MISC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">9</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.MISC" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.UPOS">
+<span class="sig-name descname"><span class="pre">UPOS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">3</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.UPOS" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.XPOS">
+<span class="sig-name descname"><span class="pre">XPOS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">4</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.Columns.XPOS" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.extensions">
+<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['conllu',</span> <span class="pre">'csv',</span> <span class="pre">'tsv']</span></em><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.extensions" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.Document" title="FileProcessing.Document.Document"><span class="pre">Document</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Parsers/CoNLLU.html#CoNLLU.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.parse" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant le parsing d’un fichier d’un certain type, pour le préparer au traitement et à l’upload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txt</strong> (<em>str</em>) – Le contenu brut du fichier</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – le nom du document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document, soit brut, soit déjà traité à un certain niveau</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.CoNLLU.CoNLLU.produce">
+<span class="sig-name descname"><span class="pre">produce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="_modules/FileProcessing/Parsers/CoNLLU.html#CoNLLU.produce"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Parsers.CoNLLU.CoNLLU.produce" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode traitant les données préalablement récupérées de la base de données pour les mettre en forme en une sortie textuelle</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>data</strong> (<em>list</em>) – les données de la DB, en liste de phrases à traiter</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>une mise en forme textuelle des données récupérées</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="fileprocessing-parsers-txt-module">
+<h2>FileProcessing.Parsers.TXT module<a class="headerlink" href="#fileprocessing-parsers-txt-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-6430a0479ebc8fa4c8b0230d7551d3f06771e0cc.png" alt="Inheritance diagram of FileProcessing.Parsers.TXT" usemap="#inheritance0d07cb9b35" class="inheritance graphviz" /></div>
+<map id="inheritance0d07cb9b35" name="inheritance0d07cb9b35">
+<area shape="rect" id="node1" href="FileProcessing.html#FileProcessing.ParserInterfaces.ParserInterface" target="_top" title="Interface visant à implémenter un parser de fichier d&#39;un certain type." alt="" coords="5,5,124,31"/>
+<area shape="rect" id="node2" href="#FileProcessing.Parsers.TXT.TXT" target="_top" title="TXT" alt="" coords="29,79,101,104"/>
+</map><span class="target" id="module-FileProcessing.Parsers.TXT"></span><section id="id1">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
+Projet de fin de semestre</p>
+<p>Le parser et producer “TXT” permet :
+- de traiter un fichier texte brut en entrée
+- de fournir une reconstitution du texte brut (tout ou partie) en sortie</p>
+</section>
+<section id="id2">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id2" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.TXT.TXT">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FileProcessing.Parsers.TXT.</span></span><span class="sig-name descname"><span class="pre">TXT</span></span><a class="reference internal" href="_modules/FileProcessing/Parsers/TXT.html#TXT"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Parsers.TXT.TXT" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="FileProcessing.html#FileProcessing.ParserInterfaces.ParserInterface" title="FileProcessing.ParserInterfaces.ParserInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">ParserInterface</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.TXT.TXT._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#FileProcessing.Parsers.TXT.TXT._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.TXT.TXT.extensions">
+<span class="sig-name descname"><span class="pre">extensions</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">['txt',</span> <span class="pre">'']</span></em><a class="headerlink" href="#FileProcessing.Parsers.TXT.TXT.extensions" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Parsers.TXT.TXT.parse">
+<span class="sig-name descname"><span class="pre">parse</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">txt</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.RawDocument" title="FileProcessing.Document.RawDocument"><span class="pre">RawDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Parsers/TXT.html#TXT.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Parsers.TXT.TXT.parse" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant le parsing d’un fichier d’un certain type, pour le préparer au traitement et à l’upload.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txt</strong> (<em>str</em>) – Le contenu brut du fichier</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – le nom du document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document, soit brut, soit déjà traité à un certain niveau</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p>Any</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-FileProcessing.Parsers">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-FileProcessing.Parsers" title="Lien permanent vers cette rubrique"></a></h2>
+<section id="id3">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id3" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
+Projet de fin de semestre</p>
+<p>Ce package regroupe les parsers de fichiers d’entrée pour différents types comm texte brut, XML, CoNLL-U, etc.</p>
+</section>
+<section id="id4">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id4" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="FileProcessing.html" class="btn btn-neutral float-left" title="FileProcessing package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="FileProcessing.Processors.html" class="btn btn-neutral float-right" title="FileProcessing.Processors package" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jérémy Bourdillat &amp; Inès Adjoudj.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FileProcessing.Parsers.CoNLLU &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/translations.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Bourdillat-Adjoudj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../modules.html">python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FileProcessing.html">FileProcessing package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Bourdillat-Adjoudj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">FileProcessing.Parsers.CoNLLU</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de FileProcessing.Parsers.CoNLLU</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">INFORMATIONS GENERALES</span>
+<span class="sd">=========================================================================</span>
+<span class="sd">Cours de Python - M1 Sciences du Langage parcours Industries de la Langue</span>
+<span class="sd">Projet de fin de semestre</span>
+
+<span class="sd">Le parser et producer &#39;CoNLLU&#39; permet :</span>
+<span class="sd">- de traiter un fichier CoNLL-U en entrée</span>
+<span class="sd">- de fournir une sortie d&#39;un texte (tout ou partie) au format CoNLL-U</span>
+
+<span class="sd">Le format CoNLL-U est détaillé ici : https://universaldependencies.org/format.html</span>
+
+<span class="sd">INFORMATIONS SUR LE MODULE</span>
+<span class="sd">=========================================================================</span>
+<span class="sd">:auteur: Jérémy Bourdillat &lt;Jeremy.Bourdillat@etu.univ-grenoble-alpes.fr&gt;</span>
+<span class="sd">:version: 1.0</span>
+<span class="sd">Python ver. 3.11.1</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">ParserInterfaces</span>
+<span class="kn">from</span> <span class="nn">..Document</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">enum</span> <span class="kn">import</span> <span class="n">IntEnum</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<div class="viewcode-block" id="CoNLLU"><a class="viewcode-back" href="../../../FileProcessing.Parsers.html#FileProcessing.Parsers.CoNLLU.CoNLLU">[docs]</a><span class="k">class</span> <span class="nc">CoNLLU</span><span class="p">(</span><span class="n">ParserInterfaces</span><span class="o">.</span><span class="n">ParserInterface</span><span class="p">,</span> <span class="n">ParserInterfaces</span><span class="o">.</span><span class="n">ProducerInterface</span><span class="p">):</span>
+
+    <span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;conllu&quot;</span><span class="p">,</span> <span class="s2">&quot;csv&quot;</span><span class="p">,</span> <span class="s2">&quot;tsv&quot;</span><span class="p">]</span>
+
+
+    <span class="n">Columns</span> <span class="o">=</span> <span class="n">IntEnum</span><span class="p">(</span><span class="s1">&#39;Columns&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;ID&#39;</span><span class="p">,</span> <span class="s1">&#39;FORM&#39;</span><span class="p">,</span> <span class="s1">&#39;LEMMA&#39;</span><span class="p">,</span> <span class="s1">&#39;UPOS&#39;</span><span class="p">,</span> <span class="s1">&#39;XPOS&#39;</span><span class="p">,</span> <span class="s1">&#39;FEATS&#39;</span><span class="p">,</span> <span class="s1">&#39;HEAD&#39;</span><span class="p">,</span> <span class="s1">&#39;DEPREL&#39;</span><span class="p">,</span> <span class="s1">&#39;DEPS&#39;</span><span class="p">,</span> <span class="s1">&#39;MISC&#39;</span><span class="p">],</span> <span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="CoNLLU.parse"><a class="viewcode-back" href="../../../FileProcessing.Parsers.html#FileProcessing.Parsers.CoNLLU.CoNLLU.parse">[docs]</a>    <span class="k">def</span> <span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Document</span><span class="p">:</span>
+
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">RawDocument</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">txt</span><span class="p">)</span>
+
+        <span class="n">sentences</span> <span class="o">=</span> <span class="n">doc</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">tokenized_doc_data</span> <span class="o">=</span> <span class="p">{</span>
+           <span class="s1">&#39;token_forms&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;token_sent_inds&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;sentence_doc_inds&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;cmptr_tokens&#39;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;token_doc_ind&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;offset&#39;</span> <span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;spaceafter&#39;</span> <span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="n">is_tagged</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">tagged_doc_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;lemma_pos&#39;</span> <span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="n">is_lemmatized</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">lemmatized_doc_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;lemma_forms&#39;</span> <span class="p">:</span> <span class="p">[]</span>
+        <span class="p">}</span>
+
+        <span class="n">is_analysed</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">full_doc_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;deprels&#39;</span> <span class="p">:</span> <span class="p">[],</span> <span class="s1">&#39;heads&#39;</span> <span class="p">:</span> <span class="p">[]}</span>
+
+        <span class="k">for</span> <span class="n">i_sent</span><span class="p">,</span> <span class="n">sent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sentences</span><span class="p">):</span>
+
+            <span class="k">for</span> <span class="n">i_line</span><span class="p">,</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sent</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)):</span>
+
+                <span class="k">if</span> <span class="n">l</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span> <span class="ow">or</span> <span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;#&#39;</span><span class="p">:</span>
+                    <span class="k">continue</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">l</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">10</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fichier CoNLLU &#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; - erreur phrase </span><span class="si">{</span><span class="n">i_sent</span><span class="si">}</span><span class="s2"> : mauvais nombre de colonnes (</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="si">}</span><span class="s2">) ligne </span><span class="si">{</span><span class="n">i_line</span><span class="si">}</span><span class="s2"> : </span><span class="se">\n</span><span class="si">{</span><span class="n">l</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        <span class="k">continue</span>
+
+                    <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;token_forms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">FORM</span><span class="p">])</span>
+                    <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;token_sent_inds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">ID</span><span class="p">])</span>
+                    <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;sentence_doc_inds&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i_sent</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;cmptr_tokens&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;token_doc_ind&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;cmptr_tokens&#39;</span><span class="p">])</span>
+
+
+                    <span class="c1">### Spaceafter</span>
+
+                    <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;spaceafter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span> <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;SpaceAfter=No&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">MISC</span><span class="p">])</span> <span class="o">!=</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">1</span><span class="p">)</span>
+
+                    <span class="c1">### Offset</span>
+
+                    <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">:=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;TokenRange=([0-9]+):[0-9]+&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">MISC</span><span class="p">]))</span> <span class="o">!=</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="c1"># Si l&#39;offset est spécifié dans le fichier CoNLLU :</span>
+
+                        <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)))</span>
+
+                    <span class="k">elif</span> <span class="n">i_sent</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">i_line</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="c1"># Si l&#39;offset n&#39;est pas spécifié et que l&#39;on n&#39;est pas sur le premier token :</span>
+
+                        <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                            <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;token_forms&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;spaceafter&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+                            <span class="p">)</span>
+                        
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tokenized_doc_data</span><span class="p">[</span><span class="s1">&#39;offset&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+                    <span class="c1">### POS</span>
+
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">UPOS</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+                        <span class="n">is_tagged</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">tagged_doc_data</span><span class="p">[</span><span class="s2">&quot;lemma_pos&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">UPOS</span><span class="p">])</span>
+
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">tagged_doc_data</span><span class="p">[</span><span class="s2">&quot;lemma_pos&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">)</span>
+
+                    <span class="c1">### LEMMA</span>
+
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">LEMMA</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+                        <span class="n">is_lemmatized</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">lemmatized_doc_data</span><span class="p">[</span><span class="s1">&#39;lemma_forms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">LEMMA</span><span class="p">])</span>
+
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">lemmatized_doc_data</span><span class="p">[</span><span class="s1">&#39;lemma_forms&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+
+                    <span class="c1">### DEPRELS</span>
+
+                    <span class="k">if</span> <span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">DEPREL</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span> <span class="ow">and</span> <span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">HEAD</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;_&#39;</span><span class="p">:</span>
+                        <span class="n">is_analysed</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="n">full_doc_data</span><span class="p">[</span><span class="s1">&#39;deprels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">DEPREL</span><span class="p">])</span>
+                        <span class="n">full_doc_data</span><span class="p">[</span><span class="s1">&#39;heads&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">CoNLLU</span><span class="o">.</span><span class="n">Columns</span><span class="o">.</span><span class="n">HEAD</span><span class="p">])</span>
+
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">full_doc_data</span><span class="p">[</span><span class="s1">&#39;deprels&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;dep&quot;</span><span class="p">)</span>
+                        <span class="n">full_doc_data</span><span class="p">[</span><span class="s1">&#39;heads&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+
+        <span class="n">doc</span> <span class="o">=</span> <span class="n">TokenizedDocument</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="o">**</span><span class="n">tokenized_doc_data</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_tagged</span><span class="p">:</span>
+            <span class="n">doc</span> <span class="o">=</span> <span class="n">TaggedDocument</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="o">**</span><span class="n">tagged_doc_data</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">is_lemmatized</span><span class="p">:</span>
+                <span class="n">doc</span> <span class="o">=</span> <span class="n">LemmatizedDocument</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="o">**</span><span class="n">lemmatized_doc_data</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">is_analysed</span><span class="p">:</span>
+                    <span class="n">doc</span> <span class="o">=</span> <span class="n">Document</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="o">**</span><span class="n">full_doc_data</span><span class="p">)</span>
+
+        
+        <span class="k">return</span> <span class="n">doc</span></div>
+
+<div class="viewcode-block" id="CoNLLU.produce"><a class="viewcode-back" href="../../../FileProcessing.Parsers.html#FileProcessing.Parsers.CoNLLU.CoNLLU.produce">[docs]</a>    <span class="k">def</span> <span class="nf">produce</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="s2">&quot;&quot;</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jérémy Bourdillat &amp; Inès Adjoudj.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

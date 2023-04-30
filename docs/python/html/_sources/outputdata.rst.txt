@@ -1,0 +1,7 @@
+outputdata module
+=================
+
+.. automodule:: outputdata
+   :members:
+   :undoc-members:
+   :show-inheritance:

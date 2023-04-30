@@ -11,7 +11,7 @@ Welcome to Bourdillat-Adjoudj's documentation!
    :caption: Contents:
    
    modules
-   InputProcessing
+   FileProcessing
       Processors
 	  Parsers
 

@@ -1,8 +1,8 @@
 import sys
 import inspect
 import json
-from InputProcessing.Parsers import *
-from InputProcessing.ParserInterface import ParserInterface
+from FileProcessing.Parsers import *
+from FileProcessing.ParserInterfaces import ParserInterface
 
 
 if __name__ == "__main__":

@@ -4,7 +4,6 @@ include("connexion.php");
 include("start_session.php");
 
 
-
 $normalizeChars = array(
     'Š'=>'S', 'š'=>'s', 'Ð'=>'Dj','Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A',
     'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E', 'Ê'=>'E', 'Ë'=>'E', 'Ì'=>'I', 'Í'=>'I', 'Î'=>'I',
@@ -128,7 +127,7 @@ echo "<br/>Files tranferred.<br/>";
 
 //print_r($return);
 
-$cmd = "/home/IdL/2022/bourdillat/miniconda3/envs/website/bin/python3.9 ../python/inputdata.py";
+$cmd = $PYTHON_PATH." ../python/inputdata.py";
 
 foreach($to_delete as $f){
     $cmd = $cmd." '".$f."'";

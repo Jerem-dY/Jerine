@@ -1,4 +1,4 @@
-from InputProcessing.Parsers import CoNLLU
+from FileProcessing.Parsers import CoNLLU
 import re
 
 
@@ -34,30 +34,31 @@ doc = conllu.parse(content, "test.txt")
 
 print()"""
 
+if __name__ == "__main__":
 
-with open(r"D:\documents\COURS\Master IDL\M1\S2\Programmation Web et base de données pour le TAL\TEST CORPORA\corpus 3\contes_bruns_balzac.txt", 
-          mode="r", encoding="utf-8") as f:
-    ct = f.read()
+    with open(r"D:\documents\COURS\Master IDL\M1\S2\Programmation Web et base de données pour le TAL\TEST CORPORA\corpus 3\contes_bruns_balzac.txt", 
+            mode="r", encoding="utf-8") as f:
+        ct = f.read()
 
-    sentences = tokenizeRegex(ct, grm_sents, grm)
-    output = ""
+        sentences = tokenizeRegex(ct, grm_sents, grm)
+        output = ""
 
-    for i, sent in enumerate(sentences, 1):
+        for i, sent in enumerate(sentences, 1):
 
-        print(f"phrase {i} / {len(sentences)}")
+            print(f"phrase {i} / {len(sentences)}")
 
-        if len(sent) != 0:
+            if len(sent) != 0:
 
-            output += "# sent_id = " + str(i) + '\n'
+                output += "# sent_id = " + str(i) + '\n'
 
-            for j, tok in enumerate(sent, 1):
-                output += str(j) + '\t' + tok + "\t_\t_\t_\t_\t_\t_\t_\t_" + '\n'
+                for j, tok in enumerate(sent, 1):
+                    output += str(j) + '\t' + tok + "\t_\t_\t_\t_\t_\t_\t_\t_" + '\n'
 
-            output += '\n'
+                output += '\n'
 
 
-    with open(r"D:\documents\COURS\Master IDL\M1\S2\Programmation Web et base de données pour le TAL\TEST CORPORA\corpus 3\contes_bruns_balzac.conllu", 
-              mode="w", encoding="utf-8") as f:
-        f.write(output)
+        with open(r"D:\documents\COURS\Master IDL\M1\S2\Programmation Web et base de données pour le TAL\TEST CORPORA\corpus 3\contes_bruns_balzac.conllu", 
+                mode="w", encoding="utf-8") as f:
+            f.write(output)
 
-    print("Done! :)")
+        print("Done! :)")

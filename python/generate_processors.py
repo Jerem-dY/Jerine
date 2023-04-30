@@ -1,8 +1,8 @@
 import sys
 import inspect
 import json
-from InputProcessing.Processors import *
-from InputProcessing import ProcessorInterfaces
+from FileProcessing.Processors import *
+from FileProcessing import ProcessorInterfaces
 
 
 if __name__ == "__main__":

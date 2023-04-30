@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FileProcessing.UploadTask &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+        <script src="../../_static/translations.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Recherche" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Bourdillat-Adjoudj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules.html">python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FileProcessing.html">FileProcessing package</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Bourdillat-Adjoudj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Code du module</a></li>
+      <li class="breadcrumb-item active">FileProcessing.UploadTask</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Code source de FileProcessing.UploadTask</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">INFORMATIONS GENERALES</span>
+<span class="sd">=========================================================================</span>
+<span class="sd">Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  </span>
+<span class="sd">Projet de fin de semestre  </span>
+
+<span class="sd">Module contenant la classe UploadTask destinée à l&#39;UploadMachine.</span>
+
+<span class="sd">INFORMATIONS SUR LE MODULE</span>
+<span class="sd">=========================================================================</span>
+<span class="sd">:auteur: Jérémy Bourdillat &lt;Jeremy.Bourdillat@etu.univ-grenoble-alpes.fr&gt;</span>
+<span class="sd">:version: 1.0</span>
+<span class="sd">Python ver. 3.11.1</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="kn">import</span> <span class="nn">aiomysql</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">textwrap</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">.Document</span> <span class="kn">import</span> <span class="n">Document</span>
+
+
+<span class="n">VERBOSE</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="hash_doc"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.hash_doc">[docs]</a><span class="k">def</span> <span class="nf">hash_doc</span><span class="p">(</span><span class="n">doc</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">hashlib</span><span class="o">.</span><span class="n">blake2b</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="n">digest_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">inner_size</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">(),</span> <span class="mi">16</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="transaction"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.transaction">[docs]</a><span class="k">def</span> <span class="nf">transaction</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;UploadTask&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">pool</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span> <span class="k">as</span> <span class="n">conn</span><span class="p">:</span>
+                <span class="c1">#await conn.autocommit(True)</span>
+            <span class="k">async</span> <span class="k">with</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">(</span><span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">)</span> <span class="k">as</span> <span class="n">cur</span><span class="p">:</span>
+                <span class="k">await</span> <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SET SESSION TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;&quot;</span><span class="p">)</span>
+                <span class="n">out</span> <span class="o">=</span> <span class="k">await</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cur</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">await</span> <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+    
+
+
+<div class="viewcode-block" id="verbose"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.verbose">[docs]</a><span class="k">def</span> <span class="nf">verbose</span><span class="p">(</span><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
+
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">:</span> <span class="s1">&#39;UploadTask&#39;</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="n">VERBOSE</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;§ [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;40</span><span class="si">}</span><span class="s2">]</span><span class="se">\t</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="se">\t</span><span class="s2">❔&quot;</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">out</span> <span class="o">=</span> <span class="k">await</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">VERBOSE</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;§ [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;40</span><span class="si">}</span><span class="s2">]</span><span class="se">\t</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="se">\t</span><span class="s2">👍&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">out</span>
+        
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">VERBOSE</span><span class="p">:</span>
+                <span class="n">error</span> <span class="o">=</span> <span class="n">textwrap</span><span class="o">.</span><span class="n">indent</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()),</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&gt; &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;§ [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;40</span><span class="si">}</span><span class="s2">]</span><span class="se">\t</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">:</span><span class="s2">&lt;20</span><span class="si">}</span><span class="se">\t</span><span class="s2">❌ (</span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2">)</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+        
+    
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+<div class="viewcode-block" id="UploadTask"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask">[docs]</a><span class="k">class</span> <span class="nc">UploadTask</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Classe représentant une tâche de mise en ligne d&#39;un document dans la base de données.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">user_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">doc</span><span class="p">:</span> <span class="n">Document</span><span class="p">,</span> <span class="n">pool</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">Pool</span><span class="p">,</span> <span class="n">forms_lock</span><span class="p">,</span> <span class="n">lemmas_lock</span><span class="p">,</span> <span class="n">sentences_lock</span><span class="p">,</span> <span class="n">tokens_lock</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructeur de la classe.</span>
+
+<span class="sd">        :param doc: Le document finalisé à mettre en ligne</span>
+<span class="sd">        :type doc: Document</span>
+<span class="sd">        :param forms_lock: Le lock des formes de l&#39;UploadMachine partagé entre les tâches</span>
+<span class="sd">        :type forms_lock: _type_</span>
+<span class="sd">        :param lemmas_lock: Le lock des lemmes de l&#39;UploadMachine partagé entre les tâches</span>
+<span class="sd">        :type lemmas_lock: _type_</span>
+<span class="sd">        :param sentences_lock: Le lock des phrases de l&#39;UploadMachine partagé entre les tâches</span>
+<span class="sd">        :type sentences_lock: _type_</span>
+<span class="sd">        :param tokens_lock: Le lock des tokens de l&#39;UploadMachine partagé entre les tâches</span>
+<span class="sd">        :type tokens_lock: _type_</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="n">user_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="p">:</span> <span class="n">Document</span> <span class="o">=</span> <span class="n">doc</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">forms_lock</span> <span class="o">=</span> <span class="n">forms_lock</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">lemmas_lock</span> <span class="o">=</span> <span class="n">lemmas_lock</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sentences_lock</span> <span class="o">=</span> <span class="n">sentences_lock</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tokens_lock</span> <span class="o">=</span> <span class="n">tokens_lock</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">pool</span> <span class="o">=</span> <span class="n">pool</span>
+
+
+<div class="viewcode-block" id="UploadTask.process_file"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.process_file">[docs]</a>    <span class="k">async</span> <span class="k">def</span> <span class="nf">process_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode principale permettant la mise en ligne du document.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;### [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">]</span><span class="se">\t</span><span class="s2">DEMARRE. ⭕&quot;</span><span class="p">)</span>
+
+        <span class="n">document_id</span><span class="p">,</span> <span class="n">is_in_db</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_document</span><span class="p">()</span>
+        <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_in_collection</span><span class="p">(</span><span class="n">document_id</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">is_in_db</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;§ [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">]</span><span class="se">\t</span><span class="s2">DEJA DANS LA BASE. ⏹&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms_lock</span><span class="p">:</span>
+            <span class="n">token_form_ids</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_forms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">token_forms</span><span class="p">)</span>
+            <span class="n">lemma_form_ids</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_forms</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">lemma_forms</span><span class="p">)</span>
+
+            <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">lemmas_lock</span><span class="p">:</span>
+                <span class="n">lemma_ids</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_lemmas</span><span class="p">(</span><span class="n">lemma_form_ids</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">lemma_pos</span><span class="p">)</span>
+        
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">sentences_lock</span><span class="p">:</span>
+            <span class="n">sentence_ids</span> <span class="o">=</span> <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_sentences</span><span class="p">(</span><span class="n">document_id</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">dict</span><span class="o">.</span><span class="n">fromkeys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">sentence_doc_inds</span><span class="p">)))</span>
+
+
+        <span class="c1"># On attribue à chaque token l&#39;id de la phrase à laquelle il appartient</span>
+        <span class="n">sentences</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="nb">id</span><span class="p">,</span> <span class="n">gr</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sentence_ids</span><span class="p">,</span> <span class="p">[</span><span class="nb">list</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">sentence_doc_inds</span><span class="p">)]):</span>
+            <span class="n">sentences</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">gr</span><span class="p">)))</span>
+
+
+        <span class="c1"># token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter</span>
+        <span class="k">async</span> <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokens_lock</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">forms_lock</span><span class="p">:</span>
+
+            <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_tokens</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">token_sent_inds</span><span class="p">,</span> 
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">token_doc_ind</span><span class="p">,</span> 
+                                     <span class="n">token_form_ids</span><span class="p">,</span> 
+                                     <span class="n">lemma_ids</span><span class="p">,</span> 
+                                     <span class="n">sentences</span><span class="p">,</span> 
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">deprels</span><span class="p">,</span> 
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">heads</span><span class="p">,</span> 
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">offset</span><span class="p">,</span> 
+                                     <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">spaceafter</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;§ [</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;12</span><span class="si">}</span><span class="s2">]</span><span class="se">\t</span><span class="s2">TERMINE. ✅&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="UploadTask.insert_document"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.insert_document">[docs]</a>    <span class="nd">@transaction</span>
+    <span class="nd">@verbose</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode effectuant l&#39;insertion du document dans la table &quot;document&quot; de la base de données.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">hash</span> <span class="o">=</span> <span class="n">hash_doc</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+
+        <span class="c1"># On vérifie si le document a déjà été uploadé par le passé :</span>
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select document_id from document where document_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">hash</span><span class="p">,))</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="c1"># Si le document est déjà dans la base de données :</span>
+        <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="p">[]:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;insert into document (document_id, document_name) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+            <span class="k">return</span> <span class="p">(</span><span class="nb">hash</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span></div>
+        
+
+<div class="viewcode-block" id="UploadTask.insert_in_collection"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.insert_in_collection">[docs]</a>    <span class="nd">@transaction</span>
+    <span class="nd">@verbose</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_in_collection</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">,</span> <span class="n">document_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode effectuant l&#39;insertion du document dans le champ &quot;documents&quot; d&#39;un utilisateur de la base de données.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;select documents from user where user_id = </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user_id</span><span class="p">,))</span>
+        <span class="n">collection_id</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;insert into collection_has_document (collection_id, document_id) values (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) ON DUPLICATE KEY UPDATE collection_id=collection_id&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">collection_id</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">document_id</span><span class="p">))</span></div>
+        
+
+<div class="viewcode-block" id="UploadTask.insert_forms"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.insert_forms">[docs]</a>    <span class="nd">@transaction</span>
+    <span class="nd">@verbose</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_forms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">,</span> <span class="n">forms</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode effectuant l&#39;insertion des formes du document dans la table &quot;form&quot; de la base de données.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO form (form_chars) VALUES (</span><span class="si">%s</span><span class="s2">) ON DUPLICATE KEY UPDATE form_id=LAST_INSERT_ID(form_id);&quot;</span><span class="p">,</span> <span class="n">forms</span><span class="p">)</span>
+        
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">forms</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT form_id FROM form WHERE form_chars = </span><span class="si">%s</span><span class="s2">;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+            
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="p">[]:</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1">#ids = list(range(cursor.lastrowid-len(forms), cursor.lastrowid+1))</span>
+
+
+        <span class="k">return</span> <span class="n">ids</span></div>
+
+
+<div class="viewcode-block" id="UploadTask.insert_lemmas"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.insert_lemmas">[docs]</a>    <span class="nd">@transaction</span>
+    <span class="nd">@verbose</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_lemmas</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">,</span> <span class="n">lemma_form_ids</span><span class="p">,</span> <span class="n">lemma_pos</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode effectuant l&#39;insertion des lemmes du document dans la table &quot;lemma&quot; de la base de données.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">lemma_form_ids</span><span class="p">,</span> <span class="n">lemma_pos</span><span class="p">)]</span>
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO lemma (lemma_form, pos) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) ON DUPLICATE KEY UPDATE lemma_id=LAST_INSERT_ID(lemma_id);&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT lemma_id FROM lemma WHERE lemma_form = </span><span class="si">%s</span><span class="s2"> AND pos = </span><span class="si">%s</span><span class="s2">;&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="p">[]:</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        
+        <span class="c1">#ids = list(range(cursor.lastrowid-len(lemma_pos), cursor.lastrowid+1))</span>
+
+        <span class="k">return</span> <span class="n">ids</span></div>
+
+
+<div class="viewcode-block" id="UploadTask.insert_sentences"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.insert_sentences">[docs]</a>    <span class="nd">@transaction</span> 
+    <span class="nd">@verbose</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_sentences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">,</span> <span class="n">text_id</span><span class="p">,</span> <span class="n">sentence_doc_ind</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode effectuant l&#39;insertion des phrases du document dans la table &quot;sentence&quot; de la base de données.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="s2">&quot;DEC&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence_doc_ind</span><span class="p">)),</span> <span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">text_id</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence_doc_ind</span><span class="p">)),</span> <span class="n">sentence_doc_ind</span><span class="p">)]</span>
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO sentence (type, text_id, sentence_doc_ind) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+        
+        <span class="n">ids</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SELECT sentence_id FROM sentence WHERE text_id = </span><span class="si">%s</span><span class="s2"> AND sentence_doc_ind = </span><span class="si">%s</span><span class="s2">;&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">text_id</span><span class="p">,</span> <span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">result</span> <span class="o">!=</span> <span class="p">[]:</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ids</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1">#ids = list(range(cursor.lastrowid, cursor.lastrowid+len(sentence_doc_ind)))</span>
+
+        <span class="k">return</span> <span class="n">ids</span></div>
+
+
+<div class="viewcode-block" id="UploadTask.insert_tokens"><a class="viewcode-back" href="../../FileProcessing.html#FileProcessing.UploadTask.UploadTask.insert_tokens">[docs]</a>    <span class="nd">@transaction</span>        
+    <span class="nd">@verbose</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="nf">insert_tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">aiomysql</span><span class="o">.</span><span class="n">SSCursor</span><span class="p">,</span> <span class="n">token_sent_ind</span><span class="p">,</span> <span class="n">token_doc_ind</span><span class="p">,</span> <span class="n">token_form</span><span class="p">,</span> <span class="n">lemma</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">deprel</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">spaceafter</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Méthode effectuant l&#39;insertion des tokens du document dans la table &quot;token&quot; de la base de données.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">token_sent_ind</span><span class="p">,</span> <span class="n">token_doc_ind</span><span class="p">,</span> <span class="n">token_form</span><span class="p">,</span> <span class="n">lemma</span><span class="p">,</span> <span class="n">sentence</span><span class="p">,</span> <span class="n">deprel</span><span class="p">,</span> <span class="n">head</span><span class="p">,</span> <span class="n">offset</span><span class="p">,</span> <span class="n">spaceafter</span><span class="p">)]</span>
+
+        <span class="k">await</span> <span class="n">cursor</span><span class="o">.</span><span class="n">executemany</span><span class="p">(</span><span class="s2">&quot;INSERT INTO token (token_sent_ind, token_doc_ind, token_form, lemma, sentence, deprel, head, offset, spaceafter) VALUES (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">);&quot;</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></div></div>
+
+
+        
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jérémy Bourdillat &amp; Inès Adjoudj.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+FileProcessing.Processors package
+=================================
+
+Submodules
+----------
+
+FileProcessing.Processors.Hops module
+-------------------------------------
+
+.. inheritance-diagram:: FileProcessing.Processors.Hops
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Processors.Hops
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.Processors.NLTK module
+-------------------------------------
+
+.. inheritance-diagram:: FileProcessing.Processors.NLTK
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Processors.NLTK
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.Processors.Spacy module
+--------------------------------------
+
+.. inheritance-diagram:: FileProcessing.Processors.Spacy
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Processors.Spacy
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.Processors.TreeTagger module
+-------------------------------------------
+
+.. inheritance-diagram:: FileProcessing.Processors.TreeTagger
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Processors.TreeTagger
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: FileProcessing.Processors
+   :members:
+   :undoc-members:
+   :show-inheritance:

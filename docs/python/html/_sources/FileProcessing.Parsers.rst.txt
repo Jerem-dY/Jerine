@@ -1,0 +1,37 @@
+FileProcessing.Parsers package
+==============================
+
+Submodules
+----------
+
+FileProcessing.Parsers.CoNLLU module
+------------------------------------
+
+.. inheritance-diagram:: FileProcessing.Parsers.CoNLLU
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Parsers.CoNLLU
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.Parsers.TXT module
+---------------------------------
+
+.. inheritance-diagram:: FileProcessing.Parsers.TXT
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Parsers.TXT
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: FileProcessing.Parsers
+   :members:
+   :undoc-members:
+   :show-inheritance:

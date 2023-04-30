@@ -1,0 +1,7 @@
+generate\_producers module
+==========================
+
+.. automodule:: generate_producers
+   :members:
+   :undoc-members:
+   :show-inheritance:

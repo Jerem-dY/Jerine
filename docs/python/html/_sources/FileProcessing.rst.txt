@@ -1,0 +1,94 @@
+FileProcessing package
+======================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   FileProcessing.Parsers
+   FileProcessing.Processors
+
+Submodules
+----------
+
+FileProcessing.Document module
+------------------------------
+
+.. inheritance-diagram:: FileProcessing.Document
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.Document
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.DocumentBuilder module
+-------------------------------------
+
+.. inheritance-diagram:: FileProcessing.DocumentBuilder
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.DocumentBuilder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.ParserInterfaces module
+--------------------------------------
+
+.. inheritance-diagram:: FileProcessing.ParserInterfaces
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.ParserInterfaces
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.ProcessorInterfaces module
+-----------------------------------------
+
+.. inheritance-diagram:: FileProcessing.ProcessorInterfaces
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.ProcessorInterfaces
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.UploadMachine module
+-----------------------------------
+
+.. inheritance-diagram:: FileProcessing.UploadMachine
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.UploadMachine
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+FileProcessing.UploadTask module
+--------------------------------
+
+.. inheritance-diagram:: FileProcessing.UploadTask
+   :parts: 1
+   
+
+.. automodule:: FileProcessing.UploadTask
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: FileProcessing
+   :members:
+   :undoc-members:
+   :show-inheritance:

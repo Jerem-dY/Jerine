@@ -20,8 +20,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
-    <link rel="next" title="inputdata_legacy module" href="inputdata_legacy.html" />
-    <link rel="prev" title="generate_processors module" href="generate_processors.html" /> 
+    <link rel="next" title="outputdata module" href="outputdata.html" />
+    <link rel="prev" title="generate_producers module" href="generate_producers.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -46,17 +46,21 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">python</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a></li>
-<li class="toctree-l2"><a class="reference internal" href="benchmark.html">benchmark module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html">FileProcessing package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">inputdata module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="inputdata_legacy.html">inputdata_legacy module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="test.html">test module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="testUM.html">testUM module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_producers.html">generate_producers module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">inputdata module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#informations-generales">INFORMATIONS GENERALES</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#informations-sur-le-module">INFORMATIONS SUR LE MODULE</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="InputProcessing.html">InputProcessing package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputdata.html">outputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_conllu.html">test_conllu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FileProcessing.html">FileProcessing package</a></li>
 </ul>
 
         </div>
@@ -86,14 +90,34 @@
              
   <section id="module-inputdata">
 <span id="inputdata-module"></span><h1>inputdata module<a class="headerlink" href="#module-inputdata" title="Lien permanent vers cette rubrique"></a></h1>
+<section id="informations-generales">
+<h2>INFORMATIONS GENERALES<a class="headerlink" href="#informations-generales" title="Lien permanent vers cette rubrique"></a></h2>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
+Projet de fin de semestre</p>
+<p>Ce module est appelé par un script PHP pour traiter les fichiers temporairements stockés sur le serveur et les mettre en ligne dans la base de données.
+Il est appelé de la manière suivante : <cite>python inputdata.py test.txt truc.conllu -u 1 -p Spacy Spacy Spacy Spacy -t TXT CoNLLU</cite>, c’est-à-dire 
+<cite>python inputdata.py [fichiers] -u [ID utilisateur] -p [tokenizer, tagger, lemmatizer, dependency parser] -t [type de chaque fichier]</cite></p>
+</section>
+<section id="informations-sur-le-module">
+<h2>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#informations-sur-le-module" title="Lien permanent vers cette rubrique"></a></h2>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
 </section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
-        <a href="generate_processors.html" class="btn btn-neutral float-left" title="generate_processors module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
-        <a href="inputdata_legacy.html" class="btn btn-neutral float-right" title="inputdata_legacy module" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="generate_producers.html" class="btn btn-neutral float-left" title="generate_producers module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="outputdata.html" class="btn btn-neutral float-right" title="outputdata module" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

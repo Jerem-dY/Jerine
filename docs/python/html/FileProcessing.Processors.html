@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FileProcessing.Processors package &mdash; Documentation Bourdillat-Adjoudj 1.0</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/translations.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="generate_parsers module" href="generate_parsers.html" />
+    <link rel="prev" title="FileProcessing.Parsers package" href="FileProcessing.Parsers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Bourdillat-Adjoudj
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">python</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="FileProcessing.html">FileProcessing package</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="FileProcessing.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="FileProcessing.Parsers.html">FileProcessing.Parsers package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">FileProcessing.Processors package</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-document-module">FileProcessing.Document module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-documentbuilder-module">FileProcessing.DocumentBuilder module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-parserinterfaces-module">FileProcessing.ParserInterfaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-processorinterfaces-module">FileProcessing.ProcessorInterfaces module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadmachine-module">FileProcessing.UploadMachine module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadtask-module">FileProcessing.UploadTask module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.html#module-FileProcessing">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="generate_parsers.html">generate_parsers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_processors.html">generate_processors module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generate_producers.html">generate_producers module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="inputdata.html">inputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="outputdata.html">outputdata module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="test_conllu.html">test_conllu module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools.html">tools module</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="FileProcessing.html">FileProcessing package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="FileProcessing.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="FileProcessing.Parsers.html">FileProcessing.Parsers package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FileProcessing.Processors package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fileprocessing-processors-hops-module">FileProcessing.Processors.Hops module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fileprocessing-processors-nltk-module">FileProcessing.Processors.NLTK module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fileprocessing-processors-spacy-module">FileProcessing.Processors.Spacy module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fileprocessing-processors-treetagger-module">FileProcessing.Processors.TreeTagger module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-FileProcessing.Processors">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-document-module">FileProcessing.Document module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-documentbuilder-module">FileProcessing.DocumentBuilder module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-parserinterfaces-module">FileProcessing.ParserInterfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-processorinterfaces-module">FileProcessing.ProcessorInterfaces module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadmachine-module">FileProcessing.UploadMachine module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#fileprocessing-uploadtask-module">FileProcessing.UploadTask module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FileProcessing.html#module-FileProcessing">Module contents</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Bourdillat-Adjoudj</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">python</a></li>
+          <li class="breadcrumb-item"><a href="FileProcessing.html">FileProcessing package</a></li>
+      <li class="breadcrumb-item active">FileProcessing.Processors package</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/FileProcessing.Processors.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fileprocessing-processors-package">
+<h1>FileProcessing.Processors package<a class="headerlink" href="#fileprocessing-processors-package" title="Lien permanent vers cette rubrique"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Lien permanent vers cette rubrique"></a></h2>
+</section>
+<section id="fileprocessing-processors-hops-module">
+<h2>FileProcessing.Processors.Hops module<a class="headerlink" href="#fileprocessing-processors-hops-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-7cf6cdfe176b1c3e27fb48ffb8c026d3a37c6d1a.png" alt="Inheritance diagram of FileProcessing.Processors.Hops" usemap="#inheritancee4240bf072" class="inheritance graphviz" /></div>
+<map id="inheritancee4240bf072" name="inheritancee4240bf072">
+<area shape="rect" id="node1" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node2" href="#FileProcessing.Processors.Hops.Hops" target="_top" title="Hops" alt="" coords="57,79,129,104"/>
+</map><span class="target" id="module-FileProcessing.Processors.Hops"></span><dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Hops.Hops">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FileProcessing.Processors.Hops.</span></span><span class="sig-name descname"><span class="pre">Hops</span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Hops.html#Hops"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Hops.Hops" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" title="FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Hops.Hops._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#FileProcessing.Processors.Hops.Hops._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Hops.Hops.deprel">
+<span class="sig-name descname"><span class="pre">deprel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.Document" title="FileProcessing.Document.Document"><span class="pre">Document</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Hops.html#Hops.deprel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Hops.Hops.deprel" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’analyse syntaxique des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><em>LemmatizedDocument</em></a>) – le document lemmatisé à analyser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document analysé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.Document" title="FileProcessing.Document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="fileprocessing-processors-nltk-module">
+<h2>FileProcessing.Processors.NLTK module<a class="headerlink" href="#fileprocessing-processors-nltk-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-9576c3fa246db3e679ea7bc6ded1926e25c31ec9.png" alt="Inheritance diagram of FileProcessing.Processors.NLTK" usemap="#inheritance22253c43fc" class="inheritance graphviz" /></div>
+<map id="inheritance22253c43fc" name="inheritance22253c43fc">
+<area shape="rect" id="node1" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node2" href="#FileProcessing.Processors.NLTK.NLTK" target="_top" title="NLTK" alt="" coords="238,79,310,104"/>
+<area shape="rect" id="node3" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="205,5,343,31"/>
+<area shape="rect" id="node4" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="368,5,513,31"/>
+</map><span class="target" id="module-FileProcessing.Processors.NLTK"></span><section id="informations-generales">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#informations-generales" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant les processeurs NLTK (tokenisation, étiquetage, lemmatisation et analyse syntaxique en dépendances).</p>
+</section>
+<section id="informations-sur-le-module">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#informations-sur-le-module" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Processors.NLTK.NLTK">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FileProcessing.Processors.NLTK.</span></span><span class="sig-name descname"><span class="pre">NLTK</span></span><a class="reference internal" href="_modules/FileProcessing/Processors/NLTK.html#NLTK"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.NLTK.NLTK" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.TokenizerInterface" title="FileProcessing.ProcessorInterfaces.TokenizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.PosTaggerInterface" title="FileProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" title="FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Processors.NLTK.NLTK._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#FileProcessing.Processors.NLTK.NLTK._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.NLTK.NLTK.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FileProcessing/Processors/NLTK.html#NLTK.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.NLTK.NLTK.close" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.NLTK.NLTK.deprel">
+<span class="sig-name descname"><span class="pre">deprel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">&lt;module</span> <span class="pre">'FileProcessing.Document'</span> <span class="pre">from</span> <span class="pre">'D:\\documents\\COURS\\Master</span> <span class="pre">IDL\\M1\\S2\\Programmation</span> <span class="pre">Web</span> <span class="pre">et</span> <span class="pre">base</span> <span class="pre">de</span> <span class="pre">données</span> <span class="pre">pour</span> <span class="pre">le</span> <span class="pre">TAL\\projet\\python\\FileProcessing\\Document.py'&gt;</span></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/NLTK.html#NLTK.deprel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.NLTK.NLTK.deprel" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’analyse syntaxique des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><em>LemmatizedDocument</em></a>) – le document lemmatisé à analyser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document analysé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.Document" title="FileProcessing.Document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.NLTK.NLTK.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/NLTK.html#NLTK.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.NLTK.NLTK.tag" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’étiquetage des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><em>TokenizedDocument</em></a>) – Le document tokenisé à étiqueter</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document étiqueté</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument">TaggedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.NLTK.NLTK.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.RawDocument" title="FileProcessing.Document.RawDocument"><span class="pre">RawDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/NLTK.html#NLTK.tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.NLTK.NLTK.tokenize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la tokenisation d’un texte brut (y compris la segmentation en phrase)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txt</strong> (<em>str</em>) – Le texte brut à tokeniser</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – le nom du document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document tokenisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument">TokenizedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="fileprocessing-processors-spacy-module">
+<h2>FileProcessing.Processors.Spacy module<a class="headerlink" href="#fileprocessing-processors-spacy-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-606c3b08a7e434dae2c959b27c9206a64c38ea6f.png" alt="Inheritance diagram of FileProcessing.Processors.Spacy" usemap="#inheritancef4ce3075ce" class="inheritance graphviz" /></div>
+<map id="inheritancef4ce3075ce" name="inheritancef4ce3075ce">
+<area shape="rect" id="node1" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;analyse syntaxique en dépendances. Nécessite de définir la méthode &#39;deprel&#39; dans la classe fille." alt="" coords="5,5,180,31"/>
+<area shape="rect" id="node4" href="#FileProcessing.Processors.Spacy.Spacy" target="_top" title="Spacy" alt="" coords="333,79,405,104"/>
+<area shape="rect" id="node2" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="205,5,359,31"/>
+<area shape="rect" id="node3" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="384,5,529,31"/>
+<area shape="rect" id="node5" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.TokenizerInterface" target="_top" title="Interface visant à implémenter un processeur de tokenisation. Nécessite de définir la méthode &#39;tokenize&#39; dans la classe fille." alt="" coords="554,5,693,31"/>
+</map><span class="target" id="module-FileProcessing.Processors.Spacy"></span><dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Spacy.Spacy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FileProcessing.Processors.Spacy.</span></span><span class="sig-name descname"><span class="pre">Spacy</span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Spacy.html#Spacy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Spacy.Spacy" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.TokenizerInterface" title="FileProcessing.ProcessorInterfaces.TokenizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">TokenizerInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.PosTaggerInterface" title="FileProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.LemmatizerInterface" title="FileProcessing.ProcessorInterfaces.LemmatizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface" title="FileProcessing.ProcessorInterfaces.DeprelAnalyzerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeprelAnalyzerInterface</span></code></a></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Spacy.Spacy._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#FileProcessing.Processors.Spacy.Spacy._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Spacy.Spacy.deprel">
+<span class="sig-name descname"><span class="pre">deprel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">&lt;module</span> <span class="pre">'FileProcessing.Document'</span> <span class="pre">from</span> <span class="pre">'D:\\documents\\COURS\\Master</span> <span class="pre">IDL\\M1\\S2\\Programmation</span> <span class="pre">Web</span> <span class="pre">et</span> <span class="pre">base</span> <span class="pre">de</span> <span class="pre">données</span> <span class="pre">pour</span> <span class="pre">le</span> <span class="pre">TAL\\projet\\python\\FileProcessing\\Document.py'&gt;</span></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Spacy.html#Spacy.deprel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Spacy.Spacy.deprel" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’analyse syntaxique des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><em>LemmatizedDocument</em></a>) – le document lemmatisé à analyser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document analysé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.Document" title="FileProcessing.Document.Document">Document</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Spacy.Spacy.lemmatize">
+<span class="sig-name descname"><span class="pre">lemmatize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Spacy.html#Spacy.lemmatize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Spacy.Spacy.lemmatize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la lemmatisation des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><em>TaggedDocument</em></a>) – le document étiqueté à lemmatiser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document lemmatisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument">LemmatizedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Spacy.Spacy.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Spacy.html#Spacy.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Spacy.Spacy.tag" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’étiquetage des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><em>TokenizedDocument</em></a>) – Le document tokenisé à étiqueter</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document étiqueté</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument">TaggedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.Spacy.Spacy.tokenize">
+<span class="sig-name descname"><span class="pre">tokenize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.RawDocument" title="FileProcessing.Document.RawDocument"><span class="pre">RawDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/Spacy.html#Spacy.tokenize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.Spacy.Spacy.tokenize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la tokenisation d’un texte brut (y compris la segmentation en phrase)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>txt</strong> (<em>str</em>) – Le texte brut à tokeniser</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – le nom du document</p></li>
+</ul>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document tokenisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument">TokenizedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="fileprocessing-processors-treetagger-module">
+<h2>FileProcessing.Processors.TreeTagger module<a class="headerlink" href="#fileprocessing-processors-treetagger-module" title="Lien permanent vers cette rubrique"></a></h2>
+<div class="graphviz"><img src="_images/inheritance-0ddcb6c1396e33f2f21170f8fefe43abed6b696e.png" alt="Inheritance diagram of FileProcessing.Processors.TreeTagger" usemap="#inheritance35f79699ea" class="inheritance graphviz" /></div>
+<map id="inheritance35f79699ea" name="inheritance35f79699ea">
+<area shape="rect" id="node1" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.LemmatizerInterface" target="_top" title="Interface visant à implémenter un processeur de lemmatisation. Nécessite de définir la méthode &#39;lemmatize&#39; dans la classe fille." alt="" coords="5,5,160,31"/>
+<area shape="rect" id="node3" href="#FileProcessing.Processors.TreeTagger.TreeTagger" target="_top" title="Classe représentant les processeurs utilisables pour l&#39;outil TreeTagger." alt="" coords="122,79,217,104"/>
+<area shape="rect" id="node2" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.PosTaggerInterface" target="_top" title="Interface visant à implémenter un processeur d&#39;étiquetage morphosyntaxique. Nécessite de définir la méthode &#39;tag&#39; dans la classe fille." alt="" coords="185,5,330,31"/>
+</map><span class="target" id="module-FileProcessing.Processors.TreeTagger"></span><section id="id1">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id1" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue  
+Projet de fin de semestre</p>
+<p>Module contenant les processeurs TreeTagger (tokenisation, étiquetage, lemmatisation).
+L’usage de la tokenisation est déconseillé car TreeTagger ne segmente pas en phrase, ainsi tout le texte sera casé dans une seule et même phrase.</p>
+</section>
+<section id="id2">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id2" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+<dl class="py class">
+<dt class="sig sig-object py" id="FileProcessing.Processors.TreeTagger.TreeTagger">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">FileProcessing.Processors.TreeTagger.</span></span><span class="sig-name descname"><span class="pre">TreeTagger</span></span><a class="reference internal" href="_modules/FileProcessing/Processors/TreeTagger.html#TreeTagger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.TreeTagger.TreeTagger" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Bases : <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.PosTaggerInterface" title="FileProcessing.ProcessorInterfaces.PosTaggerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">PosTaggerInterface</span></code></a>, <a class="reference internal" href="FileProcessing.html#FileProcessing.ProcessorInterfaces.LemmatizerInterface" title="FileProcessing.ProcessorInterfaces.LemmatizerInterface"><code class="xref py py-class docutils literal notranslate"><span class="pre">LemmatizerInterface</span></code></a></p>
+<p>Classe représentant les processeurs utilisables pour l’outil TreeTagger.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="FileProcessing.Processors.TreeTagger.TreeTagger._abc_impl">
+<span class="sig-name descname"><span class="pre">_abc_impl</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">&lt;_abc._abc_data</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#FileProcessing.Processors.TreeTagger.TreeTagger._abc_impl" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.TreeTagger.TreeTagger._convert_tagset">
+<span class="sig-name descname"><span class="pre">_convert_tagset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tags</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/FileProcessing/Processors/TreeTagger.html#TreeTagger._convert_tagset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.TreeTagger.TreeTagger._convert_tagset" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.TreeTagger.TreeTagger.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/FileProcessing/Processors/TreeTagger.html#TreeTagger.close"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.TreeTagger.TreeTagger.close" title="Lien permanent vers cette définition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.TreeTagger.TreeTagger.lemmatize">
+<span class="sig-name descname"><span class="pre">lemmatize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument"><span class="pre">LemmatizedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/TreeTagger.html#TreeTagger.lemmatize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.TreeTagger.TreeTagger.lemmatize" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant la lemmatisation des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><em>TaggedDocument</em></a>) – le document étiqueté à lemmatiser</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document lemmatisé</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.LemmatizedDocument" title="FileProcessing.Document.LemmatizedDocument">LemmatizedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="FileProcessing.Processors.TreeTagger.TreeTagger.tag">
+<span class="sig-name descname"><span class="pre">tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">document</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><span class="pre">TokenizedDocument</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument"><span class="pre">TaggedDocument</span></a></span></span><a class="reference internal" href="_modules/FileProcessing/Processors/TreeTagger.html#TreeTagger.tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#FileProcessing.Processors.TreeTagger.TreeTagger.tag" title="Lien permanent vers cette définition"></a></dt>
+<dd><p>Méthode permettant l’étiquetage des tokens du document fourni.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Paramètres<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>document</strong> (<a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TokenizedDocument" title="FileProcessing.Document.TokenizedDocument"><em>TokenizedDocument</em></a>) – Le document tokenisé à étiqueter</p>
+</dd>
+<dt class="field-even">Lève<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – si la fonction n’a pas été implémentée par la classe fille</p>
+</dd>
+<dt class="field-odd">Renvoie<span class="colon">:</span></dt>
+<dd class="field-odd"><p>le document étiqueté</p>
+</dd>
+<dt class="field-even">Type renvoyé<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="FileProcessing.html#FileProcessing.Document.TaggedDocument" title="FileProcessing.Document.TaggedDocument">TaggedDocument</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-FileProcessing.Processors">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-FileProcessing.Processors" title="Lien permanent vers cette rubrique"></a></h2>
+<section id="id3">
+<h3>INFORMATIONS GENERALES<a class="headerlink" href="#id3" title="Lien permanent vers cette rubrique"></a></h3>
+<p>Cours de Python - M1 Sciences du Langage parcours Industries de la Langue
+Projet de fin de semestre</p>
+<p>Ce package regroupe les wrappers de traitement pour divers systèmes comme spaCy, HOPS, stanza, etc.</p>
+</section>
+<section id="id4">
+<h3>INFORMATIONS SUR LE MODULE<a class="headerlink" href="#id4" title="Lien permanent vers cette rubrique"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">auteur<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Jérémy Bourdillat &lt;<a class="reference external" href="mailto:Jeremy&#46;Bourdillat&#37;&#52;&#48;etu&#46;univ-grenoble-alpes&#46;fr">Jeremy<span>&#46;</span>Bourdillat<span>&#64;</span>etu<span>&#46;</span>univ-grenoble-alpes<span>&#46;</span>fr</a>&gt;</p>
+</dd>
+<dt class="field-even">version<span class="colon">:</span></dt>
+<dd class="field-even"><p>1.0</p>
+</dd>
+</dl>
+<p>Python ver. 3.11.1</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="FileProcessing.Parsers.html" class="btn btn-neutral float-left" title="FileProcessing.Parsers package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="generate_parsers.html" class="btn btn-neutral float-right" title="generate_parsers module" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Jérémy Bourdillat &amp; Inès Adjoudj.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

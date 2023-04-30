@@ -2,6 +2,7 @@
 
 
 include("start_session.php");
+include("env.php");
 
 if(!(isset($_SESSION) && isset($_SESSION["user_id"]))){
     print "<br/>Required tokens were not provided. Aborting.<br/>";
@@ -9,7 +10,7 @@ if(!(isset($_SESSION) && isset($_SESSION["user_id"]))){
     exit;
 }
 
-$cmd = "/home/IdL/2022/bourdillat/miniconda3/envs/website/bin/python3.9 ../python/generate_processors.py 2>&1";
+$cmd = $PYTHON_PATH." ../python/generate_processors.py 2>&1";
 $process_out = exec($cmd, $return);
 
 echo $return[0];

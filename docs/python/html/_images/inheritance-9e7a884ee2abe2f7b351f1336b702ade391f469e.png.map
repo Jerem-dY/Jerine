@@ -1,0 +1,7 @@
+<map id="inheritanced84392aac5" name="inheritanced84392aac5">
+<area shape="rect" id="node1" href="#FileProcessing.Document.Document" target="_top" title="Classe représentant un document tokenisé, étiqueté, lemmatisé et analysé syntaxiquement par des processeurs." alt="" coords="45,299,135,324"/>
+<area shape="rect" id="node2" href="#FileProcessing.Document.LemmatizedDocument" target="_top" title="Classe représentant un document tokenisé, étiqueté et lemmatisé par des processeurs." alt="" coords="5,225,175,251"/>
+<area shape="rect" id="node3" href="#FileProcessing.Document.TaggedDocument" target="_top" title="Classe représentant un document tokenisé et étiqueté par des processeurs." alt="" coords="22,152,158,177"/>
+<area shape="rect" id="node4" href="#FileProcessing.Document.RawDocument" target="_top" title="Classe représentant un document brut." alt="" coords="33,5,147,31"/>
+<area shape="rect" id="node5" href="#FileProcessing.Document.TokenizedDocument" target="_top" title="Classe représentant un document tokenisé par un processeur. " alt="" coords="13,79,167,104"/>
+</map>

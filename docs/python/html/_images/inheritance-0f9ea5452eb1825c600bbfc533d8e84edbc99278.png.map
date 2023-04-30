@@ -1,0 +1,5 @@
+<map id="inheritance1a2767f65c" name="inheritance1a2767f65c">
+<area shape="rect" id="node1" href="#FileProcessing.Parsers.CoNLLU.CoNLLU" target="_top" title="CoNLLU" alt="" coords="103,79,176,104"/>
+<area shape="rect" id="node2" href="FileProcessing.html#FileProcessing.ParserInterfaces.ParserInterface" target="_top" title="Interface visant à implémenter un parser de fichier d&#39;un certain type." alt="" coords="5,5,124,31"/>
+<area shape="rect" id="node3" href="FileProcessing.html#FileProcessing.ParserInterfaces.ProducerInterface" target="_top" title="Interface visant à implémenter un traitement des données dans la DB pour une sortie textuelle spécifique." alt="" coords="148,5,283,31"/>
+</map>
