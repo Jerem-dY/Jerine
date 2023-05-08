@@ -9,86 +9,112 @@ if(!(isset($_SESSION) && isset($_SESSION["user_id"]) && isset($_GET["document"])
     exit;
 }
 
+
+function escape(string $input){
+    if($input == '\n'){
+        return '\\n';
+    }
+    else if($input == '\t'){
+        return '\\t';
+    }
+    else if($input == '\r'){
+        return '\\r';
+    }
+    else{
+        return $input;
+    }
+}
+
+$doc = $_GET["document"];
 ?>
 
+<?php 
+$sql = "SELECT COUNT(DISTINCT(sentence.sentence_id)) AS nb_sent FROM sentence
+WHERE sentence.text_id = $doc;
+";
 
-<div class="conllu-parse" tabs="yes" style="width: 1000px;">
-# generator = UDPipe 2, https://lindat.mff.cuni.cz/services/udpipe
-# udpipe_model = french-gsd-ud-2.10-220711
-# udpipe_model_licence = CC BY-NC-SA
-# newdoc
-# newpar
-# sent_id = 1
-# text = Pendant plusieurs jours de suite des lambeaux d'armée en déroute avaient traversé la ville.
-1	Pendant	pendant	ADP	_	_	3	case	_	SpacesBefore=\s\s\s|TokenRange=3:10
-2	plusieurs	plusieurs	DET	_	Number=Plur|PronType=Ind	3	det	_	TokenRange=11:20
-3	jours	jour	NOUN	_	Gender=Masc|Number=Plur	14	obl:mod	_	TokenRange=21:26
-4	de	de	ADP	_	_	5	case	_	TokenRange=27:29
-5	suite	suite	NOUN	_	Gender=Fem|Number=Sing	3	nmod	_	TokenRange=30:35
-6-7	des	_	_	_	_	_	_	_	TokenRange=36:39
-6	de	de	ADP	_	_	8	case	_	_
-7	les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	8	det	_	_
-8	lambeaux	lambeau	NOUN	_	Gender=Masc|Number=Plur	3	nmod	_	TokenRange=40:48
-9	d'	de	ADP	_	_	10	case	_	SpaceAfter=No|TokenRange=49:51
-10	armée	armée	NOUN	_	Gender=Fem|Number=Sing	8	nmod	_	TokenRange=51:56
-11	en	en	ADP	_	_	12	case	_	TokenRange=57:59
-12	déroute	déroute	NOUN	_	Gender=Fem|Number=Sing	8	nmod	_	TokenRange=60:67
-13	avaient	avoir	AUX	_	Mood=Ind|Number=Plur|Person=3|Tense=Imp|VerbForm=Fin	14	aux:tense	_	TokenRange=68:75
-14	traversé	traverser	VERB	_	Gender=Masc|Number=Sing|Tense=Past|VerbForm=Part	0	root	_	TokenRange=76:84
-15	la	le	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	16	det	_	TokenRange=85:87
-16	ville	ville	NOUN	_	Gender=Fem|Number=Sing	14	obj	_	SpaceAfter=No|TokenRange=88:93
-17	.	.	PUNCT	_	_	14	punct	_	TokenRange=93:94
+if(!($response = $pdo->query($sql))){
+    echo "<br/>Failed to fetch document's number of sentences. Aborting.<br/>";
+    http_response_code(500);
+    exit;
+}
 
-# sent_id = 2
-# text = Ce n'était point de la troupe, mais des hordes débandées.
-1	Ce	ce	PRON	_	Gender=Masc|Number=Sing|Person=3|PronType=Dem	7	nsubj	_	TokenRange=95:97
-2	n'	ne	ADV	_	Polarity=Neg	7	advmod	_	SpaceAfter=No|TokenRange=98:100
-3	était	être	AUX	_	Mood=Ind|Number=Sing|Person=3|Tense=Imp|VerbForm=Fin	7	cop	_	TokenRange=100:105
-4	point	point	ADV	_	Polarity=Neg	7	advmod	_	TokenRange=106:111
-5	de	de	ADP	_	_	7	case	_	TokenRange=112:114
-6	la	le	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	7	det	_	TokenRange=115:117
-7	troupe	troupe	NOUN	_	Gender=Fem|Number=Sing	0	root	_	SpaceAfter=No|TokenRange=118:124
-8	,	,	PUNCT	_	_	12	punct	_	TokenRange=124:125
-9	mais	mais	CCONJ	_	_	12	cc	_	TokenRange=126:130
-10-11	des	_	_	_	_	_	_	_	TokenRange=131:134
-10	de	de	ADP	_	_	12	case	_	_
-11	les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	12	det	_	_
-12	hordes	horde	NOUN	_	Gender=Fem|Number=Plur	7	conj	_	TokenRange=135:141
-13	débandées	débandé	VERB	_	Gender=Fem|Number=Plur|Tense=Past|VerbForm=Part	12	acl	_	SpaceAfter=No|TokenRange=142:151
-14	.	.	PUNCT	_	_	7	punct	_	TokenRange=151:152
+while($record = $response->fetch()){
+    $sentence_total = $record["nb_sent"];
+}
 
-# sent_id = 3
-# text = Les hommes avaient la barbe longue et sale, des uniformes en guenilles, et ils avançaient d'une allure molle, sans drapeau, sans régiment.
-1	Les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	2	det	_	TokenRange=153:156
-2	hommes	homme	NOUN	_	Gender=Masc|Number=Plur	3	nsubj	_	TokenRange=157:163
-3	avaient	avoir	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Imp|VerbForm=Fin	0	root	_	TokenRange=164:171
-4	la	le	DET	_	Definite=Def|Gender=Fem|Number=Sing|PronType=Art	5	det	_	TokenRange=172:174
-5	barbe	barbe	NOUN	_	Gender=Fem|Number=Sing	3	obj	_	TokenRange=175:180
-6	longue	long	ADJ	_	Gender=Fem|Number=Sing	5	amod	_	TokenRange=181:187
-7	et	et	CCONJ	_	_	8	cc	_	TokenRange=188:190
-8	sale	sale	ADJ	_	Gender=Fem|Number=Sing	6	conj	_	SpaceAfter=No|TokenRange=191:195
-9	,	,	PUNCT	_	_	12	punct	_	TokenRange=195:196
-10-11	des	_	_	_	_	_	_	_	TokenRange=197:200
-10	de	de	ADP	_	_	12	case	_	_
-11	les	le	DET	_	Definite=Def|Number=Plur|PronType=Art	12	det	_	_
-12	uniformes	uniforme	NOUN	_	Gender=Masc|Number=Plur	5	conj	_	TokenRange=201:210
-13	en	en	ADP	_	_	14	case	_	TokenRange=211:213
-14	guenilles	guenille	NOUN	_	Gender=Fem|Number=Plur	12	nmod	_	SpaceAfter=No|TokenRange=214:223
-15	,	,	PUNCT	_	_	18	punct	_	TokenRange=223:224
-16	et	et	CCONJ	_	_	18	cc	_	TokenRange=225:227
-17	ils	il	PRON	_	Gender=Masc|Number=Plur|Person=3|PronType=Prs	18	nsubj	_	TokenRange=228:231
-18	avançaient	avançer	VERB	_	Mood=Ind|Number=Plur|Person=3|Tense=Imp|VerbForm=Fin	3	conj	_	TokenRange=232:242
-19	d'	de	ADP	_	_	21	case	_	SpaceAfter=No|TokenRange=243:245
-20	une	un	DET	_	Definite=Ind|Gender=Fem|Number=Sing|PronType=Art	21	det	_	TokenRange=245:248
-21	allure	allure	NOUN	_	Gender=Fem|Number=Sing	18	obl:arg	_	TokenRange=249:255
-22	molle	mou	ADJ	_	Gender=Fem|Number=Sing	21	amod	_	SpaceAfter=No|TokenRange=256:261
-23	,	,	PUNCT	_	_	25	punct	_	TokenRange=261:262
-24	sans	sans	ADP	_	_	25	case	_	TokenRange=263:267
-25	drapeau	drapeau	NOUN	_	Gender=Masc|Number=Sing	21	nmod	_	SpaceAfter=No|TokenRange=268:275
-26	,	,	PUNCT	_	_	28	punct	_	TokenRange=275:276
-27	sans	sans	ADP	_	_	28	case	_	TokenRange=277:281
-28	régiment	régiment	NOUN	_	Gender=Masc|Number=Sing	25	conj	_	SpaceAfter=No|TokenRange=282:290
-29	.	.	PUNCT	_	_	3	punct	_	TokenRange=290:291
+?>
+
+<label for=<?php $sent = "sent_".$_GET["document"]; echo $sent;?>>Phrase (/<?php echo $sentence_total;?>)</label>
+<input type="number" max=<?php echo $sentence_total;?> min="1" value="1" id=<?php $sent = "sent_".$_GET["document"]; echo $sent;?> name=<?php $sent = "sent_".$_GET["document"]; echo $sent;?> ></input>
+<script>
+    $(<?php echo $sent;?>).on("change", function(){
+        $.ajax({
+            url: "php/get_deprel_view.php",
+            method : "GET",
+            dataType : "html",
+            data : "document="+<?php echo $_GET["document"]; ?>+"&sentence="+$(<?php $sent = "sent_".$_GET["document"]; echo $sent;?>).val(),
+            success : (function(result, status){
+
+                $(<?php echo "conllu_".$_GET["document"];?>).text(result);
+                Annodoc.activate(Config.bratCollData, Collections.listing);
+
+            }).bind(this),
+            error : (function(response, status, errorType){
+                $("<div>" + errorType + " : <p>" + response.responseText + "</p></div>").dialog();
+            }).bind(this)
+        });
+    });
+</script>
+<div class="conllu-parse" tabs="yes" style="width: 1000px;" id=<?php echo "conllu_".$_GET["document"];?>>
+<?php 
+
+if(isset($_GET) && isset($_GET["sentence"])){
+
+    $sent_nb = $_GET["sentence"];
+    $query = "SELECT token_sent_ind as ID, tok_form.form_chars as FORM, lem_form.form_chars as LEMMA, lemma.pos as UPOS, token.head as HEAD, token.deprel as DEPREL, token.offset as OFFSET, token.spaceafter as SPACEAFTER FROM token
+    INNER JOIN lemma ON token.lemma = lemma.lemma_id
+    INNER JOIN form AS tok_form ON token.token_form = tok_form.form_id
+    INNER JOIN form AS lem_form ON lemma.lemma_form = lem_form.form_id
+    INNER JOIN sentence ON sentence.sentence_id = token.sentence
+    INNER JOIN document ON sentence.text_id = document.document_id
+
+    WHERE document.document_id = $doc AND sentence.sentence_doc_ind = $sent_nb;
+    ";
+
+    if(!($response = $pdo->query($query))){
+        echo "<br/>Failed to fetch document's content. Aborting.<br/>";
+        http_response_code(500);
+        exit;
+    }
+
+    $lines = 0;
+    while($record = $response->fetch()){
+
+        if($record["ID"] == 1){
+            $lines++;
+            echo "\n# sent_id = $lines\n";
+        }
+
+        $id = $record["ID"];
+        $form = escape($record["FORM"]);
+        $lemma = escape($record["LEMMA"]);
+        $upos = $record["UPOS"];
+        $head = $record["HEAD"];
+        $deprel = $record["DEPREL"];
+        $misc = ($record["SPACEAFTER"] == 0) ? "SpaceAfter=No" : "_";
+
+        if($upos == "SPACE"){
+            $form = " ";
+            $lemma = " ";
+        }
+
+        echo "$id\t$form\t$lemma\t$upos\t_\t_\t$head\t$deprel\t_\t$misc\n";
+    }
+}
+
+
+?>
 </div>
 
 

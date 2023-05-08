@@ -28,7 +28,7 @@ class TreeTagger(
 
     def __init__(self):
         from treetaggerwrapper import TreeTagger, make_tags
-        self.tagger = TreeTagger(TAGLANG='fr', TAGOPT=u'-token -lemma -quiet')
+        self.tagger = TreeTagger(TAGLANG='fr', TAGOPT=u'-token -lemma -quiet', TAGDIR="/home/IdL/2022/bourdillat/treetagger")
         self.mk_tags = make_tags
 
     """def tokenize(self, document: Document.RawDocument) -> Document.TokenizedDocument:

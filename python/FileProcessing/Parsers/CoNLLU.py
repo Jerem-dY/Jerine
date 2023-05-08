@@ -96,7 +96,7 @@ class CoNLLU(ParserInterfaces.ParserInterface, ParserInterfaces.ProducerInterfac
                         # Si l'offset n'est pas spécifié et que l'on n'est pas sur le premier token :
 
                         tokenized_doc_data['offset'].append(
-                            tokenized_doc_data['offset'][-1] + len(tokenized_doc_data['token_forms'][-2]) + tokenized_doc_data['spaceafter'][-2]
+                            tokenized_doc_data['offset'][-1] + len(tokenized_doc_data['token_forms'][-2]) + tokenized_doc_data['spaceafter'][-2] if len(tokenized_doc_data['spaceafter']) > 1 else 0
                             )
                         
                     else:
