@@ -1,17 +1,23 @@
 # Jérine
 
-Plateforme web de gestion de documents et d'import/export en fichiers **CoNLL-U, TXT et XML**.  
+Plateforme web de gestion de documents et d'import en fichiers **CoNLL-U et TXT **.  
 *Le cahier des charges et autres ressources se trouvent dans [docs/readable](/docs/readable)*  
 
 Le site est accessible ici : [***Jérine***](http://i3l.univ-grenoble-alpes.fr/~bourdillat/Jerine/) 
 
 ## Description 
-Ce site est une application web (s'éxecutant dans un navigateur) mettant à disposition de l'utilisateur un espace de travail et un stockage pour déposer des documents tokenisés, segmentés en phrases et analysés syntaxiquement. L'application permet l'import de fichiers de type *texte brut*, *XML* ou *CoNLL-U*. Il est possible de compléter les informations manquantes à l'aide des processeurs disponibles (spaCy, stanza, nltk, etc.). L'export des documents dans les mêmes formats que ceux cités précédemment est possible. L'utilisateur a aussi accès à diverses visualisations de ses données, elles aussi exportables.  
+Ce site est une application web (s'éxecutant dans un navigateur) mettant à disposition de l'utilisateur un espace de travail de stockage pour déposer des documents tokenisés, segmentés en phrases et analysés syntaxiquement. 
 
+Cette plateforme offre les fonctionnalités suivantes :
+- L'importation des fichiers provenant d'autres formats tels que TXT et ConLL-U ;
+- La tokenisation, la segmentation en phrases et l'analyse syntaxiquement des fichiers importer par differents processeurs (SpaCy, TreeTagger);
+- Le tri des fichiers par ordre alphabétique, par phrases, par tokens, par lemmes, par formes, par rapport types/token, ainsi que par caractères;
+- L'ajout et la suppression de fichiers et de collections;
+- La visualisation des fichiers sous forme représentation graphique des dépendances;
+- La recherche de fichiers selon leur titre.
 
-## Wiki :
-- [Sécurité](https://gricad-gitlab.univ-grenoble-alpes.fr/idl2022-2023/bourdillat-adjoudj/-/wikis/S%C3%A9curit%C3%A9)  
-- [Performances](https://gricad-gitlab.univ-grenoble-alpes.fr/idl2022-2023/bourdillat-adjoudj/-/wikis/Performances)  
+La base de données constitue une plateforme qui offre aux utilisateurs la possibilité de créer un compte personnel, de se connecter à celui-ci, ainsi que de stocker des fichiers en divers formats (tels que TXT et ConLL-U) en bénéficiant d'une certaine forme de sécurité. 
+
 
 ## Documentation :
 - [javascript](/docs/js/)
@@ -47,12 +53,3 @@ Ce site est une application web (s'éxecutant dans un navigateur) mettant à dis
 - [sphinx-pyreverse](https://github.com/alendit/sphinx-pyreverse) *>= 0.0.17*  
 - [pylint](https://pylint.readthedocs.io/en/latest/) *>= 2.16.1*  
 
-
-### Rust
-
-##### *Compilation* 
-- [maturin](https://www.maturin.rs/) *>= 0.14.16*  
-- [PyO3](https://pyo3.rs/v0.12.3/) *>= 0.12.3*  
-
-##### *Documentation*
-- [rustdoc](https://doc.rust-lang.org/rustdoc/what-is-rustdoc.html) *>= 1.68.0*  
