@@ -6,18 +6,16 @@ Plateforme web de gestion de documents et d'import en fichiers **CoNLL-U et TXT 
 Le site est accessible ici : [***Jérine***](http://i3l.univ-grenoble-alpes.fr/~bourdillat/Jerine/) 
 
 ## Description 
-Ce site est une application web (s'éxecutant dans un navigateur) mettant à disposition de l'utilisateur un espace de travail de stockage pour déposer des documents tokenisés, segmentés en phrases et analysés syntaxiquement. 
-
+Ce site est une application web (s'exécutant dans un navigateur) mettant à disposition de l'utilisateur un espace de travail de stockage pour déposer des documents tokenisés, segmentés en phrases et analysés syntaxiquement. 
 Cette plateforme offre les fonctionnalités suivantes :
 - L'importation des fichiers provenant d'autres formats tels que TXT et ConLL-U ;
-- La tokenisation, la segmentation en phrases et l'analyse syntaxiquement des fichiers importer par differents processeurs (SpaCy, TreeTagger);
-- Le tri des fichiers par ordre alphabétique, par phrases, par tokens, par lemmes, par formes, par rapport types/token, ainsi que par caractères;
+- La tokenisation, la segmentation en phrases, et l'analyse syntaxique des fichiers importés par différents processeurs (SpaCy et TreeTagger);
+- Le tri des fichiers par ordre alphabétique, par phrases, par tokens, par lemmes, par formes, par rapport types/tokens, ainsi que par caractères;
 - L'ajout et la suppression de fichiers et de collections;
-- La visualisation des fichiers sous forme représentation graphique des dépendances;
-- La recherche de fichiers selon leur titre.
+- La visualisation des fichiers sous forme de représentation graphique des dépendances;
+- La recherche de fichiers en fonction de leur titre.
 
-La base de données constitue une plateforme qui offre aux utilisateurs la possibilité de créer un compte personnel, de se connecter à celui-ci, ainsi que de stocker des fichiers en divers formats (tels que TXT et ConLL-U) en bénéficiant d'une certaine forme de sécurité. 
-
+La base de données utilisée est une plateforme qui permet à ses utilisateurs de créer un compte personnel, de s'y connecter et de stocker des fichiers dans divers formats (tels que TXT et ConLL-U), tout en bénéficiant d'une certaine forme de sécurité.
 
 ## Documentation :
 - [javascript](/docs/js/)
