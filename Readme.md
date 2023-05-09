@@ -51,10 +51,11 @@ La base de données utilisée est une plateforme qui permet à ses utilisateurs 
 - [sphinx-pyreverse](https://github.com/alendit/sphinx-pyreverse) *>= 0.0.17*  
 - [pylint](https://pylint.readthedocs.io/en/latest/) *>= 2.16.1*  
 
-###### *Limitations*
+## Limitations : 
 
 - Le processeur TreeTagger ne fonctionne plus.
 - Des contraintes peuvent exister pour le système d'onglets pour l'analyse syntaxique.
 - Il peut y avoir des erreurs lors de la création de compte.
 - L'application ne permet pas de visualiser les fichiers sous forme de tableaux ou de graphes.
-** A noter que les limites n'ont pas été traitées en raison de contraintes temporelles, mais elles pourraient être envisagées à long terme.**
+
+*A noter que les limites n'ont pas été traitées en raison de contraintes temporelles, mais elles pourraient être envisagées à long terme.*
