@@ -15,7 +15,7 @@ Cette plateforme offre les fonctionnalités suivantes :
 - La visualisation des fichiers sous forme de représentation graphique des dépendances;
 - La recherche de fichiers en fonction de leur titre.
 
-La base de données utilisée est une plateforme qui permet à ses utilisateurs de créer un compte personnel, de s'y connecter et de stocker des fichiers dans divers formats (tels que TXT et ConLL-U), tout en bénéficiant d'une certaine forme de sécurité.
+La base de données utilisée est une plateforme qui permet à ses utilisateurs de créer un compte personnel, de s'y connecter et de déconstituer à partir de divers formats (tels que TXT et ConLL-U), tout en bénéficiant d'une certaine forme de sécurité.
 
 ## Documentation :
 - [javascript](/docs/js/)
@@ -51,3 +51,10 @@ La base de données utilisée est une plateforme qui permet à ses utilisateurs 
 - [sphinx-pyreverse](https://github.com/alendit/sphinx-pyreverse) *>= 0.0.17*  
 - [pylint](https://pylint.readthedocs.io/en/latest/) *>= 2.16.1*  
 
+###### *Limitations*
+
+- Le processeur TreeTagger ne fonctionne plus.
+- Des contraintes peuvent exister pour le système d'onglets pour l'analyse syntaxique.
+- Il peut y avoir des erreurs lors de la création de compte.
+- L'application ne permet pas de visualiser les fichiers sous forme de tableaux ou de graphes.
+** A noter que les limites n'ont pas été traitées en raison de contraintes temporelles, mais elles pourraient être envisagées à long terme.**
